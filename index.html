@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>משפחות נקש וסויסה | איה נאפה 2026</title>
-    <!-- Chargement de Tailwind CSS et Chart.js -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Noto Sans Hebrew', sans-serif;
-            background-color: #fcfbf9; /* Couleur sable très clair et chaleureux */
+            background-color: #fcfbf9;
             color: #1c1917;
         }
         .chart-container {
@@ -40,71 +39,71 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+        .checked-item {
+            text-decoration: line-through;
+            color: #a8a29e;
+            transition: all 0.2s ease;
+        }
     </style>
 </head>
 <body class="antialiased pb-12">
 
-    <!-- Palette choisie : Dégradé Coucher de soleil Méditerranéen (Ciel d'or, corail doux, bleu lagon profond) -->
-    <!-- Plan de structure de l'application : Une interface web mobile-first optimisée pour les familles. Elle s'ouvre sur un en-tête de vacances immersif et coloré. La navigation se fait par boutons de type "pilule" d'accès rapide pour un confort maximal d'utilisation. -->
-    <!-- Choix des visuels et du contenu : Graphique à barres pour les températures avec des couleurs harmonisées (Corail, Bleu ciel, Turquoise). Agent IA entièrement mis à jour. -->
-    <!-- CONFIRMATION : Aucune image SVG externe ni Mermaid JS utilisés. -->
+    <!-- Chosen Palette: Mediterranean Coral & Laguna Blue -->
+    <!-- Application Structure Plan: Un tableau de bord de voyage bilingue (Hébreu/Français) sans agent IA. Il est structuré en 5 onglets interactifs optimisés pour mobile : 1. Aperçu général et météo, 2. Vols détaillés et מסלול יומי, 3. Plages et conseils pour enfants de 3 ans, 4. Check-list interactive de valise avec mémorisation d'état, 5. Restauration Casher et Beth Chabad. Les horaires exacts de départ (09h00) et de retour (15h00 avec piscine + mall) sont intégrés. -->
+    <!-- Visualization & Content Choices: Source: Températures moyennes de septembre -> Goal: Graphique météo coloré -> Method: Graphique à barres horizontales Chart.js avec couleurs personnalisées -> Interaction: Survol tactile pour afficher les degrés -> Justification: Facilite la préparation des bagages des enfants. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
-    <!-- En-tête de Vacances Premium (Holiday Header) -->
     <header class="relative bg-gradient-to-br from-amber-400 via-rose-400 to-sky-500 text-white py-14 px-6 text-center rounded-b-[2.5rem] shadow-xl shadow-sky-100/40 overflow-hidden mb-6">
-        <!-- Éléments décoratifs en CSS pur pour l'ambiance plage/soleil -->
         <div class="absolute -top-16 -left-16 w-52 h-52 bg-yellow-200 rounded-full opacity-30 blur-2xl"></div>
         <div class="absolute -bottom-16 -right-16 w-72 h-72 bg-sky-300 rounded-full opacity-40 blur-3xl"></div>
         
         <div class="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
             <span class="text-xs font-bold tracking-widest bg-white/25 backdrop-blur-md px-4 py-1.5 rounded-full uppercase text-sky-950 shadow-sm">
-                קפריסין 2026 🌊🏖️
+                קפריסין 2026 • CHYPRE 2026 🌊🏖️
             </span>
             <h1 class="text-3xl sm:text-5xl font-extrabold mt-4 drop-shadow-md text-sky-950 tracking-tight">
-                חופשת הקיץ המושלמת באיה נאפה
+                חופשת הקיץ באיה נאפה
             </h1>
-            <p class="text-base sm:text-xl font-medium mt-3 text-sky-900/90 max-w-lg">
-                המדריך החכם למשפחות נקש וסויסה • 27-30 בספטמבר
+            <p class="text-base sm:text-xl font-medium mt-3 text-sky-950 max-w-lg">
+                משפחות נקש וסויסה • Familles Nakache & Swissa
+                <br>
+                <span class="text-sm font-semibold text-sky-900">27-30 בספטמבר 2026</span>
             </p>
         </div>
     </header>
 
-    <!-- Barre de navigation sticky avec effet flouté moderne -->
     <nav class="bg-white/90 backdrop-blur-md shadow-md sticky top-0 z-50 border-b border-stone-100 py-3">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Onglets de navigation style "pilules" -->
             <div class="flex overflow-x-auto hide-scrollbar space-x-reverse space-x-3 text-sm font-semibold" id="nav-tabs">
-                <button class="nav-tab tab-active whitespace-nowrap px-4 py-2.5 rounded-full text-stone-600 hover:text-sky-600 transition-all duration-200" data-target="pane-overview">🏠 סקירה כללית</button>
-                <button class="nav-tab whitespace-nowrap px-4 py-2.5 rounded-full text-stone-600 hover:text-sky-600 transition-all duration-200" data-target="pane-itinerary">📅 מסלול יומי</button>
-                <button class="nav-tab whitespace-nowrap px-4 py-2.5 rounded-full text-stone-600 hover:text-sky-600 transition-all duration-200" data-target="pane-kids">🏖️ קטנטנים וחופים</button>
-                <button class="nav-tab whitespace-nowrap px-4 py-2.5 rounded-full text-stone-600 hover:text-sky-600 transition-all duration-200" data-target="pane-dining">✡️ אוכל כשר</button>
-                <button class="nav-tab whitespace-nowrap px-4 py-2.5 rounded-full text-sky-600 bg-sky-50 hover:bg-sky-100 transition-all duration-200" data-target="pane-ai-agent">🤖 סוכן נסיעות AI ✨</button>
+                <button class="nav-tab tab-active whitespace-nowrap px-4 py-2.5 rounded-full text-stone-600 hover:text-sky-600 transition-all duration-200" data-target="pane-overview">🏠 סקירה כללית / Aperçu</button>
+                <button class="nav-tab whitespace-nowrap px-4 py-2.5 rounded-full text-stone-600 hover:text-sky-600 transition-all duration-200" data-target="pane-itinerary">📅 טיסות ומסלול / Vols & Infos</button>
+                <button class="nav-tab whitespace-nowrap px-4 py-2.5 rounded-full text-stone-600 hover:text-sky-600 transition-all duration-200" data-target="pane-kids">🏖️ קטנטנים וחופים / Enfants</button>
+                <button class="nav-tab whitespace-nowrap px-4 py-2.5 rounded-full text-rose-600 bg-rose-50 hover:bg-rose-100 transition-all duration-200" data-target="pane-checklist">📋 רשימת ציוד / Valise</button>
+                <button class="nav-tab whitespace-nowrap px-4 py-2.5 rounded-full text-stone-600 hover:text-sky-600 transition-all duration-200" data-target="pane-dining">✡️ אוכל כשר / Casher</button>
             </div>
         </div>
     </nav>
 
-    <!-- Contenu principal -->
     <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
 
-        <!-- SECTION 1: SÉLECTION GÉNÉRALE (OVERVIEW) -->
         <section id="pane-overview" class="tab-pane block">
             <div class="mb-8 bg-sky-50/70 p-5 rounded-2xl border border-sky-100">
                 <p class="text-sm text-sky-950 leading-relaxed">
-                    <strong>שלום משפחות נקש וסויסה! 👋</strong> ברוכים הבאים למרכז המידע האישי שלכם. כאן תמצאו את כל מה שצריך לחופשה בלתי נשכחת באיה נאפה: מעקב חי של הספירה לאחור, פרטי הנהג האהוב פנטליס, וגרף טמפרטורות אינטראקטיבי המציג כמה חמים ונעימים המים והאוויר בסוף ספטמבר.
+                    <strong>שלום משפחות נקש וסויסה! 👋 Bonjour !</strong> 
+                    ברוכים הבאים ללוח התכנון הדיגיטלי והמעודכן שלכם. כאן תמצאו את פרטי הטיסות החדשים, החופים המומלצים ביותר, רשימת ציוד אינטראקטיבית כדי שלא תשכחו כלום לפעוטות בני ה-3, ומידע על אוכל כשר.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <!-- Compteur de temps -->
                 <div class="bg-white rounded-2xl p-6 shadow-md shadow-stone-100/80 border border-stone-100 flex flex-col justify-center items-center text-center">
                     <div class="text-4xl mb-2">🌴</div>
-                    <h3 class="text-lg font-bold text-stone-800">מתי מתחיל הכיף?</h3>
+                    <h3 class="text-lg font-bold text-stone-800">מתי מתחיל הכיף? / Compte à rebours</h3>
                     <div id="countdown" class="text-3xl font-extrabold text-rose-500 tracking-tight my-2">טוען...</div>
                     <p class="text-xs text-stone-400">יום ראשון, 27 בספטמבר, 2026</p>
                 </div>
 
-                <!-- Logistique et transports -->
                 <div class="bg-white rounded-2xl p-6 shadow-md shadow-stone-100/80 border border-stone-100">
-                    <h3 class="text-lg font-bold text-stone-800 border-b border-stone-100 pb-2 mb-4">📍 אנשי קשר ומידע חשוב</h3>
+                    <h3 class="text-lg font-bold text-stone-800 border-b border-stone-100 pb-2 mb-4">📍 אנשי קשר ולוגיסטיקה / Contacts</h3>
                     <ul class="space-y-4">
                         <li class="flex items-start">
                             <span class="text-xl ml-3">🏨</span>
@@ -119,191 +118,317 @@
                             <div>
                                 <p class="font-bold text-stone-800">שירות המוניות של פנטליס (Pentelis)</p>
                                 <a href="tel:+35799605215" class="text-sky-600 font-bold hover:underline" dir="ltr">+357 99 605215</a>
-                                <p class="text-xs text-stone-400 mt-1">נהג צמוד להסעות משדה התעופה ולקניון ביום האחרון</p>
+                                <p class="text-xs text-stone-400 mt-1">נהג צמוד להסעות משדה התעופה ולקניון בדרך חזור</p>
                             </div>
                         </li>
                         <li class="flex items-start">
                             <span class="text-xl ml-3">🚨</span>
                             <div>
-                                <p class="font-bold text-stone-800">מספר החירום הלאומי בקפריסין</p>
+                                <p class="font-bold text-stone-800">מספר החירום הלאומי בקפריסין / Urgence</p>
                                 <p class="text-rose-500 font-bold">112</p>
-                                <p class="text-xs text-stone-400 mt-1">לכל מקרה חירום רפואי או סיוע מיידי</p>
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Graphique de météo interactif -->
             <div class="bg-white rounded-2xl p-6 shadow-md shadow-stone-100/80 border border-stone-100">
-                <h3 class="text-lg font-bold text-stone-800 mb-1">טמפרטורת המים ומזג האוויר המדהים בספטמבר</h3>
-                <p class="text-xs text-stone-500 mb-6">מזג האוויר בספטמבר חם ואידיאלי לרחצה, מומלץ להביא קרם הגנה ובגדים קלים.</p>
+                <h3 class="text-lg font-bold text-stone-800 mb-1">טמפרטורת המים ומזג האוויר בספטמבר / Météo</h3>
+                <p class="text-xs text-stone-500 mb-6">מזג האוויר בספטמבר חם ואידיאלי לרחצה, המים חמימים ומתאימים מאוד לפעוטות.</p>
                 <div class="chart-container">
                     <canvas id="weatherChart"></canvas>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 2: PROGRAMME DE VOYAGE (ITINERARY) -->
         <section id="pane-itinerary" class="tab-pane hidden">
              <div class="mb-8 bg-sky-50/70 p-5 rounded-2xl border border-sky-100">
                 <p class="text-sm text-sky-950 leading-relaxed">
-                    <strong>המסלול שלכם:</strong> תוכנית רגועה ומאוזנת המותאמת במיוחד לפעוטות שלכם. כל יום משלב זמני בריכה, חופים נהדרים עם מים רדודים, מנוחת צהריים חיונית, וארוחות כשרות מעולות.
+                    <strong>לוח זמני הטיסות והטיול:</strong> כאן מפורטים זמני הטיסות החדשים שלכם כולל שעות ההגעה המומלצות לשדה התעופה ותוכנית מפורטת לכל ימי הנופש.
                 </p>
             </div>
 
             <div class="space-y-6">
                 
-                <!-- Jour 1 -->
-                <div class="bg-white rounded-2xl p-6 shadow-md shadow-stone-100/80 border border-stone-100">
-                    <div class="flex justify-between items-center border-b border-stone-100 pb-3 mb-4">
-                        <h3 class="text-lg font-bold text-sky-900">יום 1: יום ראשון, 27 בספטמבר, 2026</h3>
-                        <span class="bg-sky-100 text-sky-800 text-xs font-bold px-3 py-1.5 rounded-full">נחיתה והתאקלמות</span>
-                    </div>
-                    <div class="space-y-3">
-                        <div class="bg-stone-50/50 p-3 rounded-xl border border-stone-100">
-                            <p class="text-sm font-bold text-sky-800 mb-1">☀️ אחרי הצהריים - הגעה למלון ובבריכה</p>
-                            <p class="text-sm text-stone-700">נחיתה בשדה התעופה בלרנקה. נהג המונית שלכם <strong>פנטליס</strong> יאסוף אתכם ישירות למלון <strong>Mare Ayia Napa</strong>. עושים צ'ק-אין, מחליפים לבגדי ים ויוצאים ישר עם הילדים לבריכת הפעוטות המפנקת.</p>
+                <div class="bg-sky-600 text-white rounded-2xl p-6 shadow-md">
+                    <h3 class="text-lg font-bold mb-3 border-b border-sky-500 pb-2">✈️ זמני הטיסות שלכם / Vos Vols</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                        <div class="bg-sky-700/40 p-3.5 rounded-xl">
+                            <p class="font-bold text-amber-300 text-base">✈️ הלוך / Aller: 27.09.2026</p>
+                            <p class="mt-2">⏱️ <strong>שעת טיסה:</strong> 09:00 בבוקר</p>
+                            <p class="text-emerald-300 font-semibold mt-1">⏱️ הגעה מומלצת לנתב"ג: 06:00 בבוקר (3 שעות לפני)</p>
+                            <p class="text-xs text-sky-200 mt-2">נחיתה משוערת בלרנקה ב-10:00. פנטליס ימתין לכם בשדה.</p>
                         </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl border border-stone-100">
-                            <p class="text-sm font-bold text-sky-800 mb-1">🌙 ערב - ארוחה בשרית בחוץ</p>
-                            <p class="text-sm text-stone-700">נוסעים למרכז העיר לארוחת ערב בשרית כשרה ומפנקת במסעדת <strong>Mush</strong> שליד בית חב"ד. חוזרים למלון למנוחה.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Jour 2 -->
-                <div class="bg-white rounded-2xl p-6 shadow-md shadow-stone-100/80 border border-stone-100">
-                    <div class="flex justify-between items-center border-b border-stone-100 pb-3 mb-4">
-                        <h3 class="text-lg font-bold text-amber-900">יום 2: יום שני, 28 בספטמבר, 2026</h3>
-                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1.5 rounded-full">חול זהב ובריכה</span>
-                    </div>
-                    <div class="space-y-3">
-                        <div class="bg-stone-50/50 p-3 rounded-xl border border-stone-100">
-                            <p class="text-sm font-bold text-amber-800 mb-1">☀️ בוקר - חוף לנדה (Landa Beach)</p>
-                            <p class="text-sm text-stone-700">אורזים דלי וכף ונוסעים 5 דקות לחוף לנדה המדהים. המים שם צלולים ושקטים מאוד ללא גלים, והם נשארים רדודים לאורך מטרים רבים - מושלם לפעוטות בני ה-3.</p>
-                        </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl border border-stone-100">
-                            <p class="text-sm font-bold text-amber-800 mb-1">☀️ אחר הצהריים - שנ"צ ובריכת המלון</p>
-                            <p class="text-sm text-stone-700">חוזרים למלון לשנ"צ חיוני לקטנטנים בחדר הממוזג. לאחר מכן נהנים מבריכת המלון ומגן המשחקים של אתר הנופש.</p>
-                        </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl border border-stone-100">
-                            <p class="text-sm font-bold text-amber-800 mb-1">🌙 ערב - פיצה כשרה במלון</p>
-                            <p class="text-sm text-stone-700">מזמינים משלוח פיצה חמה וכשרה למהדרין ממסעדת <strong>Jewpizza</strong> ישירות ללובי המלון. אוכלים ליד המים ונהנים מערב רגוע.</p>
+                        <div class="bg-sky-700/40 p-3.5 rounded-xl">
+                            <p class="font-bold text-amber-300 text-base">✈️ חזור / Retour: 30.09.2026</p>
+                            <p class="mt-2">⏱️ <strong>שעת טיסה:</strong> 15:00 בצהריים</p>
+                            <p class="text-emerald-300 font-semibold mt-1">⏱️ הגעה מומלצת לשדה בלרנקה: 12:15-12:30</p>
+                            <p class="text-xs text-sky-200 mt-2">תוכנית הבוקר מעודכנת מטה בהתאם לשעת הטיסה הזו.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Jour 3 -->
                 <div class="bg-white rounded-2xl p-6 shadow-md shadow-stone-100/80 border border-stone-100">
                     <div class="flex justify-between items-center border-b border-stone-100 pb-3 mb-4">
-                        <h3 class="text-lg font-bold text-emerald-900">יום 3: יום שלישי, 29 בספטמבר, 2026</h3>
-                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1.5 rounded-full">חופים וסירות בנמל</span>
+                        <h3 class="text-lg font-bold text-sky-900">יום 1: יום ראשון, 27 בספטמבר – הגעה והתאקלמות</h3>
+                        <span class="bg-sky-100 text-sky-800 text-xs font-bold px-3 py-1.5 rounded-full">נחיתה ובריכה</span>
                     </div>
                     <div class="space-y-3">
-                        <div class="bg-stone-50/50 p-3 rounded-xl border border-stone-100">
-                            <p class="text-sm font-bold text-emerald-800 mb-1">☀️ בוקר - חוף מקרוניסוס (Makronissos Beach)</p>
-                            <p class="text-sm text-stone-700">מבלים את הבוקר בחוף מקרוניסוס הלבן והשקט. החוף מציע מפרץ כפול מוגן מרוחות ונוח מאוד להגעה עם עגלות ילדים ממש עד המים.</p>
+                        <div class="bg-stone-50/50 p-3 rounded-xl">
+                            <p class="text-sm font-bold text-sky-800">⏱️ 06:00 – הגעה לשדה התעופה לחציק-אין וביטחון.</p>
                         </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl border border-stone-100">
-                            <p class="text-sm font-bold text-emerald-800 mb-1">☀️ אחר הצהריים - שנ"צ וטיול בנמל</p>
-                            <p class="text-sm text-stone-700">אחרי מנוחת הצהריים, יוצאים לטיול רגלי קל ונעים בנמל איה נאפה היפה, לצפייה בסירות ובמשחק משפחתי רגוע.</p>
+                        <div class="bg-stone-50/50 p-3 rounded-xl">
+                            <p class="text-sm font-bold text-sky-800">⏱️ 09:00 – המראה לקפריסין.</p>
                         </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl border border-stone-100">
-                            <p class="text-sm font-bold text-emerald-800 mb-1">🌙 ערב - ארוחת סיום חגיגית</p>
-                            <p class="text-sm text-stone-700">ארוחת ערב בשרית מעולה במסעדת <strong>Mush</strong> הכשרה. חוזרים לחדר לחגיגת מיני-דיסקו קופצנית עם שירי ילדים.</p>
+                        <div class="bg-stone-50/50 p-3 rounded-xl">
+                            <p class="text-sm text-stone-700"><strong>אחר הצהריים:</strong> נחיתה ואיסוף על ידי פנטליס. צ'ק-אין במלון Mare Ayia Napa ורחצה מרעננת בבריכת הילדים.</p>
+                        </div>
+                        <div class="bg-stone-50/50 p-3 rounded-xl">
+                            <p class="text-sm text-stone-700"><strong>ערב:</strong> ארוחת ערב בשרית מעולה במסעדת Mush הכשרה שליד בית חב"ד.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Jour 4 -->
-                <div class="bg-white rounded-2xl p-6 shadow-md border-rose-200 border-2">
+                <div class="bg-white rounded-2xl p-6 shadow-md shadow-stone-100/80 border border-stone-100">
+                    <div class="flex justify-between items-center border-b border-stone-100 pb-3 mb-4">
+                        <h3 class="text-lg font-bold text-amber-900">יום 2: יום שני, 28 בספטמבר – חוף לנדה והמלון</h3>
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1.5 rounded-full">חוף לנדה</span>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="bg-stone-50/50 p-3 rounded-xl">
+                            <p class="text-sm text-stone-700"><strong>בוקר:</strong> נסיעה קצרה של 5 דקות לחוף לנדה (Landa Beach) - מים רדודים, שקט מוחלט ובניית ארמונות בחול המלטף.</p>
+                        </div>
+                        <div class="bg-stone-50/50 p-3 rounded-xl">
+                            <p class="text-sm text-stone-700"><strong>צהריים:</strong> חזרה למלון למנוחת צהריים (שנ"צ) חיונית לקטנטנים בחדר הממוזג.</p>
+                        </div>
+                        <div class="bg-stone-50/50 p-3 rounded-xl">
+                            <p class="text-sm text-stone-700"><strong>אחר הצהריים:</strong> זמן בריכה ומשחקים במתקני המלון.</p>
+                        </div>
+                        <div class="bg-stone-50/50 p-3 rounded-xl">
+                            <p class="text-sm text-stone-700"><strong>ערב:</strong> משלוח פיצה כשרה חמה ממסעדת Jewpizza ישירות ללובי שלכם.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 shadow-md shadow-stone-100/80 border border-stone-100">
+                    <div class="flex justify-between items-center border-b border-stone-100 pb-3 mb-4">
+                        <h3 class="text-lg font-bold text-emerald-900">יום 3: יום שלישי, 29 בספטמבר – חוף מקרוניסוס ונמל</h3>
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1.5 rounded-full">מפרץ וסירות</span>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="bg-stone-50/50 p-3 rounded-xl">
+                            <p class="text-sm text-stone-700"><strong>בוקר:</strong> בילוי משפחתי בחוף מקרוניסוס (Makronissos Beach) השקט עם גישה נוחה מאוד לעגלות.</p>
+                        </div>
+                        <div class="bg-stone-50/50 p-3 rounded-xl">
+                            <p class="text-sm text-stone-700"><strong>צהריים/אחר הצהריים:</strong> מנוחת שנ"צ במלון, ולאחריה טיול רגוע בנמל איה נאפה לצפייה בסירות הצבעוניות.</p>
+                        </div>
+                        <div class="bg-stone-50/50 p-3 rounded-xl">
+                            <p class="text-sm text-stone-700"><strong>ערב:</strong> ארוחת ערב חגיגית לסיום במסעדת Mush הבשרית הכשרה.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 shadow-md border-rose-300 border-2">
                     <div class="flex justify-between items-center border-b border-rose-100 pb-3 mb-4">
-                        <h3 class="text-lg font-bold text-rose-950">יום 4: יום רביעי, 30 בספטמבר, 2026</h3>
-                        <span class="bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1.5 rounded-full">קניות, משחקים וטיסה</span>
+                        <h3 class="text-lg font-bold text-rose-950">יום 4: יום רביעי, 30 בספטמבר – בריכה, קניון וטיסת חזור 🛍️</h3>
+                        <span class="bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1.5 rounded-full">תוכנית מתוזמנת</span>
                     </div>
                     <div class="space-y-3">
-                        <div class="bg-stone-50/50 p-3 rounded-xl border border-stone-100">
-                            <p class="text-sm font-bold text-rose-800 mb-1">☀️ בוקר - פרידה מהמלון</p>
-                            <p class="text-sm text-stone-700">נהנים מארוחת בוקר רגועה, טבילה אחרונה בבריכה, ועושים צ'ק-אאוט בשעה 11:00.</p>
+                        <div class="bg-stone-50/50 p-3 rounded-xl">
+                            <p class="text-sm text-stone-700"><strong>⏱️ 08:00 - 09:30 – בריכת בוקר וארוחת בוקר:</strong> נהנים מטבילת בוקר אחרונה בבריכה או בים, ארוחת בוקר ואריזת המזוודות.</p>
                         </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl border border-stone-100 bg-rose-50/20 border-rose-100">
-                            <p class="text-sm font-bold text-rose-800 mb-1">🛍️ צהריים - קניון Metropolis Mall בלרנקה</p>
-                            <p class="text-sm text-stone-700">בשעה 11:30, <strong>פנטליס</strong> אוסף אתכם עם המזוודות. נוסעים כ-35 דקות לקניון חדיש וממוזג בלרנקה (נמצא רק 15 דקות מהשדה). ההורים נהנים מקניות (Zara, Mango) והילדים נהנים ומוציאים מרץ במתחם המשחקים המקורה והבטוח <strong>Playland</strong>.</p>
+                        <div class="bg-stone-50/50 p-3 rounded-xl border border-rose-200">
+                            <p class="text-sm text-stone-700"><strong>⏱️ 10:00 – צ'ק-אאוט ואיסוף:</strong> עושים צ'ק-אאוט מהמלון. נהג המונית <strong>פנטליס</strong> אוסף אתכם ואת המזוודות.</p>
                         </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl border border-stone-100">
-                            <p class="text-sm font-bold text-rose-800 mb-1">✈️ אחר הצהריים - המראה הביתה</p>
-                            <p class="text-sm text-stone-700">פנטליס מסיע אתכם בבטחה לקראת הטיסה חזרה הביתה. טיסה נעימה ובטוחה!</p>
+                        <div class="bg-stone-50/50 p-3 rounded-xl bg-amber-50/40">
+                            <p class="text-sm text-stone-700"><strong>⏱️ 10:45 - 12:00 – קניון Metropolis Mall, לרנקה:</strong> עצירה בקניון הממוזג בדרך לשדה. ההורים עושים קניות זריזות והילדים משחקים ומוציאים מרץ במתחם המשחקים המקורה והבטוח <strong>Playland</strong>.</p>
+                        </div>
+                        <div class="bg-stone-50/50 p-3 rounded-xl">
+                            <p class="text-sm text-stone-700"><strong>⏱️ 12:00 – יציאה מהקניון</strong> ונסיעה קצרה של 15 דקות לשדה התעופה.</p>
+                        </div>
+                        <div class="bg-stone-50/50 p-3 rounded-xl border border-rose-200">
+                            <p class="text-sm text-stone-700 font-bold text-rose-900">⏱️ 12:15 - 12:30 – הגעה לשדה התעופה בלרנקה לביטחון וצ'ק-אין.</p>
+                        </div>
+                        <div class="bg-stone-50/50 p-3 rounded-xl">
+                            <p class="text-sm text-stone-700">⏱️ 15:00 – המראה חזרה הביתה.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 3: ENFANTS & PLAGES (KIDS & BEACHES) -->
         <section id="pane-kids" class="tab-pane hidden">
             <div class="mb-8 bg-sky-50/70 p-5 rounded-2xl border border-sky-100">
                 <p class="text-sm text-sky-950 leading-relaxed">
-                    <strong>פינת הקטנטנים:</strong> ריכזנו עבורכם את החופים הבטוחים ביותר לפעוטות בני 3 (עם גישה נוחה לעגלות), לצד רעיונות למשחקים קלים ושקטים בחדר המלון בערב כדי להבטיח הירדמות מהירה וחלקה.
+                    <strong>טיפים לפעוטות בני 3:</strong> חופים עם חול רך ומים רדודים במיוחד, לצד רעיונות למשחקי ערב שקטים בחדר שיעזרו להם להירדם בקלות.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Les plages recommandées -->
                 <div class="bg-white rounded-2xl p-6 shadow-md shadow-stone-100/80 border border-stone-100">
-                    <h3 class="text-lg font-bold text-stone-800 mb-1 border-b border-stone-100 pb-2">🏖️ חופים מושלמים לפעוטות</h3>
+                    <h3 class="text-lg font-bold text-stone-800 mb-1 border-b border-stone-100 pb-2">🏖️ חופים מומלצים לפעוטות / Plages Bébé</h3>
                     
                     <div class="mb-6 mt-4">
                         <h4 class="font-bold text-sky-700 text-base">1. חוף לנדה (Landa Beach)</h4>
-                        <p class="text-sm text-stone-600 mt-1">חוף שקט ורחב ידיים עם חול זהוב ורך. המים צלולים לחלוטין, שקטים מאוד ללא גלים, ונשארים רדודים לאורך מרחק רב. מושלם לבניית טירות חול עם הילדים.</p>
+                        <p class="text-sm text-stone-600 mt-1">המים צלולים לחלוטין ונשארים רדודים לאורך מרחק רב ללא גלים. מושלם ומומלץ ביותר למשפחות עם ילדים קטנים.</p>
                     </div>
                     
                     <div class="mb-6">
                         <h4 class="font-bold text-sky-700 text-base">2. חוף מקרוניסוס (Makronissos Beach)</h4>
-                        <p class="text-sm text-stone-600 mt-1">מפרץ כפול מוגן ורגוע עם חול דק. החוף נהנה מאווירה משפחתית ונינוחה, המים נקיים מאוד, ויש אליו גישה נוחה וסלולה לעגלות ילדים ממש עד קו המים.</p>
+                        <p class="text-sm text-stone-600 mt-1">מפרץ מוגן ורגוע עם חול דק ומים נקיים מאוד. יש אליו גישה נוחה וסלולה לעגלות ילדים ממש עד קו המים.</p>
                     </div>
 
                     <div>
                         <h4 class="font-bold text-sky-700 text-base">3. חוף ניסי (Nissi Beach)</h4>
-                        <p class="text-sm text-stone-600 mt-1">החוף המפורסם ביותר בקפריסין. בסוף ספטמבר הוא פחות עמוס ונעים מאוד לביקור. המים הרדודים יוצרים בריכת שכשוך טבעית ומדהימה לילדים.</p>
+                        <p class="text-sm text-stone-600 mt-1">לשון החול המפורסמת יוצרת מעין בריכת שכשוך טבעית ומדהימה לילדים בסוף ספטמבר כשהחוף פחות עמוס.</p>
                     </div>
                 </div>
 
-                <!-- Petits jeux de soirée -->
                 <div class="bg-white rounded-2xl p-6 shadow-md shadow-stone-100/80 border border-stone-100">
-                    <h3 class="text-lg font-bold text-stone-800 mb-1 border-b border-stone-100 pb-2">🧸 רעיונות למשחקי ערב בחדר</h3>
+                    <h3 class="text-lg font-bold text-stone-800 mb-1 border-b border-stone-100 pb-2">🧸 רעיונות למשחקי ערב בחדר / Petits Jeux</h3>
                     
                     <ul class="space-y-4 mt-4">
                         <li class="bg-stone-50 p-3 rounded-lg">
-                            <h4 class="font-bold text-stone-800">משחק צבעים (אני רואה בעיניי...)</h4>
-                            <p class="text-sm text-stone-600 mt-1">אומרים לילד: "אני רואה בחדר משהו בצבע... כחול!". הילד צריך לחפש ולמצוא את החפץ הכחול בחדר. משחק מעולה המקדם קשב וריכוז רגוע.</p>
+                            <h4 class="font-bold text-stone-800">משחק צבעים (מצאתי צבע!)</h4>
+                            <p class="text-sm text-stone-600 mt-1">אומרים לילד: "אני רואה משהו בצבע... כחול!". הילד מחפש את החפץ בחדר. מעולה לפיתוח ריכוז שקט במיטה.</p>
                         </li>
                         <li class="bg-stone-50 p-3 rounded-lg">
                             <h4 class="font-bold text-stone-800">לא להפיל את הבלון!</h4>
-                            <p class="text-sm text-stone-600 mt-1">נפחו בלון אחד בחדר ותנו לילדים לנסות לטפוח עליו כדי שלא יגע ברצפה. משחק בטוח, שקט ולא שובר כלום שמנצל אנרגיות אחרונות בצורה בטוחה.</p>
+                            <p class="text-sm text-stone-600 mt-1">מנפחים בלון אחד בחדר והילדים צריכים לטפוח עליו כדי שלא יגע ברצפה. משחק בטוח, שקט ולא שובר כלום.</p>
                         </li>
                         <li class="bg-stone-50 p-3 rounded-lg">
                             <h4 class="font-bold text-stone-800">ספארי מדבקות</h4>
-                            <p class="text-sm text-stone-600 mt-1">הביאו מהארץ חוברת קטנה עם מדבקות רב-פעמיות של חיות ים. הילדים יכולים ליצור "עולם תת-ימי" משלהם על דף נייר בשקט ובריכוז לפני השינה.</p>
-                        </li>
-                        <li class="bg-stone-50 p-3 rounded-lg">
-                            <h4 class="font-bold text-stone-800">מיני-דיסקו בחדר</h4>
-                            <p class="text-sm text-stone-600 mt-1">שימו בטלפון את שירי הילדים האהובים עליהם ועשו מסיבת ריקודים קצרה של 10 דקות כדי לעייף אותם סופית לקראת שינה עמוקה וטובה.</p>
+                            <p class="text-sm text-stone-600 mt-1">חוברת קטנה עם מדבקות של חיות ים לרגעים של יצירה שקטה ועצמאית במיטה.</p>
                         </li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 4: RESTAURATION KASHER (KOSHER DINING) -->
-        <section id="pane-dining" class="tab-pane hidden">
-            <div class="mb-8 bg-sky-50/70 p-5 rounded-2xl border border-sky-100">
-                <p class="text-sm text-sky-950 leading-relaxed">
-                    <strong>כשרות ודת:</strong> כל המידע לשמירת כשרות באיה נאפה. כאן מרוכזים פרטי ההתקשרות עם בית חב"ד המקומי בראשות הרב זושא ניימרק, המנהל גם את המסעדות והסופרמרקט הכשר באזור.
+        <!-- SECTION 4: PACKING CHECKLIST (NEW TAB) -->
+        <section id="pane-checklist" class="tab-pane hidden">
+            <div class="mb-8 bg-rose-50/70 p-5 rounded-2xl border border-rose-100">
+                <p class="text-sm text-rose-950 leading-relaxed">
+                    <strong>רשימת ציוד אינטראקטיבית לטיול: / Checklist Valise</strong> 
+                    סמנו ב-V את הדברים שכבר ארזתם כדי לא לשכוח דבר! הרשימה מותאמת במיוחד לנסיעה עם פעוטות בני 3 ומזג האוויר של קפריסין בספטמבר.
                 </p>
             </div>
 
-            <!-- Carte contact Chabad -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Documents & Essentials -->
+                <div class="bg-white rounded-2xl p-6 shadow-md border border-stone-100">
+                    <h3 class="text-lg font-bold text-stone-800 border-b border-stone-100 pb-2 mb-4">📋 מסמכים ודברים חיוניים / Essentiels</h3>
+                    <ul class="space-y-3 text-sm text-stone-700">
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-doc-1" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-doc-1" class="cursor-pointer">דרכונים בתוקף (ומסמכי טיסה) / Passeports</label>
+                        </li>
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-doc-2" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-doc-2" class="cursor-pointer">אישור הזמנה למלון Mare Ayia Napa / Voucher</label>
+                        </li>
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-doc-3" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-doc-3" class="cursor-pointer">ביטוח נסיעות בריאותי / Assurance</label>
+                        </li>
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-doc-4" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-doc-4" class="cursor-pointer">מתאם שקע חשמל אנגלי (בקפריסין השקע הוא בריטי!) / Adaptateur</label>
+                        </li>
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-doc-5" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-doc-5" class="cursor-pointer">מטענים לטלפונים וסוללות גיבוי / Chargeurs</label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Kids Specifics -->
+                <div class="bg-white rounded-2xl p-6 shadow-md border border-stone-100">
+                    <h3 class="text-lg font-bold text-stone-800 border-b border-stone-100 pb-2 mb-4">👶 בשביל הקטנטנים (בני 3) / Pour les petits</h3>
+                    <ul class="space-y-3 text-sm text-stone-700">
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-kid-1" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-kid-1" class="cursor-pointer">טיולון קל עם גגון שמש / Poussette</label>
+                        </li>
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-kid-2" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-kid-2" class="cursor-pointer">חיתולי שחייה עמידים למים / Couches piscine</label>
+                        </li>
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-kid-3" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-kid-3" class="cursor-pointer">חפץ מעבר אהוב (בובה או שמיכה לשינה) / Doudou</label>
+                        </li>
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-kid-4" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-kid-4" class="cursor-pointer">נשנושים וחטיפים לטיסה ולנסיעות / Snacks</label>
+                        </li>
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-kid-5" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-kid-5" class="cursor-pointer">מגבונים לחים בכמות מספקת / Lingettes</label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Clothing & Beach -->
+                <div class="bg-white rounded-2xl p-6 shadow-md border border-stone-100">
+                    <h3 class="text-lg font-bold text-stone-800 border-b border-stone-100 pb-2 mb-4">👕 בגדים, ים ובריכה / Vêtements & Plage</h3>
+                    <ul class="space-y-3 text-sm text-stone-700">
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-wear-1" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-wear-1" class="cursor-pointer">בגדי ים וחולצות שחייה מסננות קרינה (UV) / Maillots</label>
+                        </li>
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-wear-2" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-wear-2" class="cursor-pointer">קרם הגנה לפעוטות עם מקדם גבוה (50+) / Crème solaire</label>
+                        </li>
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-wear-3" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-wear-3" class="cursor-pointer">כובעי שמש רחבי שוליים לילדים ולהורים / Chapeaux</label>
+                        </li>
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-wear-4" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-wear-4" class="cursor-pointer">בגדי ערב קלים + עליונית דקה (לפעמים קריר קצת בערב) / Vestes</label>
+                        </li>
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-wear-5" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-wear-5" class="cursor-pointer">צעצועי חוף פשוטים ומתנפחים קלים / Jeux de plage</label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- First Aid -->
+                <div class="bg-white rounded-2xl p-6 shadow-md border border-stone-100">
+                    <h3 class="text-lg font-bold text-stone-800 border-b border-stone-100 pb-2 mb-4">💊 עזרה ראשונה ותרופות / Pharmacie</h3>
+                    <ul class="space-y-3 text-sm text-stone-700">
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-med-1" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-med-1" class="cursor-pointer">תרופות להורדת חום לילדים (נובימול / אקמולי) / Sirop fièvre</label>
+                        </li>
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-med-2" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-med-2" class="cursor-pointer">פלסטרים וחומר חיטוי לפצעים קלים / Pansements</label>
+                        </li>
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-med-3" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-med-3" class="cursor-pointer">קרם להרגעת העור (אלוורה / פניסטיל) / Gel apaisant</label>
+                        </li>
+                        <li class="flex items-center space-x-reverse space-x-3">
+                            <input type="checkbox" id="chk-med-4" onclick="toggleCheck(this)" class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400">
+                            <label for="chk-med-4" class="cursor-pointer">תרופות קבועות לכל בני המשפחה / Médicaments habituels</label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: RESTAURATION KASHER (KOSHER DINING) -->
+        <section id="pane-dining" class="tab-pane hidden">
+            <div class="mb-8 bg-sky-50/70 p-5 rounded-2xl border border-sky-100">
+                <p class="text-sm text-sky-950 leading-relaxed">
+                    <strong>כשרות באיה נאפה:</strong> המדריך המלא לשמירת כשרות. ריכזנו עבורכם את כל מסעדות חב"ד, אפשרויות המשלוחים הישר למלון Mare Ayia Napa, ופרטי יצירת הקשר.
+                </p>
+            </div>
+
             <div class="bg-gradient-to-r from-sky-700 to-sky-600 text-white rounded-2xl p-6 shadow-md mb-6 relative overflow-hidden">
                 <div class="absolute -top-12 -right-12 w-32 h-32 bg-sky-500 rounded-full opacity-20 blur-xl"></div>
                 <div class="flex justify-between items-start relative z-10">
@@ -314,46 +439,42 @@
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mt-2 relative z-10">
                     <div>
-                        <p class="text-sky-200">📍 כתובת:</p>
+                        <p class="text-sky-200">📍 כתובת / Adresse :</p>
                         <p class="font-semibold">Kavo Gkreko 11, Ayia Napa</p>
                     </div>
                     <div>
-                        <p class="text-sky-200">📞 טלפון ו-Whatsapp:</p>
+                        <p class="text-sky-200">📞 טלפון / Contact :</p>
                         <a href="tel:+35796640980" class="font-bold hover:underline" dir="ltr">+357 96 640980</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Les Restaurants -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- Mush -->
                 <div class="bg-white rounded-2xl p-5 shadow-md shadow-stone-100/80 border border-stone-100 flex flex-col">
                     <div class="text-2xl mb-2">🥩</div>
                     <h4 class="font-bold text-stone-800 text-lg">מסעדת Mush</h4>
                     <p class="text-xs font-bold text-rose-600 mb-2 uppercase tracking-wide">בשרי | כשר למהדרין</p>
-                    <p class="text-sm text-stone-600 mb-4">תפריט ישראלי וים-תיכוני עשיר: שניצלים לילדים, המבורגרים, סטייקים, סלטים טריים וחומוס מעולה.</p>
+                    <p class="text-sm text-stone-600 mb-4">סלטים טריים, שניצלים מעולים לילדים, המבורגרים ובשרים על האש.</p>
                     <div class="bg-stone-50 p-3 rounded-xl text-xs text-stone-700 mt-auto border border-stone-100">
-                        💡 <strong>טיפ שימושי:</strong> ניתן להזמין משלוח ישירות למלון שלכם דרך אפליקציית Wolt!
+                        💡 <strong>משלוחים:</strong> ניתן להזמין משלוח ישירות למלון דרך אפליקציית Wolt המקומית!
                     </div>
                 </div>
 
-                <!-- Jewpizza -->
                 <div class="bg-white rounded-xl p-5 shadow-md shadow-stone-100/80 border border-stone-100 flex flex-col">
                     <div class="text-2xl mb-2">🍕</div>
                     <h4 class="font-bold text-stone-800 text-lg">Jewpizza</h4>
                     <p class="text-xs font-bold text-blue-600 mb-2 uppercase tracking-wide">חלבי | כשר למהדרין</p>
-                    <p class="text-sm text-stone-600 mb-4">פיצות חמות וטריות הנאפות במקום, פסטות איכותיות ומאפים חלביים שילדים אוהבים מאוד.</p>
+                    <p class="text-sm text-stone-600 mb-4">פיצות משפחתיות חמות וטעימות, פסטות מעולות ומאפים חלביים שילדים אוהבים.</p>
                     <div class="bg-stone-50 p-3 rounded-xl text-xs text-stone-700 mt-auto border border-stone-100">
-                        📞 <strong>טלפון להזמנות:</strong> <a href="tel:+35797769254" class="font-bold text-sky-600" dir="ltr">+357 97 769254</a>
+                        📞 <strong>הזמנות בטלפון:</strong> <a href="tel:+35797769254" class="font-bold text-sky-600" dir="ltr">+357 97 769254</a>
                     </div>
                 </div>
 
-                <!-- Hummus Eliyahu -->
                 <div class="bg-white rounded-xl p-5 shadow-md shadow-stone-100/80 border border-stone-100 flex flex-col">
                     <div class="text-2xl mb-2">🧆</div>
                     <h4 class="font-bold text-stone-800 text-lg">חומוס אליהו</h4>
                     <p class="text-xs font-bold text-emerald-600 mb-2 uppercase tracking-wide">פרווה | כשר למהדרין</p>
-                    <p class="text-sm text-stone-600 mb-4">חומוס חם ואיכותי כמו בארץ, פיתות טריות, פלאפל חם ופריך, צ'יפס ושקשוקה מעולה.</p>
+                    <p class="text-sm text-stone-600 mb-4">חומוס טרי וחם כמו בארץ, פיתות רכות, פלאפל חם ופריך וצ'יפס זהוב.</p>
                     <div class="bg-stone-50 p-3 rounded-xl text-xs text-stone-700 mt-auto border border-stone-100">
                         📍 <strong>כתובת:</strong> Archiepiscopou Makariou III, 15
                     </div>
@@ -361,59 +482,9 @@
             </div>
         </section>
 
-        <!-- SECTION 5: AGENT VOYAGE IA (AI AGENT) -->
-        <section id="pane-ai-agent" class="tab-pane hidden">
-            <div class="mb-8 bg-sky-50/70 p-5 rounded-2xl border border-sky-100">
-                <p class="text-sm text-sky-950 leading-relaxed">
-                    <strong>סוכן הנסיעות החכם שלכם מבוסס בינה מלאכותית (Gemini API) ✨:</strong> הסוכן מכיר את כל פרטי הטיול שלכם לקפריסין ומוכן לעזור לכם בכל שאלה במהירות! שאלו אותו על תרגום ליוונית, בקשו רעיון למשחק נוסף לפעוטות, או הצעות לפעילות במקרה של שינוי בתוכניות.
-                </p>
-            </div>
-
-            <!-- Interface Chat IA -->
-            <div class="bg-white rounded-2xl p-6 shadow-md shadow-stone-100/80 border border-stone-100">
-                <div class="flex items-center space-x-reverse space-x-3 mb-4">
-                    <span class="text-3xl">🤖</span>
-                    <div>
-                        <h3 class="text-lg font-bold text-stone-800">סוכן הנסיעות של משפחות נקש וסויסה ✨</h3>
-                        <p class="text-xs text-stone-400">מופעל על ידי Gemini - מוכן לעזור לכם 24/7</p>
-                    </div>
-                </div>
-
-                <div class="mb-4">
-                    <p class="text-xs font-bold text-stone-500 mb-2">שאלות נפוצות מהירות:</p>
-                    <div class="flex flex-wrap gap-2">
-                        <button onclick="sendQuickPrompt('הצע משחק חדר מקורי ומצחיק לילד בן 3 שמרדים אותו')" class="bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs px-3 py-2 rounded-full transition-colors">🎮 משחק מצחיק לפעוט</button>
-                        <button onclick="sendQuickPrompt('איך אומרים ביוונית תודה, בבקשה, כמה זה עולה, ואיפה השירותים?')" class="bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs px-3 py-2 rounded-full transition-colors">🗣️ מילים שימושיות ביוונית</button>
-                        <button onclick="sendQuickPrompt('מה לעשות באיה נאפה עם ילדים בני 3 אם חם מדי בחוץ או אם יורד גשם?')" class="bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs px-3 py-2 rounded-full transition-colors">🏖️ תוכנית גיבוי למזג אוויר</button>
-                    </div>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-2 mb-6">
-                    <input id="ai-input" type="text" placeholder="שאלו את הסוכן שלכם משהו (למשל: 'היכן לאכול צהריים כשר מחר?')..." class="flex-grow bg-stone-50 border border-stone-200 rounded-xl px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
-                    <button id="ai-submit" onclick="submitAIQuery()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold text-sm px-6 py-3.5 rounded-xl transition-all duration-200 flex items-center justify-center space-x-reverse space-x-2 shrink-0">
-                        <span>שאל את ה-AI ✨</span>
-                    </button>
-                </div>
-
-                <div id="ai-loader" class="hidden flex flex-col items-center py-8">
-                    <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-sky-600 mb-3"></div>
-                    <p class="text-xs text-stone-500 animate-pulse">סוכן ה-AI מעבד את שאלתכם ומכין פתרון מותאם אישית...</p>
-                </div>
-
-                <div id="ai-response-container" class="hidden border border-sky-100 bg-sky-50/50 rounded-xl p-5 mt-4">
-                    <div class="flex justify-between items-center mb-2 pb-2 border-b border-sky-100">
-                        <span class="text-xs font-bold text-sky-700">תשובת סוכן הנסיעות שלכם:</span>
-                        <button onclick="clearAIResponse()" class="text-stone-400 hover:text-stone-600 text-xs font-bold">נקה תשובה</button>
-                    </div>
-                    <div id="ai-response-text" class="text-sm text-stone-800 leading-relaxed whitespace-pre-wrap"></div>
-                </div>
-            </div>
-        </section>
-
     </main>
 
     <script>
-        // Logique de navigation par onglets
         const tabs = document.querySelectorAll('.nav-tab');
         const panes = document.querySelectorAll('.tab-pane');
 
@@ -432,8 +503,7 @@
             });
         });
 
-        // Calculateur de compte à rebours basé sur la nouvelle date (27 Septembre 2026)
-        const tripDate = new Date('September 27, 2026 12:00:00').getTime();
+        const tripDate = new Date('September 27, 2026 09:00:00').getTime();
         const countdownElement = document.getElementById('countdown');
 
         function updateCountdown() {
@@ -441,7 +511,7 @@
             const distance = tripDate - now;
 
             if (distance < 0) {
-                countdownElement.innerText = "החופשה התחילה!";
+                countdownElement.innerText = "החופשה התחילה! 🎉";
                 return;
             }
 
@@ -454,7 +524,27 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // Graphique météo de septembre aux couleurs de notre nouvelle palette
+        function toggleCheck(checkbox) {
+            const label = checkbox.nextElementSibling;
+            if (checkbox.checked) {
+                label.classList.add('checked-item');
+                localStorage.setItem(checkbox.id, 'true');
+            } else {
+                label.classList.remove('checked-item');
+                localStorage.removeItem(checkbox.id);
+            }
+        }
+
+        window.onload = function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(cb => {
+                if (localStorage.getItem(cb.id) === 'true') {
+                    cb.checked = true;
+                    cb.nextElementSibling.classList.add('checked-item');
+                }
+            });
+        };
+
         const ctx = document.getElementById('weatherChart').getContext('2d');
         new Chart(ctx, {
             type: 'bar',
@@ -464,9 +554,9 @@
                     label: 'ממוצע מעלות צלזיוס בספטמבר',
                     data: [29, 19, 27],
                     backgroundColor: [
-                        'rgba(244, 63, 94, 0.75)',  // Rose Corail pour la chaleur maximale
-                        'rgba(56, 189, 248, 0.65)',  // Bleu ciel pour la fraîcheur de la nuit
-                        'rgba(13, 148, 136, 0.75)'   // Turquoise profond pour l'eau de Chypre
+                        'rgba(244, 63, 94, 0.75)',
+                        'rgba(56, 189, 248, 0.65)',
+                        'rgba(13, 148, 136, 0.75)'
                     ],
                     borderColor: [
                         'rgba(244, 63, 94, 1)',
@@ -508,113 +598,6 @@
                 }
             }
         });
-        
-        // Logique de l'API Gemini avec Exponential Backoff
-        async function fetchGeminiAPI(promptText) {
-            const apiKey = "";
-            const modelName = "gemini-2.5-flash-preview-09-2025";
-            const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
-
-            const systemInstruction = `אתה סוכן נסיעות ועוזר אישי חכם עבור משפחות נקש וסויסה המטיילות באיה נאפה, קפריסין בין ה-27 ל-30 בספטמבר 2026. יש להם ילדים קטנים בני 3. 
-הנה פרטי הטיול החשובים שאתה מכיר ותמיד תתייחס אליהם בעת הצורך:
-1. המלון שלהם: Mare Ayia Napa.
-2. נהג המונית הצמוד שלהם: פנטליס (Pentelis), מספר טלפון: +357 99 605215.
-3. בית חב"ד איה נאפה: בהנהלת הרב זושא ניימרק, טלפון: +357 96 640980.
-4. מסעדות כשרות: Mush (בשרי), Jewpizza (חלבי), חומוס אליהו (פרווה).
-5. ביום האחרון (30 בספטמבר) הם הולכים לקניון מדהים - Metropolis Mall בלרנקה, שיש בו מתחם משחקים בטוח לפעוטות בשם Playland, לפני שפנטליס לוקח אותם לשדה התעופה.
-6. החופים המומלצים עבורם הם חוף לנדה (Landa) וחוף מקרוניסוס (Makronissos) בזכות מים שקטים ורדודים במיוחד.
-
-הנחיות לתשובה:
-- תמיד תענה בשפה העברית בצורה מנומסת, חמה, ומאירת פנים למשפחה.
-- תן עצות מעשיות, פשוטות וקלות ליישום במיוחד כשהם עם פעוטות בני 3.
-- נסח את התשובות קצר ולעניין כדי שיהיה נוח לקרוא מהטלפון תוך כדי טיול.`;
-
-            const payload = {
-                contents: [{
-                    parts: [{ text: promptText }]
-                }],
-                systemInstruction: {
-                    parts: [{ text: systemInstruction }]
-                }
-            };
-
-            let currentDelay = 1000;
-            for (let i = 0; i < 5; i++) {
-                try {
-                    const response = await fetch(endpoint, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (response.ok) {
-                        const data = await response.json();
-                        const resultText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-                        if (resultText) return resultText;
-                    }
-                } catch (error) {
-                }
-                await new Promise(resolve => setTimeout(resolve, currentDelay));
-                currentDelay *= 2;
-            }
-            throw new Error("מצטערים, לא הצלחנו לקבל תשובה מהשרת של Gemini. אנא ודאו שיש לכם חיבור אינטרנט תקין ונסו שוב.");
-        }
-
-        async function submitAIQuery() {
-            const inputEl = document.getElementById('ai-input');
-            const query = inputEl.value.trim();
-            if (!query) return;
-
-            showAILoader(true);
-            hideAIResponse();
-
-            try {
-                const response = await fetchGeminiAPI(query);
-                displayAIResponse(response);
-            } catch (err) {
-                displayAIResponse(err.message || "אירעה שגיאה בלתי צפויה.");
-            } finally {
-                showAILoader(false);
-            }
-        }
-
-        function sendQuickPrompt(promptText) {
-            document.getElementById('ai-input').value = promptText;
-            submitAIQuery();
-        }
-
-        function displayAIResponse(text) {
-            const container = document.getElementById('ai-response-container');
-            const textEl = document.getElementById('ai-response-text');
-            textEl.textContent = text;
-            container.classList.remove('hidden');
-            container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-
-        function hideAIResponse() {
-            document.getElementById('ai-response-container').classList.add('hidden');
-        }
-
-        function clearAIResponse() {
-            hideAIResponse();
-            document.getElementById('ai-input').value = "";
-        }
-
-        function showAILoader(show) {
-            const loader = document.getElementById('ai-loader');
-            const submitBtn = document.getElementById('ai-submit');
-            if (show) {
-                loader.classList.remove('hidden');
-                submitBtn.disabled = true;
-                submitBtn.classList.add('opacity-50');
-            } else {
-                loader.classList.add('hidden');
-                submitBtn.disabled = false;
-                submitBtn.classList.remove('opacity-50');
-            }
-        }
     </script>
 </body>
 </html>
