@@ -3,88 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>משפחות נקש וסויסה | איה נאפה 2026</title>
+    <title>משפחות נקש וסויסה | איה נאפה 2026 ✈️</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --sky: #0ea5e9;
+            --sky-dark: #0284c7;
+            --rose: #f43f5e;
+            --amber: #f59e0b;
+            --emerald: #10b981;
+            --sand: #fdf8f0;
+            --glass: rgba(255,255,255,0.72);
+        }
+
+        * { box-sizing: border-box; }
+
         body {
             font-family: 'Noto Sans Hebrew', sans-serif;
-            background-color: #fcfbf9;
+            background-color: var(--sand);
             color: #1c1917;
             overflow-x: hidden;
         }
-        
-        /* אנימציית רקע זורמת לכותרת הראשית */
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+
+        /* ========== HEADER PREMIUM ========== */
+        .hero-header {
+            position: relative;
+            min-height: 340px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 25%, #ec4899 50%, #8b5cf6 75%, #0ea5e9 100%);
+            background-size: 400% 400%;
+            animation: heroGradient 12s ease infinite;
+            border-radius: 0 0 3rem 3rem;
+            box-shadow: 0 25px 60px rgba(14,165,233,0.25), 0 10px 30px rgba(244,63,94,0.2);
+        }
+
+        @keyframes heroGradient {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        .animated-header {
-            background-size: 200% 200%;
-            animation: gradientBG 10s ease infinite;
+
+        /* Floating particles in header */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.18;
+            animation: floatUp linear infinite;
+        }
+        @keyframes floatUp {
+            0%   { transform: translateY(100%) scale(0.5); opacity: 0; }
+            20%  { opacity: 0.18; }
+            80%  { opacity: 0.12; }
+            100% { transform: translateY(-120%) scale(1.2); opacity: 0; }
         }
 
-        /* מכולת הגרף */
-        .chart-container {
+        /* Wave bottom of header */
+        .hero-wave {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--sand);
+            clip-path: ellipse(55% 100% at 50% 100%);
+        }
+
+        /* Glassmorphism badge */
+        .glass-badge {
+            background: rgba(255,255,255,0.22);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 999px;
+            padding: 6px 18px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #fff;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* ========== STICKY NAV ========== */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(253,248,240,0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(14,165,233,0.12);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+        }
+
+        .nav-tab {
             position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 400px;
+            white-space: nowrap;
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #78716c;
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+            cursor: pointer;
+            border: none;
+            background: transparent;
         }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
+        .nav-tab:hover {
+            color: var(--sky-dark);
+            background: rgba(14,165,233,0.08);
+            transform: translateY(-1px);
         }
-
-        /* מעברים חלקים לטאב פעיל */
-        .tab-active {
-            background-color: #0284c7;
-            color: #ffffff !important;
-            box-shadow: 0 10px 20px rgba(2, 132, 199, 0.3);
+        .nav-tab.tab-active {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            color: #fff !important;
+            box-shadow: 0 6px 20px rgba(14,165,233,0.38);
             transform: translateY(-2px);
         }
 
-        .family-tab-active {
-            background-color: #f43f5e;
-            color: #ffffff !important;
-            box-shadow: 0 6px 12px rgba(244, 63, 94, 0.25);
+        /* ========== CARDS ========== */
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.06);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+            transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+            overflow: hidden;
+        }
+        .card:hover {
+            box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
         }
 
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .card-glass {
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.6);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
         }
 
-        /* אנימציית מחיקה לרשימת הציוד */
+        /* ========== COUNTDOWN ========== */
+        .countdown-ring {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+        }
+        .countdown-ring svg {
+            transform: rotate(-90deg);
+        }
+        .countdown-ring .ring-bg {
+            fill: none;
+            stroke: #f0f9ff;
+            stroke-width: 8;
+        }
+        .countdown-ring .ring-progress {
+            fill: none;
+            stroke: url(#ringGradient);
+            stroke-width: 8;
+            stroke-linecap: round;
+            stroke-dasharray: 314;
+            stroke-dashoffset: 80;
+            transition: stroke-dashoffset 1s ease;
+        }
+        .countdown-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        /* ========== TIMELINE ========== */
+        .timeline-item {
+            position: relative;
+            padding-right: 28px;
+            padding-bottom: 20px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: 8px;
+            top: 28px;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #bae6fd, transparent);
+        }
+        .timeline-item:last-child::before { display: none; }
+        .timeline-dot {
+            position: absolute;
+            right: 0;
+            top: 6px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            box-shadow: 0 0 0 4px rgba(14,165,233,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ========== CHECKLIST ========== */
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+        .check-item:hover {
+            background: rgba(14,165,233,0.05);
+        }
+        .check-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--rose);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
         .checked-item {
             text-decoration: line-through;
             color: #a8a29e;
-            transform: scale(0.97);
-            opacity: 0.7;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.65;
         }
 
-        /* אנימציית כניסה רכה לתוכן הטאבים (Slide up + Fade in) */
-        .tab-pane {
-            opacity: 0;
-            transform: translateY(12px);
-            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-        }
-        .tab-pane.pane-show {
-            opacity: 1;
-            transform: translateY(0);
+        /* ========== FAMILY TABS ========== */
+        .family-tab-active {
+            background: linear-gradient(135deg, #f43f5e, #e11d48) !important;
+            color: #fff !important;
+            box-shadow: 0 6px 20px rgba(244,63,94,0.35) !important;
+            transform: translateY(-2px) !important;
         }
 
-        /* עיצוב משחק הזיכרון */
+        /* ========== MEMORY GAME ========== */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -98,20 +261,16 @@
             cursor: pointer;
             transition: transform 0.2s ease;
         }
-        .memory-card:active {
-            transform: scale(0.95);
-        }
+        .memory-card:active { transform: scale(0.92); }
         .card-inner {
             position: relative;
             width: 100%;
             height: 100%;
             text-align: center;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
             transform-style: preserve-3d;
         }
-        .memory-card.flipped .card-inner {
-            transform: rotateY(180deg);
-        }
+        .memory-card.flipped .card-inner { transform: rotateY(180deg); }
         .card-front, .card-back {
             position: absolute;
             width: 100%;
@@ -121,514 +280,829 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 16px;
-            font-size: 2rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border-radius: 14px;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
         .card-back {
-            background: linear-gradient(135deg, #e0f2fe, #bae6fd);
-            border: 2px solid #93c5fd;
-            color: #0284c7;
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            color: #fff;
+            font-size: 1.4rem;
         }
         .card-front {
-            background-color: #ffffff;
-            border: 2px solid #0284c7;
+            background: #fff;
+            border: 2px solid #bae6fd;
             transform: rotateY(180deg);
         }
+        .memory-card.matched .card-front {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            border-color: #34d399;
+        }
 
-        /* אנימציית קונפטי דינמית לחגיגת ניצחון */
+        /* ========== TAB PANE ANIMATION ========== */
+        .tab-pane {
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        }
+        .tab-pane.pane-show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========== CONFETTI ========== */
         @keyframes confettiFall {
-            0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+            0%   { transform: translateY(-50px) rotate(0deg) scale(1); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(540deg) scale(0.5); opacity: 0; }
         }
         .confetti {
             position: fixed;
-            width: 12px;
-            height: 12px;
-            z-index: 999;
+            width: 10px;
+            height: 10px;
+            z-index: 9999;
             pointer-events: none;
-            animation: confettiFall 3s linear forwards;
+            animation: confettiFall 3.5s ease-in forwards;
+            border-radius: 2px;
         }
+
+        /* ========== SCROLLBAR ========== */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* ========== PROGRESS BAR ========== */
+        .progress-bar {
+            height: 6px;
+            border-radius: 999px;
+            background: #e7f3ff;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #0ea5e9, #38bdf8);
+            transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        /* ========== STAT CARD ========== */
+        .stat-card {
+            background: linear-gradient(135deg, var(--from), var(--to));
+            border-radius: 18px;
+            padding: 20px;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+        }
+
+        /* ========== CHART CONTAINER ========== */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            height: 280px;
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 320px; }
+        }
+
+        /* ========== RESTAURANT CARD ========== */
+        .restaurant-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .restaurant-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            border-radius: 0 20px 0 60px;
+            opacity: 0.08;
+        }
+
+        /* ========== SCROLL REVEAL ========== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========== PULSE GLOW ========== */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(244,63,94,0.3); }
+            50%       { box-shadow: 0 0 0 10px rgba(244,63,94,0); }
+        }
+        .pulse-glow { animation: pulseGlow 2.5s ease infinite; }
+
+        /* ========== FLIGHT CARD ========== */
+        .flight-card {
+            background: linear-gradient(135deg, #0c4a6e, #0369a1, #0284c7);
+            border-radius: 20px;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .flight-card::after {
+            content: '✈';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.04;
+            bottom: -20px;
+            left: 10px;
+            transform: rotate(-15deg);
+        }
+
+        /* ========== BEACH CARD ========== */
+        .beach-card {
+            background: linear-gradient(160deg, #e0f2fe, #f0f9ff);
+            border: 1px solid #bae6fd;
+            border-radius: 18px;
+            padding: 18px;
+            transition: all 0.3s ease;
+        }
+        .beach-card:hover {
+            background: linear-gradient(160deg, #bae6fd, #e0f2fe);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(14,165,233,0.15);
+        }
+
+        /* ========== EXPENSE TABLE ========== */
+        .expense-row {
+            transition: background 0.2s ease;
+        }
+        .expense-row:hover {
+            background: rgba(14,165,233,0.04);
+        }
+
+        /* ========== SECTION INTRO ========== */
+        .section-intro {
+            border-radius: 18px;
+            padding: 18px 22px;
+            margin-bottom: 28px;
+            border-right: 4px solid;
+        }
+
+        /* ========== DAY BADGE ========== */
+        .day-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 14px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ========== SHIMMER EFFECT ========== */
+        @keyframes shimmer {
+            0%   { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .shimmer-btn {
+            background: linear-gradient(90deg, #0284c7 25%, #38bdf8 50%, #0284c7 75%);
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+
+        /* ========== HERO TITLE ANIMATION ========== */
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .hero-title { animation: slideInDown 0.8s ease forwards; }
+        .hero-subtitle { animation: slideInUp 0.8s 0.2s ease both; }
+        .hero-badge { animation: slideInDown 0.6s 0.1s ease both; }
     </style>
 </head>
-<body class="antialiased pb-12">
+<body class="antialiased pb-16">
 
-    <!-- Chosen Palette: Mediterranean Sunset Gradient, Sand Background (#fcfbf9), Laguna Blues -->
-    <!-- Application Structure Plan: Un tableau de bord de voyage en hébreu complet, optimisé pour les téléphones. Un en-tête immersif avec gradient animé simule un coucher de soleil. La navigation par onglets utilise des transitions CSS (Slide up & Fade). Les listes de bagages sont séparées pour les familles Nakache et Swissa. L'agent IA et toute clé d'API ont été entièrement supprimés pour garantir un fonctionnement hors ligne ultra-stable et sans bug sur GitHub Pages. -->
-    <!-- Visualization & Content Choices: Graphique météo Chart.js stylisé. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <!-- ============================================================ -->
+    <!-- HERO HEADER PREMIUM                                          -->
+    <!-- ============================================================ -->
+    <header class="hero-header">
+        <!-- Floating particles -->
+        <div class="particle" style="width:80px;height:80px;background:#fff;top:10%;right:8%;animation-duration:8s;animation-delay:0s;"></div>
+        <div class="particle" style="width:50px;height:50px;background:#fde68a;top:60%;right:20%;animation-duration:11s;animation-delay:2s;"></div>
+        <div class="particle" style="width:100px;height:100px;background:#bae6fd;top:20%;left:5%;animation-duration:9s;animation-delay:1s;"></div>
+        <div class="particle" style="width:40px;height:40px;background:#fda4af;top:70%;left:15%;animation-duration:7s;animation-delay:3s;"></div>
+        <div class="particle" style="width:65px;height:65px;background:#a5f3fc;top:40%;left:40%;animation-duration:13s;animation-delay:0.5s;"></div>
 
-    <!-- כותרת ראשית חגיגית עם אנימציית גלים צבעונית -->
-    <header class="relative animated-header bg-gradient-to-br from-amber-400 via-rose-400 via-sky-400 to-sky-500 text-white py-16 px-6 text-center rounded-b-[3rem] shadow-2xl shadow-sky-100/50 overflow-hidden mb-6">
-        <div class="absolute -top-16 -left-16 w-56 h-52 bg-yellow-200 rounded-full opacity-30 blur-2xl"></div>
-        <div class="absolute -bottom-16 -right-16 w-80 h-72 bg-sky-300 rounded-full opacity-40 blur-3xl"></div>
-        
-        <div class="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
-            <span class="text-xs font-bold tracking-widest bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full uppercase text-sky-950 shadow-sm animate-pulse">
-                קפריסין 2026 🌊🏖️
-            </span>
-            <h1 class="text-3xl sm:text-5xl font-extrabold mt-4 drop-shadow-md text-sky-950 tracking-tight leading-tight">
-                חופשת הקיץ באיה נאפה
-            </h1>
-            <p class="text-base sm:text-xl font-medium mt-3 text-sky-950 max-w-lg">
-                משפחות נקש וסויסה
+        <!-- Blur blobs -->
+        <div class="absolute -top-20 -right-20 w-72 h-72 bg-yellow-300 rounded-full opacity-25 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-20 -left-20 w-96 h-96 bg-sky-400 rounded-full opacity-20 blur-3xl pointer-events-none"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 text-center px-6 py-8 max-w-2xl mx-auto">
+            <span class="glass-badge hero-badge">🌊 קפריסין 2026 · איה נאפה</span>
+
+            <h1 class="hero-title text-4xl sm:text-6xl font-black mt-5 text-white drop-shadow-lg tracking-tight leading-tight" style="text-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+                חופשת הקיץ
                 <br>
-                <span class="text-sm font-bold text-sky-900 bg-white/30 px-3 py-1 rounded-full mt-2 inline-block shadow-inner">27-30 בספטמבר 2026</span>
+                <span style="background: linear-gradient(90deg,#fff,#fde68a,#fff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">באיה נאפה</span>
+            </h1>
+
+            <p class="hero-subtitle text-lg sm:text-2xl font-semibold mt-4 text-white/90">
+                משפחות נקש וסויסה
             </p>
+
+            <div class="hero-subtitle flex flex-wrap justify-center gap-3 mt-5">
+                <span class="glass-badge text-white">📅 27–30 ספטמבר 2026</span>
+                <span class="glass-badge text-white">🏨 Mare Ayia Napa · 5★</span>
+                <span class="glass-badge text-white">👨‍👩‍👧‍👦 2 משפחות</span>
+            </div>
         </div>
+
+        <!-- Wave bottom -->
+        <div class="hero-wave"></div>
     </header>
 
-    <!-- ניווט באמצעות טאבים חצי-שקופים ומעוגלים -->
-    <nav class="bg-white/80 backdrop-blur-lg shadow-md sticky top-0 z-50 border-b border-stone-100 py-3 transition-all duration-300">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex overflow-x-auto hide-scrollbar space-x-reverse space-x-3 text-sm font-semibold" id="nav-tabs">
-                <button class="nav-tab tab-active whitespace-nowrap px-4 py-2.5 rounded-full text-stone-600 hover:text-sky-600 hover:scale-105 active:scale-95 transition-all duration-300" data-target="pane-overview">🏠 סקירה כללית</button>
-                <button class="nav-tab whitespace-nowrap px-4 py-2.5 rounded-full text-stone-600 hover:text-sky-600 transition-all duration-300" data-target="pane-itinerary">📅 טיסות ומסלול</button>
-                <button class="nav-tab whitespace-nowrap px-4 py-2.5 rounded-full text-stone-600 hover:text-sky-600 transition-all duration-300" data-target="pane-kids">🏖️ קטנטנים וחופים</button>
-                <button class="nav-tab whitespace-nowrap px-4 py-2.5 rounded-full text-stone-600 hover:text-rose-600 transition-all duration-300 font-bold" data-target="pane-checklist">📋 רשימת ציוד</button>
-                <button class="nav-tab whitespace-nowrap px-4 py-2.5 rounded-full text-stone-600 hover:text-sky-600 transition-all duration-300" data-target="pane-dining">✡️ אוכל כשר</button>
-                <button class="nav-tab whitespace-nowrap px-4 py-2.5 rounded-full text-stone-600 hover:text-sky-600 transition-all duration-300" data-target="pane-tools">🎮 משחקים וכלים</button>
+    <!-- ============================================================ -->
+    <!-- STICKY NAVIGATION                                            -->
+    <!-- ============================================================ -->
+    <nav class="sticky-nav py-3">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="flex overflow-x-auto hide-scrollbar gap-2" id="nav-tabs">
+                <button class="nav-tab tab-active" data-target="pane-overview">🏠 סקירה</button>
+                <button class="nav-tab" data-target="pane-itinerary">📅 טיסות ומסלול</button>
+                <button class="nav-tab" data-target="pane-kids">🏖️ קטנטנים</button>
+                <button class="nav-tab" data-target="pane-checklist">📋 רשימת ציוד</button>
+                <button class="nav-tab" data-target="pane-dining">✡️ אוכל כשר</button>
+                <button class="nav-tab" data-target="pane-tools">🎮 משחקים</button>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <!-- ============================================================ -->
+    <!-- MAIN CONTENT                                                 -->
+    <!-- ============================================================ -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-6">
 
-        <!-- טאב 1: סקירה כללית -->
+        <!-- ====================== TAB 1: OVERVIEW ====================== -->
         <section id="pane-overview" class="tab-pane block pane-show">
-            <div class="mb-8 bg-sky-50/70 p-5 rounded-2xl border border-sky-100 hover:shadow-inner transition-all duration-300">
-                <p class="text-sm text-sky-950 leading-relaxed">
-                    <strong>שלום משפחות נקש וסויסה! 👋</strong> 
-                    ברוכים הבאים ללוח התכנון הדיגיטלי והמעודכן שלכם. כאן תמצאו את פרטי הטיסות החדשים, החופים המומלצים ביותר, רשימת ציוד אינטראקטיבית כדי שלא תשכחו כלום לפעוטות ולתינוקות, ומידע על אוכל כשר.
-                </p>
+
+            <!-- Welcome banner -->
+            <div class="card p-6 mb-6 bg-gradient-to-r from-sky-50 to-blue-50 border-sky-100 reveal">
+                <div class="flex items-start gap-4">
+                    <div class="text-4xl flex-shrink-0">👋</div>
+                    <div>
+                        <h2 class="text-lg font-bold text-sky-900 mb-1">שלום משפחות נקש וסויסה!</h2>
+                        <p class="text-sm text-sky-800 leading-relaxed">
+                            ברוכים הבאים ללוח התכנון הדיגיטלי שלכם. כאן תמצאו את פרטי הטיסות, החופים המומלצים, רשימת ציוד אינטראקטיבית ומידע על אוכל כשר — הכל במקום אחד.
+                        </p>
+                    </div>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <!-- טיימר ספירה לאחור עם אנימציית דופק עדינה -->
-                <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100 flex flex-col justify-center items-center text-center group">
-                    <div class="text-4xl mb-2">🌴</div>
-                    <h3 class="text-lg font-bold text-stone-800">מתי מתחיל הכיף?</h3>
-                    <div id="countdown" class="text-3xl font-extrabold text-rose-500 tracking-tight my-2 scale-100 group-hover:scale-105 transition-transform duration-300">טוען...</div>
-                    <p class="text-xs text-stone-400">יום ראשון, 27 בספטמבר, 2026</p>
+            <!-- Stats row -->
+            <div class="grid grid-cols-3 gap-3 mb-6 reveal">
+                <div class="card p-4 text-center border-sky-100">
+                    <div class="text-2xl font-black text-sky-600">4</div>
+                    <div class="text-xs text-stone-500 mt-1 font-medium">ימי חופשה</div>
+                </div>
+                <div class="card p-4 text-center border-rose-100">
+                    <div class="text-2xl font-black text-rose-500">3</div>
+                    <div class="text-xs text-stone-500 mt-1 font-medium">חופים מומלצים</div>
+                </div>
+                <div class="card p-4 text-center border-emerald-100">
+                    <div class="text-2xl font-black text-emerald-600">3</div>
+                    <div class="text-xs text-stone-500 mt-1 font-medium">מסעדות כשרות</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+                <!-- Countdown -->
+                <div class="card p-6 text-center reveal">
+                    <div class="text-3xl mb-3">🌴</div>
+                    <h3 class="text-base font-bold text-stone-700 mb-4">מתי מתחיל הכיף?</h3>
+
+                    <!-- Countdown display -->
+                    <div class="flex justify-center gap-3 mb-3">
+                        <div class="bg-sky-50 rounded-2xl px-4 py-3 min-w-[64px]">
+                            <div id="cd-days" class="text-3xl font-black text-sky-600 leading-none">--</div>
+                            <div class="text-xs text-stone-400 mt-1 font-medium">ימים</div>
+                        </div>
+                        <div class="bg-rose-50 rounded-2xl px-4 py-3 min-w-[64px]">
+                            <div id="cd-hours" class="text-3xl font-black text-rose-500 leading-none">--</div>
+                            <div class="text-xs text-stone-400 mt-1 font-medium">שעות</div>
+                        </div>
+                        <div class="bg-amber-50 rounded-2xl px-4 py-3 min-w-[64px]">
+                            <div id="cd-mins" class="text-3xl font-black text-amber-500 leading-none">--</div>
+                            <div class="text-xs text-stone-400 mt-1 font-medium">דקות</div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-stone-400">יום ראשון, 27 בספטמבר 2026 · 09:00</p>
                 </div>
 
-                <!-- אנשי קשר מהירים -->
-                <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100">
-                    <h3 class="text-lg font-bold text-stone-800 border-b border-stone-100 pb-2 mb-4">📍 אנשי קשר ולוגיסטיקה</h3>
-                    <ul class="space-y-4">
-                        <li class="flex items-start">
-                            <span class="text-xl ml-3">🏨</span>
+                <!-- Contacts -->
+                <div class="card p-6 reveal">
+                    <h3 class="text-base font-bold text-stone-800 mb-4 flex items-center gap-2">
+                        <span class="w-8 h-8 bg-sky-100 rounded-full flex items-center justify-center text-sm">📍</span>
+                        אנשי קשר ולוגיסטיקה
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3 p-3 bg-stone-50 rounded-xl">
+                            <span class="text-xl flex-shrink-0">🏨</span>
                             <div>
-                                <p class="font-bold text-stone-800">מלון Mare Ayia Napa</p>
+                                <p class="font-bold text-stone-800 text-sm">Mare Ayia Napa Hotel</p>
                                 <p class="text-xs text-stone-500">74 Cavo Greco Avenue, Ayia Napa</p>
-                                <p class="text-xs text-sky-600 mt-1 font-semibold">מלון נופש 5 כוכבים מושלם למשפחות</p>
+                                <span class="inline-block mt-1 text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-semibold">5★ Family Resort</span>
                             </div>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-xl ml-3">🚕</span>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 bg-stone-50 rounded-xl">
+                            <span class="text-xl flex-shrink-0">🚕</span>
                             <div>
-                                <p class="font-bold text-stone-800">שירות המוניות של פנטליס (Pentelis)</p>
-                                <div class="flex flex-wrap items-center gap-2 mt-1">
-                                    <a href="tel:+35799605215" class="text-sky-600 font-bold hover:underline" dir="ltr">+357 99 605215</a>
-                                    <span class="text-stone-300">|</span>
-                                    <a href="https://wa.me/35799605215?text=%D7%A9%D7%94%D7%9C%D7%95%D7%9D%20%D7%A4%D7%A0%D7%98%D7%9C%D7%99%D7%A1!%20%D7%90%D7%A0%D7%97%D7%A0%D7%95%20%D7%9E%D7%A9%D7%A4%D7%97%D7%AA%20%D7%A0%D7%A7%D7%A9%20%D7%95%D7%A1%D7%95%D7%99%D7%A1%D7%94" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 hover:scale-105 active:scale-95 text-white text-xs px-3 py-1 rounded-full font-semibold transition-all">WhatsApp 💬</a>
+                                <p class="font-bold text-stone-800 text-sm">פנטליס (Pentelis) – נהג צמוד</p>
+                                <div class="flex flex-wrap items-center gap-2 mt-1.5">
+                                    <a href="tel:+35799605215" class="text-sky-600 font-bold text-xs hover:underline" dir="ltr">+357 99 605215</a>
+                                    <a href="https://wa.me/35799605215" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white text-xs px-3 py-1 rounded-full font-semibold transition-all hover:scale-105 shadow-sm">WhatsApp 💬</a>
                                 </div>
-                                <p class="text-xs text-stone-400 mt-1">נהג צמוד להסעות משדה התעופה ולקניון בדרך חזור</p>
                             </div>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-xl ml-3">🚨</span>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-rose-50 rounded-xl">
+                            <span class="text-xl">🚨</span>
                             <div>
-                                <p class="font-bold text-stone-800">מספר החירום הלאומי בקפריסין</p>
-                                <p class="text-rose-500 font-bold">112</p>
+                                <p class="font-bold text-stone-800 text-sm">חירום לאומי בקפריסין</p>
+                                <p class="text-rose-600 font-black text-lg">112</p>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- מזג אוויר -->
-            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100">
-                <h3 class="text-lg font-bold text-stone-800 mb-1">טמפרטורת המים ומזג האוויר בספטמבר</h3>
-                <p class="text-xs text-stone-500 mb-6">מזג האוויר בספטמבר חם ואידיאלי לרחצה, המים חמימים ומתאימים מאוד לפעוטות ולתינוקות.</p>
+            <!-- Weather Chart -->
+            <div class="card p-6 reveal">
+                <div class="flex items-center justify-between mb-1">
+                    <h3 class="text-base font-bold text-stone-800">מזג האוויר בספטמבר</h3>
+                    <span class="text-xs bg-sky-100 text-sky-700 px-3 py-1 rounded-full font-semibold">ממוצע היסטורי</span>
+                </div>
+                <p class="text-xs text-stone-500 mb-5">מזג האוויר חם ואידיאלי לרחצה — מים חמימים ומתאימים לפעוטות ותינוקות.</p>
+
+                <!-- Temp indicators -->
+                <div class="grid grid-cols-3 gap-3 mb-5">
+                    <div class="text-center p-3 bg-rose-50 rounded-xl">
+                        <div class="text-2xl font-black text-rose-500">29°</div>
+                        <div class="text-xs text-stone-500 mt-1">מקסימום יום</div>
+                    </div>
+                    <div class="text-center p-3 bg-sky-50 rounded-xl">
+                        <div class="text-2xl font-black text-sky-500">19°</div>
+                        <div class="text-xs text-stone-500 mt-1">מינימום לילה</div>
+                    </div>
+                    <div class="text-center p-3 bg-teal-50 rounded-xl">
+                        <div class="text-2xl font-black text-teal-600">27°</div>
+                        <div class="text-xs text-stone-500 mt-1">טמפ' מים</div>
+                    </div>
+                </div>
+
                 <div class="chart-container">
                     <canvas id="weatherChart"></canvas>
                 </div>
             </div>
         </section>
 
-        <!-- טאב 2: טיסות ומסלול יומי -->
+        <!-- ====================== TAB 2: ITINERARY ====================== -->
         <section id="pane-itinerary" class="tab-pane hidden">
-             <div class="mb-8 bg-sky-50/70 p-5 rounded-2xl border border-sky-100">
-                <p class="text-sm text-sky-950 leading-relaxed">
-                    <strong>לוח זמני הטיסות והטיול:</strong> כאן מפורטים זמני הטיסות החדשים שלכם כולל שעות ההגעה המומלצות לשדה התעופה ותוכנית מפורטת לכל ימי הנופש.
+            <div class="section-intro bg-sky-50 border-sky-400 reveal">
+                <p class="text-sm text-sky-900 leading-relaxed">
+                    <strong>לוח זמני הטיסות והטיול:</strong> פרטי הטיסות המדויקים ותוכנית יומית מלאה לכל ימי הנופש.
                 </p>
             </div>
 
-            <div class="space-y-6">
-                
-                <!-- מידע על טיסות -->
-                <div class="bg-sky-600 text-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300">
-                    <h3 class="text-lg font-bold mb-3 border-b border-sky-500 pb-2">✈️ זמני הטיסות שלכם</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
-                        <div class="bg-sky-700/40 p-3.5 rounded-xl border border-sky-500/30">
-                            <p class="font-bold text-amber-300 text-base">✈️ הלוך: 27.09.2026</p>
-                            <p class="mt-2">⏱️ <strong>שעת טיסה:</strong> 09:00 בבוקר</p>
-                            <p class="text-emerald-300 font-semibold mt-1">⏱️ הגעה מומלצת לנתב"ג: 06:00 בבוקר (3 שעות לפני)</p>
-                            <p class="text-xs text-sky-200 mt-2">נחיתה משוערת בלרנקה ב-10:00. פנטליס ימתין לכם בשדה.</p>
+            <!-- Flight card -->
+            <div class="flight-card p-6 mb-6 reveal">
+                <h3 class="text-lg font-bold mb-5 flex items-center gap-2">
+                    <span class="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center">✈️</span>
+                    זמני הטיסות שלכם
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/20">
+                        <p class="font-black text-amber-300 text-base mb-3">✈️ הלוך · 27.09.2026</p>
+                        <div class="space-y-2 text-sky-100">
+                            <p>⏱️ <strong class="text-white">שעת טיסה:</strong> 09:00 בבוקר</p>
+                            <p class="text-emerald-300 font-semibold">⏱️ הגעה מומלצת לנתב"ג: 06:00 (3 שעות לפני)</p>
+                            <p class="text-xs text-sky-200 mt-2">נחיתה משוערת בלרנקה ב-10:00. פנטליס ימתין לכם.</p>
                         </div>
-                        <div class="bg-sky-700/40 p-3.5 rounded-xl border border-sky-500/30">
-                            <p class="font-bold text-amber-300 text-base">✈️ חזור: 30.09.2026</p>
-                            <p class="mt-2">⏱️ <strong>שעת טיסה:</strong> 15:00 בצהריים</p>
-                            <p class="text-emerald-300 font-semibold mt-1">⏱️ הגעה מומלצת לשדה בלרנקה: 12:15-12:30</p>
-                            <p class="text-xs text-sky-200 mt-2">תוכנית הבוקר של היום האחרון מותאמת בדיוק לשעה זו.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-2xl border border-white/20">
+                        <p class="font-black text-amber-300 text-base mb-3">✈️ חזור · 30.09.2026</p>
+                        <div class="space-y-2 text-sky-100">
+                            <p>⏱️ <strong class="text-white">שעת טיסה:</strong> 15:00 בצהריים</p>
+                            <p class="text-emerald-300 font-semibold">⏱️ הגעה לשדה בלרנקה: 12:15–12:30</p>
+                            <p class="text-xs text-sky-200 mt-2">תוכנית הבוקר מותאמת בדיוק לשעה זו.</p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- יום 1 -->
-                <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-stone-100">
-                    <div class="flex justify-between items-center border-b border-stone-100 pb-3 mb-4">
-                        <h3 class="text-lg font-bold text-sky-900">יום 1: יום ראשון, 27 בספטמבר – הגעה והתאקלמות</h3>
-                        <span class="bg-sky-100 text-sky-800 text-xs font-bold px-3 py-1.5 rounded-full">נחיתה ובריכה</span>
+            <!-- Days -->
+            <div class="space-y-5">
+                <!-- Day 1 -->
+                <div class="card reveal">
+                    <div class="p-5 border-b border-stone-100 flex justify-between items-center">
+                        <h3 class="font-bold text-sky-900 text-base">יום 1 · ראשון, 27 ספטמבר</h3>
+                        <span class="day-badge bg-sky-100 text-sky-700">🛬 הגעה</span>
                     </div>
-                    <div class="space-y-3">
-                        <div class="bg-stone-50/50 p-3 rounded-xl border border-stone-100">
-                            <p class="text-sm font-bold text-sky-800">⏱️ 06:00 – הגעה לשדה התעופה לצ'ק-אין וביטחון.</p>
+                    <div class="p-5 space-y-3">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <p class="text-sm font-bold text-sky-800">06:00 – הגעה לנתב"ג לצ'ק-אין וביטחון</p>
                         </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl">
-                            <p class="text-sm font-bold text-sky-800">⏱️ 09:00 – המראה לקפריסין.</p>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <p class="text-sm font-bold text-sky-800">09:00 – המראה לקפריסין</p>
                         </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl">
-                            <p class="text-sm text-stone-700"><strong>אחר הצהריים:</strong> נחיתה ואיסוף על ידי פנטליס. צ'ק-אין במלון Mare Ayia Napa ורחצה מרעננת בבריכת הילדים והפעוטות.</p>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <p class="text-sm text-stone-700"><strong>אחר הצהריים:</strong> נחיתה ואיסוף על ידי פנטליס. צ'ק-אין במלון ורחצה מרעננת בבריכת הילדים.</p>
                         </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl">
+                        <div class="timeline-item" style="padding-bottom:0">
+                            <div class="timeline-dot" style="background: linear-gradient(135deg,#f59e0b,#d97706)"></div>
                             <p class="text-sm text-stone-700"><strong>ערב:</strong> ארוחת ערב בשרית מעולה במסעדת Mush הכשרה שליד בית חב"ד.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- יום 2 -->
-                <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-stone-100">
-                    <div class="flex justify-between items-center border-b border-stone-100 pb-3 mb-4">
-                        <h3 class="text-lg font-bold text-amber-900">יום 2: יום שני, 28 בספטמבר – חוף לנדה והמלון</h3>
-                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1.5 rounded-full">חוף לנדה</span>
+                <!-- Day 2 -->
+                <div class="card reveal">
+                    <div class="p-5 border-b border-stone-100 flex justify-between items-center">
+                        <h3 class="font-bold text-amber-900 text-base">יום 2 · שני, 28 ספטמבר</h3>
+                        <span class="day-badge bg-amber-100 text-amber-700">🏖️ חוף לנדה</span>
                     </div>
-                    <div class="space-y-3">
-                        <div class="bg-stone-50/50 p-3 rounded-xl border border-stone-100">
-                            <p class="text-sm text-stone-700"><strong>בוקר:</strong> נסיעה קצרה של 5 דקות לחוף לנדה (Landa Beach) - מים רדודים, שקט מוחלט ובניית ארמונות בחול המלטף.</p>
+                    <div class="p-5 space-y-3">
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: linear-gradient(135deg,#f59e0b,#d97706)"></div>
+                            <p class="text-sm text-stone-700"><strong>בוקר:</strong> נסיעה קצרה של 5 דקות לחוף לנדה — מים רדודים, שקט מוחלט ובניית ארמונות בחול.</p>
                         </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl">
-                            <p class="text-sm text-stone-700"><strong>צהריים:</strong> חזרה למלון למנוחת צהריים (שנ"צ) חיונית לקטנטנים בחדר הממוזג.</p>
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: linear-gradient(135deg,#f59e0b,#d97706)"></div>
+                            <p class="text-sm text-stone-700"><strong>צהריים:</strong> חזרה למלון למנוחת צהריים חיונית לקטנטנים.</p>
                         </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl">
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: linear-gradient(135deg,#f59e0b,#d97706)"></div>
                             <p class="text-sm text-stone-700"><strong>אחר הצהריים:</strong> זמן בריכה ומשחקים במתקני המלון.</p>
                         </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl">
-                            <p class="text-sm text-stone-700"><strong>ערב:</strong> משלוח פיצה כשרה חמה ממסעדת Jewpizza ישירות ללובי שלכם.</p>
+                        <div class="timeline-item" style="padding-bottom:0">
+                            <div class="timeline-dot" style="background: linear-gradient(135deg,#f59e0b,#d97706)"></div>
+                            <p class="text-sm text-stone-700"><strong>ערב:</strong> משלוח פיצה כשרה חמה מ-Jewpizza ישירות ללובי.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- יום 3 -->
-                <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-stone-100">
-                    <div class="flex justify-between items-center border-b border-stone-100 pb-3 mb-4">
-                        <h3 class="text-lg font-bold text-emerald-900">יום 3: יום שלישי, 29 בספטמבר – חוף מקרוניסוס ונמל</h3>
-                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1.5 rounded-full">מפרץ וסירות</span>
+                <!-- Day 3 -->
+                <div class="card reveal">
+                    <div class="p-5 border-b border-stone-100 flex justify-between items-center">
+                        <h3 class="font-bold text-emerald-900 text-base">יום 3 · שלישי, 29 ספטמבר</h3>
+                        <span class="day-badge bg-emerald-100 text-emerald-700">⛵ מקרוניסוס</span>
                     </div>
-                    <div class="space-y-3">
-                        <div class="bg-stone-50/50 p-3 rounded-xl border border-stone-100">
-                            <p class="text-sm text-stone-700"><strong>בוקר:</strong> בילוי משפחתי בחוף מקרוניסוס (Makronissos Beach) השקט עם גישה נוחה מאוד לעגלות.</p>
+                    <div class="p-5 space-y-3">
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: linear-gradient(135deg,#10b981,#059669)"></div>
+                            <p class="text-sm text-stone-700"><strong>בוקר:</strong> בילוי משפחתי בחוף מקרוניסוס השקט עם גישה נוחה לעגלות.</p>
                         </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl">
-                            <p class="text-sm text-stone-700"><strong>צהריים/אחר הצהריים:</strong> מנוחת שנ"צ במלון, ולאחריה טיול רגוע בנמל איה נאפה לצפייה בסירות הצבעוניות.</p>
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: linear-gradient(135deg,#10b981,#059669)"></div>
+                            <p class="text-sm text-stone-700"><strong>צהריים/אחר הצהריים:</strong> מנוחת שנ"צ ולאחריה טיול רגוע בנמל לצפייה בסירות הצבעוניות.</p>
                         </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl">
+                        <div class="timeline-item" style="padding-bottom:0">
+                            <div class="timeline-dot" style="background: linear-gradient(135deg,#10b981,#059669)"></div>
                             <p class="text-sm text-stone-700"><strong>ערב:</strong> ארוחת ערב חגיגית לסיום במסעדת Mush הבשרית הכשרה.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- יום 4 -->
-                <div class="bg-white rounded-2xl p-6 shadow-md border-rose-300 border-2 hover:shadow-xl transition-all duration-300">
-                    <div class="flex justify-between items-center border-b border-rose-100 pb-3 mb-4">
-                        <h3 class="text-lg font-bold text-rose-950">יום 4: יום רביעי, 30 בספטמבר – בריכה, קניון וטיסת חזור 🛍️</h3>
-                        <span class="bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1.5 rounded-full animate-pulse">תוכנית מתוזמנת</span>
+                <!-- Day 4 -->
+                <div class="card border-2 border-rose-200 reveal">
+                    <div class="p-5 border-b border-rose-100 flex justify-between items-center bg-rose-50/40">
+                        <h3 class="font-bold text-rose-900 text-base">יום 4 · רביעי, 30 ספטמבר 🛍️</h3>
+                        <span class="day-badge bg-rose-100 text-rose-700 pulse-glow">⏰ מתוזמן</span>
                     </div>
-                    <div class="space-y-3">
-                        <div class="bg-stone-50/50 p-3 rounded-xl border border-stone-100">
-                            <p class="text-sm text-stone-700"><strong>⏱️ 08:00 - 09:30 – בריכת בוקר וארוחת בוקר:</strong> נהנים מטבילת בוקר אחרונה בבריכה או בים, ארוחת בוקר ואריזת המזוודות.</p>
+                    <div class="p-5 space-y-3">
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: linear-gradient(135deg,#f43f5e,#e11d48)"></div>
+                            <p class="text-sm text-stone-700"><strong>08:00–09:30</strong> – בריכת בוקר, ארוחת בוקר ואריזת מזוודות.</p>
                         </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl border border-rose-100">
-                            <p class="text-sm text-stone-700"><strong>⏱️ 10:00 – צ'ק-אאוט ואיסוף:</strong> עושים צ'ק-אאוט מהמלון. נהג המונית <strong>פנטליס</strong> אוסף אתכם ואת המזוודות.</p>
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: linear-gradient(135deg,#f43f5e,#e11d48)"></div>
+                            <p class="text-sm text-stone-700"><strong>10:00</strong> – צ'ק-אאוט. פנטליס אוסף אתכם.</p>
                         </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl bg-amber-50/40 border border-amber-100">
-                            <p class="text-sm text-stone-700"><strong>⏱️ 10:45 - 12:00 – קניון Metropolis Mall, לרנקה:</strong> עצירה בקניון הממוזג בדרך לשדה. ההורים עושים קניות זריזות והילדים משחקים ומוציאים מרץ במתחם המשחקים המקורה והבטוח <strong>Playland</strong>.</p>
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: linear-gradient(135deg,#f59e0b,#d97706)"></div>
+                            <p class="text-sm text-stone-700"><strong>10:45–12:00</strong> – קניון Metropolis Mall, לרנקה. קניות + Playland לילדים.</p>
                         </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl">
-                            <p class="text-sm text-stone-700"><strong>⏱️ 12:00 – יציאה מהקניון</strong> ונסיעה קצרה של 15 דקות לשדה התעופה.</p>
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background: linear-gradient(135deg,#f43f5e,#e11d48)"></div>
+                            <p class="text-sm font-bold text-rose-900"><strong>12:15–12:30</strong> – הגעה לשדה התעופה בלרנקה.</p>
                         </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl border border-rose-200 bg-rose-50/10">
-                            <p class="text-sm text-stone-700 font-bold text-rose-900">⏱️ 12:15 - 12:30 – הגעה לשדה התעופה בלרנקה לביטחון וצ'ק-אין.</p>
-                        </div>
-                        <div class="bg-stone-50/50 p-3 rounded-xl">
-                            <p class="text-sm text-stone-700 font-bold">⏱️ 15:00 – המראה חזרה הביתה.</p>
+                        <div class="timeline-item" style="padding-bottom:0">
+                            <div class="timeline-dot" style="background: linear-gradient(135deg,#0ea5e9,#0284c7)"></div>
+                            <p class="text-sm font-bold text-sky-800"><strong>15:00</strong> – המראה חזרה הביתה ✈️</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- טאב 3: קטנטנים וחופים -->
+        <!-- ====================== TAB 3: KIDS & BEACHES ====================== -->
         <section id="pane-kids" class="tab-pane hidden">
-            <div class="mb-8 bg-sky-50/70 p-5 rounded-2xl border border-sky-100">
-                <p class="text-sm text-sky-950 leading-relaxed">
-                    <strong>טיפים לפעוטות ותינוקות:</strong> חופים עם חול רך ומים רדודים במיוחד המתאימים לילדים בני 3 ותינוקות בנות שנה, לצד רעיונות למשחקים רגועים.
+            <div class="section-intro bg-sky-50 border-sky-400 reveal">
+                <p class="text-sm text-sky-900 leading-relaxed">
+                    <strong>טיפים לפעוטות ותינוקות:</strong> חופים עם חול רך ומים רדודים המתאימים לילדים בני 3 ותינוקות בנות שנה.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100">
-                    <h3 class="text-lg font-bold text-stone-800 mb-1 border-b border-stone-100 pb-2">🏖️ חופים מומלצים לפעוטות ותינוקות</h3>
-                    
-                    <div class="mb-6 mt-4">
-                        <h4 class="font-bold text-sky-700 text-base hover:text-sky-800 transition-colors">1. חוף לנדה (Landa Beach)</h4>
-                        <p class="text-sm text-stone-600 mt-1">המים צלולים לחלוטין ונשארים רדודים לאורך מרחק רב ללא גלים. מושלם ומומלץ ביותר למשפחות עם תינוקות בעגלות.</p>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <h4 class="font-bold text-sky-700 text-base hover:text-sky-800 transition-colors">2. חוף מקרוניסוס (Makronissos Beach)</h4>
-                        <p class="text-sm text-stone-600 mt-1">מפרץ מוגן ורגוע עם חול דק ומים נקיים מאוד. יש אליו גישה נוחה וסלולה לעגלות ילדים ממש עד קו המים.</p>
-                    </div>
-
-                    <div>
-                        <h4 class="font-bold text-sky-700 text-base hover:text-sky-800 transition-colors">3. חוף ניסי (Nissi Beach)</h4>
-                        <p class="text-sm text-stone-600 mt-1">לשון החול המפורסמת יוצרת מעין בריכת שכשוך טבעית ומדהימה לילדים בסוף ספטמבר כשהחוף פחות עמוס.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <!-- Beaches -->
+                <div class="card p-6 reveal">
+                    <h3 class="text-base font-bold text-stone-800 mb-4 flex items-center gap-2">
+                        <span class="w-8 h-8 bg-sky-100 rounded-full flex items-center justify-center">🏖️</span>
+                        חופים מומלצים לפעוטות
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="beach-card">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="w-7 h-7 bg-sky-500 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+                                <h4 class="font-bold text-sky-800 text-sm">חוף לנדה (Landa Beach)</h4>
+                            </div>
+                            <p class="text-xs text-stone-600 leading-relaxed">מים צלולים ורדודים לאורך מרחק רב ללא גלים. מושלם למשפחות עם תינוקות ועגלות.</p>
+                            <div class="flex gap-2 mt-2">
+                                <span class="text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded-full">🌊 מים רדודים</span>
+                                <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">🚼 עגלות</span>
+                            </div>
+                        </div>
+                        <div class="beach-card">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="w-7 h-7 bg-sky-500 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+                                <h4 class="font-bold text-sky-800 text-sm">חוף מקרוניסוס (Makronissos)</h4>
+                            </div>
+                            <p class="text-xs text-stone-600 leading-relaxed">מפרץ מוגן ורגוע עם חול דק ומים נקיים. גישה נוחה לעגלות ממש עד קו המים.</p>
+                            <div class="flex gap-2 mt-2">
+                                <span class="text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded-full">🏝️ מפרץ מוגן</span>
+                                <span class="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">🏖️ חול דק</span>
+                            </div>
+                        </div>
+                        <div class="beach-card">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="w-7 h-7 bg-sky-500 text-white rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+                                <h4 class="font-bold text-sky-800 text-sm">חוף ניסי (Nissi Beach)</h4>
+                            </div>
+                            <p class="text-xs text-stone-600 leading-relaxed">לשון החול המפורסמת יוצרת בריכת שכשוך טבעית לילדים. פחות עמוס בסוף ספטמבר.</p>
+                            <div class="flex gap-2 mt-2">
+                                <span class="text-xs bg-rose-100 text-rose-700 px-2 py-0.5 rounded-full">⭐ מפורסם</span>
+                                <span class="text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded-full">🏊 שכשוך</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100">
-                    <h3 class="text-lg font-bold text-stone-800 mb-1 border-b border-stone-100 pb-2">🧸 רעיונות למשחקי ערב בחדר</h3>
-                    
-                    <ul class="space-y-4 mt-4">
-                        <li class="bg-stone-50 p-3 rounded-xl border border-stone-100 hover:scale-[1.02] transition-transform duration-200">
-                            <h4 class="font-bold text-stone-800">משחק צבעים (מצאתי צבע!)</h4>
-                            <p class="text-sm text-stone-600 mt-1">אומרים לילד: "אני רואה משהו בצבע... כחול!". הילד מחפש את החפץ בחדר. מעולה לפיתוח ריכוז שקט במיטה.</p>
-                        </li>
-                        <li class="bg-stone-50 p-3 rounded-xl border border-stone-100 hover:scale-[1.02] transition-transform duration-200">
-                            <h4 class="font-bold text-stone-800">לא להפיל את הבלון!</h4>
-                            <p class="text-sm text-stone-600 mt-1">מנפחים בלון אחד בחדר והילדים צריכים לטפוח עליו כדי שלא יגע ברצפה. משחק בטוח, שקט ולא שובר כלום.</p>
-                        </li>
-                        <li class="bg-stone-50 p-3 rounded-xl border border-stone-100 hover:scale-[1.02] transition-transform duration-200">
-                            <h4 class="font-bold text-stone-800">ספארי מדבקות</h4>
-                            <p class="text-sm text-stone-600 mt-1">חוברת קטנה עם מדבקות של חיות ים לרגעים של יצירה שקטה ועצמאית במיטה.</p>
-                        </li>
-                    </ul>
+                <!-- Evening games -->
+                <div class="card p-6 reveal">
+                    <h3 class="text-base font-bold text-stone-800 mb-4 flex items-center gap-2">
+                        <span class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center">🧸</span>
+                        רעיונות למשחקי ערב בחדר
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="p-4 bg-gradient-to-r from-sky-50 to-blue-50 rounded-xl border border-sky-100 hover:shadow-md transition-all duration-200">
+                            <h4 class="font-bold text-stone-800 text-sm mb-1">🎨 משחק צבעים</h4>
+                            <p class="text-xs text-stone-600 leading-relaxed">אומרים לילד: "אני רואה משהו בצבע כחול!". הילד מחפש את החפץ בחדר. מעולה לפיתוח ריכוז.</p>
+                        </div>
+                        <div class="p-4 bg-gradient-to-r from-rose-50 to-pink-50 rounded-xl border border-rose-100 hover:shadow-md transition-all duration-200">
+                            <h4 class="font-bold text-stone-800 text-sm mb-1">🎈 לא להפיל את הבלון!</h4>
+                            <p class="text-xs text-stone-600 leading-relaxed">מנפחים בלון אחד בחדר והילדים צריכים לטפוח עליו. משחק בטוח ושקט.</p>
+                        </div>
+                        <div class="p-4 bg-gradient-to-r from-amber-50 to-yellow-50 rounded-xl border border-amber-100 hover:shadow-md transition-all duration-200">
+                            <h4 class="font-bold text-stone-800 text-sm mb-1">🐠 ספארי מדבקות</h4>
+                            <p class="text-xs text-stone-600 leading-relaxed">חוברת קטנה עם מדבקות חיות ים לרגעים של יצירה שקטה ועצמאית.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- טאב 4: רשימת ציוד מופרדת עם תמיכה בהוספה חופשית -->
+        <!-- ====================== TAB 4: CHECKLIST ====================== -->
         <section id="pane-checklist" class="tab-pane hidden">
-            <div class="mb-6 bg-rose-50/70 p-5 rounded-2xl border border-rose-100">
-                <p class="text-sm text-rose-950 leading-relaxed">
-                    <strong>רשימת ציוד אינטראקטיבית לטיול:</strong> 
-                    סמנו ב-V את הדברים שארזתם. הרשימות מופרדות לחלוטין בין <strong>משפחת נקש</strong> לבין <strong>משפחת סויסה</strong>, וכוללות דברים לתינוקות בנות שנה ואוכל שמביאים במזוודה. ניתן להוסיף פריטים חופשיים לכל רשימה!
+            <div class="section-intro bg-rose-50 border-rose-400 reveal">
+                <p class="text-sm text-rose-900 leading-relaxed">
+                    <strong>רשימת ציוד אינטראקטיבית:</strong> סמנו ב-V את הדברים שארזתם. הרשימות מופרדות בין <strong>משפחת נקש</strong> לבין <strong>משפחת סויסה</strong>.
                 </p>
             </div>
 
-            <!-- תתי-טאבים לבחירת משפחה -->
-            <div class="flex justify-center space-x-reverse space-x-4 mb-8">
-                <button id="btn-family-nakache" onclick="switchFamilyChecklist('nakache')" class="family-tab-active px-6 py-3 rounded-full text-sm font-bold text-stone-600 bg-white shadow-sm transition-all duration-300">📋 רשימת משפחת נקש</button>
-                <button id="btn-family-swissa" onclick="switchFamilyChecklist('swissa')" class="px-6 py-3 rounded-full text-sm font-bold text-stone-600 bg-white shadow-sm transition-all duration-300">📋 רשימת משפחת סויסה</button>
+            <!-- Family tabs -->
+            <div class="flex justify-center gap-3 mb-6 reveal">
+                <button id="btn-family-nakache" onclick="switchFamilyChecklist('nakache')" class="family-tab-active px-6 py-3 rounded-full text-sm font-bold text-stone-600 bg-white shadow-sm transition-all duration-300 border border-stone-100">
+                    📋 משפחת נקש
+                </button>
+                <button id="btn-family-swissa" onclick="switchFamilyChecklist('swissa')" class="px-6 py-3 rounded-full text-sm font-bold text-stone-600 bg-white shadow-sm transition-all duration-300 border border-stone-100">
+                    📋 משפחת סויסה
+                </button>
             </div>
 
-            <!-- קונטיינר רשימת הציוד הדינמית -->
-            <div id="checklist-content" class="space-y-6">
-                <!-- הרשימה תתרנדר כאן דינמית על פי המשפחה שנבחרה -->
+            <!-- Progress bar -->
+            <div class="card p-4 mb-5 reveal">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-xs font-semibold text-stone-600">התקדמות האריזה</span>
+                    <span id="checklist-progress-text" class="text-xs font-bold text-sky-600">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div id="checklist-progress-fill" class="progress-fill" style="width:0%"></div>
+                </div>
             </div>
+
+            <!-- Checklist content -->
+            <div id="checklist-content" class="space-y-4"></div>
         </section>
 
-        <!-- טאב 5: אוכל כשר -->
+        <!-- ====================== TAB 5: DINING ====================== -->
         <section id="pane-dining" class="tab-pane hidden">
-            <div class="mb-8 bg-sky-50/70 p-5 rounded-2xl border border-sky-100">
-                <p class="text-sm text-sky-950 leading-relaxed">
-                    <strong>כשרות באיה נאפה:</strong> המדריך המלא לשמירת כשרות. ריכזנו עבורכם את כל מסעדות חב"ד, אפשרויות המשלוחים הישר למלון Mare Ayia Napa, ופרטי יצירת הקשר.
+            <div class="section-intro bg-sky-50 border-sky-400 reveal">
+                <p class="text-sm text-sky-900 leading-relaxed">
+                    <strong>כשרות באיה נאפה:</strong> המדריך המלא לשמירת כשרות — מסעדות חב"ד, משלוחים ישירות למלון ופרטי יצירת קשר.
                 </p>
             </div>
 
-            <!-- כרטיס בית חב"ד -->
-            <div class="bg-gradient-to-r from-sky-700 to-sky-600 text-white rounded-2xl p-6 shadow-md mb-6 relative overflow-hidden">
-                <div class="absolute -top-12 -right-12 w-32 h-32 bg-sky-500 rounded-full opacity-20 blur-xl"></div>
-                <div class="flex justify-between items-start relative z-10">
-                    <div>
-                        <h3 class="text-xl font-bold mb-1">🏠 בית חב"ד איה נאפה</h3>
-                        <p class="text-sm text-sky-100 mb-3">בהנהלת השליח הרב זושא ורעייתו יעל ניימרק</p>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mt-2 relative z-10">
-                    <div>
-                        <p class="text-sky-200">📍 כתובת:</p>
-                        <p class="font-semibold">Kavo Gkreko 11, Ayia Napa</p>
-                    </div>
-                    <div>
-                        <p class="text-sky-200">📞 טלפון ליצירת קשר:</p>
-                        <div class="flex items-center gap-2">
-                            <a href="tel:+35796640980" class="font-bold hover:underline" dir="ltr">+357 96 640980</a>
-                            <span class="text-sky-300">|</span>
-                            <a href="https://wa.me/35796640980?text=%D7%A9%D7%94%D7%9C%D7%95%D7%9D%20%D7%91%D7%99%D7%AA%20%D7%97%D7%91%22%D7%93!%20%D7%90%D7%A0%D7%97%D7%A0%D7%95%20%D7%9E%D7%A9%D7%A4%D7%97%D7%AA%20%D7%A0%D7%A7%D7%A9%20%D7%95%D7%A1%D7%95%D7%99%D7%A1%D7%94" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 hover:scale-105 active:scale-95 text-white text-xs px-3 py-0.5 rounded-full transition-all">WhatsApp 💬</a>
+            <!-- Chabad card -->
+            <div class="card mb-6 overflow-hidden reveal">
+                <div class="bg-gradient-to-r from-sky-700 via-sky-600 to-blue-600 p-6 text-white relative">
+                    <div class="absolute -top-8 -left-8 w-32 h-32 bg-white rounded-full opacity-5"></div>
+                    <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-sky-400 rounded-full opacity-10"></div>
+                    <div class="relative z-10">
+                        <h3 class="text-xl font-bold mb-1 flex items-center gap-2">🏠 בית חב"ד איה נאפה</h3>
+                        <p class="text-sm text-sky-200 mb-4">בהנהלת השליח הרב זושא ורעייתו יעל ניימרק</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                            <div class="bg-white/10 p-3 rounded-xl">
+                                <p class="text-sky-200 text-xs mb-1">📍 כתובת</p>
+                                <p class="font-semibold">Kavo Gkreko 11, Ayia Napa</p>
+                            </div>
+                            <div class="bg-white/10 p-3 rounded-xl">
+                                <p class="text-sky-200 text-xs mb-1">📞 טלפון</p>
+                                <div class="flex items-center gap-2">
+                                    <a href="tel:+35796640980" class="font-bold hover:underline" dir="ltr">+357 96 640980</a>
+                                    <a href="https://wa.me/35796640980" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 text-white text-xs px-3 py-1 rounded-full font-semibold transition-all hover:scale-105">WhatsApp 💬</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- המסעדות הכשרות -->
+            <!-- Restaurant cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-white rounded-2xl p-5 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100 flex flex-col hover:-translate-y-1">
-                    <div class="text-2xl mb-2">🥩</div>
-                    <h4 class="font-bold text-stone-800 text-lg">מסעדת Mush</h4>
-                    <p class="text-xs font-bold text-rose-600 mb-2 uppercase tracking-wide">בשרי | כשר למהדרין</p>
-                    <p class="text-sm text-stone-600 mb-4">סלטים טריים, שניצלים מעולים לילדים, המבורגרים ובשרים על האש.</p>
-                    <div class="bg-stone-50 p-3 rounded-xl text-xs text-stone-700 mt-auto border border-stone-100">
-                        💡 <strong>משלוחים:</strong> ניתן להזמין משלוח ישירות למלון דרך אפליקציית Wolt המקומית!
+                <div class="card restaurant-card p-5 flex flex-col reveal">
+                    <div class="w-12 h-12 bg-rose-100 rounded-2xl flex items-center justify-center text-2xl mb-3">🥩</div>
+                    <h4 class="font-bold text-stone-800 text-lg mb-1">מסעדת Mush</h4>
+                    <span class="inline-block text-xs font-bold text-rose-600 bg-rose-50 px-3 py-1 rounded-full mb-3 w-fit">בשרי · כשר למהדרין</span>
+                    <p class="text-sm text-stone-600 mb-4 flex-grow leading-relaxed">סלטים טריים, שניצלים מעולים לילדים, המבורגרים ובשרים על האש.</p>
+                    <div class="bg-emerald-50 p-3 rounded-xl text-xs text-emerald-800 border border-emerald-100">
+                        💡 <strong>משלוחים:</strong> ניתן להזמין דרך Wolt ישירות למלון!
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl p-5 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100 flex flex-col hover:-translate-y-1">
-                    <div class="text-2xl mb-2">🍕</div>
-                    <h4 class="font-bold text-stone-800 text-lg">Jewpizza</h4>
-                    <p class="text-xs font-bold text-blue-600 mb-2 uppercase tracking-wide">חלבי | כשר למהדרין</p>
-                    <p class="text-sm text-stone-600 mb-4">פיצות משפחתיות חמות וטעימות, פסטות מעולות ומאפים חלביים שילדים אוהבים.</p>
-                    <div class="bg-stone-50 p-3 rounded-xl text-xs text-stone-700 mt-auto border border-stone-100">
-                        📞 <strong>הזמנות בטלפון:</strong> <a href="tel:+35797769254" class="font-bold text-sky-600 hover:underline" dir="ltr">+357 97 769254</a>
+                <div class="card restaurant-card p-5 flex flex-col reveal">
+                    <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-2xl mb-3">🍕</div>
+                    <h4 class="font-bold text-stone-800 text-lg mb-1">Jewpizza</h4>
+                    <span class="inline-block text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full mb-3 w-fit">חלבי · כשר למהדרין</span>
+                    <p class="text-sm text-stone-600 mb-4 flex-grow leading-relaxed">פיצות משפחתיות חמות, פסטות מעולות ומאפים חלביים שילדים אוהבים.</p>
+                    <div class="bg-stone-50 p-3 rounded-xl text-xs text-stone-700 border border-stone-100">
+                        📞 <a href="tel:+35797769254" class="font-bold text-sky-600 hover:underline" dir="ltr">+357 97 769254</a>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-xl p-5 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100 flex flex-col hover:-translate-y-1">
-                    <div class="text-2xl mb-2">🧆</div>
-                    <h4 class="font-bold text-stone-800 text-lg">חומוס אליהו</h4>
-                    <p class="text-xs font-bold text-emerald-600 mb-2 uppercase tracking-wide">פרווה | כשר למהדרין</p>
-                    <p class="text-sm text-stone-600 mb-4">חומוס טרי וחם כמו בארץ, פיתות רכות, פלאפל חם ופריך וצ'יפס זהוב.</p>
-                    <div class="bg-stone-50 p-3 rounded-xl text-xs text-stone-700 mt-auto border border-stone-100">
-                        📍 <strong>כתובת:</strong> Archiepiscopou Makariou III, 15
+                <div class="card restaurant-card p-5 flex flex-col reveal">
+                    <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-2xl mb-3">🧆</div>
+                    <h4 class="font-bold text-stone-800 text-lg mb-1">חומוס אליהו</h4>
+                    <span class="inline-block text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full mb-3 w-fit">פרווה · כשר למהדרין</span>
+                    <p class="text-sm text-stone-600 mb-4 flex-grow leading-relaxed">חומוס טרי וחם כמו בארץ, פיתות רכות, פלאפל חם ופריך וצ'יפס זהוב.</p>
+                    <div class="bg-stone-50 p-3 rounded-xl text-xs text-stone-700 border border-stone-100">
+                        📍 Archiepiscopou Makariou III, 15
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- טאב 6: משחקים וכלים שימושיים לדרך -->
+        <!-- ====================== TAB 6: GAMES & TOOLS ====================== -->
         <section id="pane-tools" class="tab-pane hidden">
-            <div class="mb-8 bg-amber-50/70 p-5 rounded-2xl border border-amber-200">
-                <p class="text-sm text-amber-950 leading-relaxed">
-                    <strong>משחקים וכלים שימושיים לדרך:</strong> 
-                    ריכזנו עבורכם משחק קטן להעסקת הילדים בנסיעות, מחשבון הוצאות מהיר לחלוקת התשלומים בין המשפחות, ותפילת הדרך לטיסה בטוחה!
+            <div class="section-intro bg-amber-50 border-amber-400 reveal">
+                <p class="text-sm text-amber-900 leading-relaxed">
+                    <strong>משחקים וכלים לדרך:</strong> משחק זיכרון לילדים, מחשבון הוצאות משפחתי ותפילת הדרך לטיסה בטוחה.
                 </p>
             </div>
 
-            <!-- משחק זיכרון לילדים -->
-            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100 mb-8 relative overflow-hidden">
-                <div class="text-center mb-4">
+            <!-- Memory game -->
+            <div class="card p-6 mb-6 reveal">
+                <div class="text-center mb-5">
                     <h3 class="text-lg font-bold text-sky-900">🎮 משחק הזיכרון לקטנטנים</h3>
                     <p class="text-xs text-stone-500 mt-1">מצאו את הזוגות התואמים!</p>
                 </div>
-                
-                <div class="card-grid mb-4" id="memory-board"></div>
-                
+                <div class="card-grid mb-5" id="memory-board"></div>
                 <div class="text-center">
-                    <button onclick="resetMemoryGame()" class="bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold px-5 py-2.5 rounded-full transition-all hover:scale-105 active:scale-95 shadow-md">
-                        🔄 התחל משחק מחדש
+                    <button onclick="resetMemoryGame()" class="shimmer-btn text-white text-sm font-bold px-6 py-2.5 rounded-full transition-all hover:scale-105 active:scale-95 shadow-md">
+                        🔄 התחל מחדש
                     </button>
-                    <p id="game-status" class="text-sm font-bold text-emerald-600 mt-3 h-5 animate-bounce"></p>
+                    <p id="game-status" class="text-sm font-bold text-emerald-600 mt-3 h-5"></p>
                 </div>
             </div>
 
-            <!-- מחשבון הוצאות משפחתי -->
-            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100 mb-8">
-                <h3 class="text-lg font-bold text-stone-800 border-b border-stone-100 pb-2 mb-4">💰 מחשבון הוצאות חופשה משותף</h3>
-                <p class="text-xs text-stone-500 mb-4">עקבו אחרי ההוצאות המשותפות של משפחת נקש ומשפחת סויסה בקלות.</p>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
-                    <input id="expense-desc" type="text" placeholder="תיאור (למשל: מונית פנטליס)" class="bg-stone-50 border border-stone-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all">
-                    <input id="expense-amount" type="number" placeholder="סכום (€)" class="bg-stone-50 border border-stone-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all">
-                    <select id="expense-payer" class="bg-stone-50 border border-stone-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all">
+            <!-- Expense calculator -->
+            <div class="card p-6 mb-6 reveal">
+                <h3 class="text-base font-bold text-stone-800 mb-1 flex items-center gap-2">
+                    <span class="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center">💰</span>
+                    מחשבון הוצאות חופשה משותף
+                </h3>
+                <p class="text-xs text-stone-500 mb-5">עקבו אחרי ההוצאות המשותפות של שתי המשפחות.</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-3">
+                    <input id="expense-desc" type="text" placeholder="תיאור (למשל: מונית פנטליס)" class="bg-stone-50 border border-stone-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400 transition-all">
+                    <input id="expense-amount" type="number" placeholder="סכום (€)" class="bg-stone-50 border border-stone-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400 transition-all">
+                    <select id="expense-payer" class="bg-stone-50 border border-stone-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400 transition-all">
                         <option value="נקש">שילם: נקש</option>
                         <option value="סויסה">שילם: סויסה</option>
                     </select>
                 </div>
-                <button id="add-expense-btn" onclick="addExpense()" class="w-full bg-emerald-600 hover:bg-emerald-700 hover:scale-[1.01] active:scale-[0.99] text-white text-sm font-bold py-3 rounded-xl transition-all shadow-md">
+                <button onclick="addExpense()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold py-3 rounded-xl transition-all hover:scale-[1.01] active:scale-[0.99] shadow-md mb-5">
                     ➕ הוסף הוצאה
                 </button>
 
-                <div class="mt-6">
-                    <h4 class="font-bold text-sm text-stone-800 mb-2">רשימת הוצאות קיימת:</h4>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-xs text-right text-stone-600">
-                            <thead>
-                                <tr class="border-b border-stone-100 text-stone-400">
-                                    <th class="pb-2">תיאור</th>
-                                    <th class="pb-2 text-left">סכום</th>
-                                    <th class="pb-2">מי שילם</th>
-                                    <th class="pb-2 text-center">מחיקה</th>
-                                </tr>
-                            </thead>
-                            <tbody id="expense-list">
-                                <!-- מתווסף דינמית -->
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="overflow-x-auto mb-4">
+                    <table class="w-full text-xs text-right text-stone-600">
+                        <thead>
+                            <tr class="border-b border-stone-100 text-stone-400">
+                                <th class="pb-2 font-semibold">תיאור</th>
+                                <th class="pb-2 text-left font-semibold">סכום</th>
+                                <th class="pb-2 font-semibold">מי שילם</th>
+                                <th class="pb-2 text-center font-semibold">מחיקה</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expense-list"></tbody>
+                    </table>
                 </div>
 
-                <!-- סיכום החשבון והפרשים -->
-                <div class="mt-4 pt-4 border-t border-stone-100 bg-stone-50 p-4 rounded-xl flex justify-between items-center text-xs">
-                    <div>
+                <div class="bg-stone-50 p-4 rounded-xl border border-stone-100 flex justify-between items-center text-xs">
+                    <div class="space-y-2">
                         <p>סך הכל שילמו נקש: <strong id="total-nakache" class="text-sky-700 text-sm">0€</strong></p>
-                        <p class="mt-1.5">סך הכל שילמו סויסה: <strong id="total-swissa" class="text-sky-700 text-sm">0€</strong></p>
+                        <p>סך הכל שילמו סויסה: <strong id="total-swissa" class="text-sky-700 text-sm">0€</strong></p>
                     </div>
-                    <div class="text-left font-bold text-stone-800 bg-white p-3 rounded-lg border border-stone-100 shadow-sm">
-                        <p id="expense-balance" class="text-rose-600 text-sm">אין הפרשים כרגע</p>
+                    <div class="bg-white p-3 rounded-xl border border-stone-100 shadow-sm text-left">
+                        <p id="expense-balance" class="text-rose-600 font-bold text-sm">אין הפרשים כרגע</p>
                     </div>
                 </div>
             </div>
 
-            <!-- תפילת הדרך -->
-            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100">
-                <h3 class="text-lg font-bold text-sky-900 border-b border-stone-100 pb-2 mb-4">✈️ תפילת הדרך לטיסה בטוחה</h3>
-                
-                <div class="space-y-4">
-                    <div class="bg-amber-50/50 p-5 rounded-xl border border-amber-100" dir="rtl">
-                        <p class="text-base text-stone-800 leading-relaxed font-semibold">
-                            יְהִי רָצוֹן מִלְּפָנֶיךָ ה' אֱלֹהֵינוּ וֵאלֹהֵי אֲבוֹתֵינוּ, שֶׁתּוֹלִיכֵנוּ לְשָׁלוֹם וְתַצְעִידֵנוּ לְשָׁלוֹם. וְתַסְמִיכֵנוּ לְשָׁלוֹם. וְתַנְחֵנוּ אֶל מְחוֹז חֶפְצֵנוּ לְחַיִּים וּלְשִׂמְחָה וּלְשָׁלוֹם. וְתַצִּילֵנוּ מִכַּף כָּל אוֹיֵב וְאוֹרֵב וְלִסְטִים וְחַיּוֹת רָעוֹת בַּדֶּרֶךְ וּמִכָּל מִנֵּי פֻּרְעָנֻיּוֹת הַמִּתְרַגְּשׁוֹת לָבוֹא לָעוֹלָם, וְתִשְׁלַח בְּרָכָה בְּמַעֲשֵׂה יָדֵינוּ, וְתִתְּנֵנוּ לְחֵן וּלְחֶסֶד וּלְרַחֲמִים בְּעֵינֶיךָ וּבְעֵינֵי כָל רוֹאֵינוּ וְתִשְׁמַע קוֹל תַּחֲנוּנֵינוּ, כִּי אֵל שׁוֹמֵעַ תְּפִלָּה וְתַחֲנוּן אָתָּה. בָּרוּךְ אַתָּה ה', שׁוֹמֵעַ תְּפִלָּה.
-                        </p>
-                    </div>
+            <!-- Prayer -->
+            <div class="card p-6 reveal">
+                <h3 class="text-base font-bold text-sky-900 mb-4 flex items-center gap-2">
+                    <span class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center">✈️</span>
+                    תפילת הדרך לטיסה בטוחה
+                </h3>
+                <div class="bg-gradient-to-br from-amber-50 to-yellow-50 p-5 rounded-2xl border border-amber-100" dir="rtl">
+                    <p class="text-sm text-stone-800 leading-loose font-medium">
+                        יְהִי רָצוֹן מִלְּפָנֶיךָ ה' אֱלֹהֵינוּ וֵאלֹהֵי אֲבוֹתֵינוּ, שֶׁתּוֹלִיכֵנוּ לְשָׁלוֹם וְתַצְעִידֵנוּ לְשָׁלוֹם. וְתַסְמִיכֵנוּ לְשָׁלוֹם. וְתַנְחֵנוּ אֶל מְחוֹז חֶפְצֵנוּ לְחַיִּים וּלְשִׂמְחָה וּלְשָׁלוֹם. וְתַצִּילֵנוּ מִכַּף כָּל אוֹיֵב וְאוֹרֵב וְלִסְטִים וְחַיּוֹת רָעוֹת בַּדֶּרֶךְ וּמִכָּל מִנֵּי פֻּרְעָנֻיּוֹת הַמִּתְרַגְּשׁוֹת לָבוֹא לָעוֹלָם, וְתִשְׁלַח בְּרָכָה בְּמַעֲשֵׂה יָדֵינוּ, וְתִתְּנֵנוּ לְחֵן וּלְחֶסֶד וּלְרַחֲמִים בְּעֵינֶיךָ וּבְעֵינֵי כָל רוֹאֵינוּ וְתִשְׁמַע קוֹל תַּחֲנוּנֵינוּ, כִּי אֵל שׁוֹמֵעַ תְּפִלָּה וְתַחֲנוּן אָתָּה. בָּרוּךְ אַתָּה ה', שׁוֹמֵעַ תְּפִלָּה.
+                    </p>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- סקריפטים עם תמיכה דינמית ובניהול מקומי מופרד -->
+    <!-- ============================================================ -->
+    <!-- SCRIPTS                                                       -->
+    <!-- ============================================================ -->
     <script>
-        // אתחול משתנים גלובליים
+        // ===== GLOBAL STATE =====
         let checkedItemsState = {};
-        let customItemsState = {
-            nakache: [],
-            swissa: []
-        };
+        let customItemsState = { nakache: [], swissa: [] };
         let expenses = [];
-
-        // משפחה נוכחית שנבחרה ברשימת הציוד
         let currentFamily = 'nakache';
 
-        // משחק הזיכרון - משתנים חיוניים
+        // ===== MEMORY GAME =====
         const icons = ['🧸', '🏖️', '✈️', '🍕', '🍉', '🐠', '🐬', '🍦'];
         const cards = [...icons, ...icons];
         let flippedCards = [];
         let matchedCount = 0;
 
-        // רשימות הבסיס הקבועות לכל משפחה
+        // ===== CHECKLIST DATA =====
         const baseChecklistCategories = {
             doc: {
                 title: "📋 מסמכים ודברים חיוניים",
+                color: "sky",
                 items: [
                     { id: "doc-1", text: "דרכונים בתוקף (ומסמכי טיסה)" },
                     { id: "doc-2", text: "אישור הזמנה למלון Mare Ayia Napa" },
@@ -638,47 +1112,51 @@
                 ]
             },
             baby: {
-                title: "🍼 דברים לתינוקות בנות שנה ולפעוטות (מיוחד)",
+                title: "🍼 דברים לתינוקות ופעוטות",
+                color: "rose",
                 items: [
                     { id: "baby-1", text: "חיתולים במידה מתאימה (כמות למספר ימים)" },
                     { id: "baby-2", text: "מטרנה / סימילאק + כפיות מדידה" },
-                    { id: "baby-3", text: "בקבוקים לתינוק + מברשת לניקוי בקבוקים" },
+                    { id: "baby-3", text: "בקבוקים לתינוק + מברשת לניקוי" },
                     { id: "baby-4", text: "מוצצים רזרביים + תופסן למוצץ" },
                     { id: "baby-5", text: "מגבוני החתלה היפואלרגניים" },
-                    { id: "baby-6", text: "בגדי גוף נוחים (קצרים ליום וארוכים דקים לערב)" },
+                    { id: "baby-6", text: "בגדי גוף נוחים (קצרים ליום וארוכים לערב)" },
                     { id: "chk-stroller", text: "טיולון קל עם גגון שמש רחב" },
                     { id: "chk-baby-cream", text: "קרם החתלה טיפולי" },
-                    { id: "chk-baby-toy", text: "רעשנים וצעצועי אחיזה אהובים לדרך" }
+                    { id: "chk-baby-toy", text: "רעשנים וצעצועי אחיזה לדרך" }
                 ]
             },
             food: {
-                title: "🥫 אוכל שמביאים מהארץ במזוודה",
+                title: "🥫 אוכל שמביאים מהארץ",
+                color: "amber",
                 items: [
                     { id: "food-1", text: "קופסאות שימורים כשרות (טונה, תירס, זיתים)" },
                     { id: "food-2", text: "חטיפים אהובים לילדים (במבה, ביסלי, תפוצ'יפס)" },
                     { id: "food-3", text: "מנות חמות / פסטה לבישול מהיר" },
                     { id: "food-4", text: "קרקרים, פריכיות אורז ופיתות עמידות" },
                     { id: "food-5", text: "ממרח שוקולד / חלווה / שוקולד למריחה" },
-                    { id: "food-6", text: "קפה שחור / נס קפה של הארץ לבוקר" },
+                    { id: "food-6", text: "קפה שחור / נס קפה לבוקר" },
                     { id: "food-7", text: "כלים חד-פעמיים קלים (צלחות, כוסות, סכו\"ם)" },
-                    { id: "food-8", text: "תבלינים בסיסיים קטנים (מלח, פלפל, שמן זית קטן)" }
+                    { id: "food-8", text: "תבלינים בסיסיים (מלח, פלפל, שמן זית קטן)" }
                 ]
             },
             wear: {
                 title: "👕 בגדים, ים ובריכה",
+                color: "teal",
                 items: [
                     { id: "wear-1", text: "בגדי ים וחולצות שחייה מסננות קרינה (UV)" },
                     { id: "wear-2", text: "חיתולי שחייה עמידים במים לתינוקות" },
                     { id: "wear-3", text: "קרם הגנה לפעוטות עם מקדם גבוה (50+)" },
                     { id: "wear-4", text: "כובעי שמש רחבי שוליים" },
                     { id: "wear-5", text: "בגדי ערב קלים + עליונית דקה" },
-                    { id: "wear-6", text: "צעצועי חוף פשוטים וגלגלי הצלה מתנפחים קלים" }
+                    { id: "wear-6", text: "צעצועי חוף וגלגלי הצלה מתנפחים" }
                 ]
             },
             med: {
                 title: "💊 עזרה ראשונה ותרופות",
+                color: "red",
                 items: [
-                    { id: "med-1", text: "תרופות להורדת חום לילדים ולתינוקות (נובימול / אקמולי)" },
+                    { id: "med-1", text: "תרופות להורדת חום לילדים ותינוקות (נובימול / אקמולי)" },
                     { id: "med-2", text: "פלסטרים וחומר חיטוי לפצעים קלים" },
                     { id: "med-3", text: "קרם להרגעת העור (אלוורה / פניסטיל)" },
                     { id: "med-4", text: "תרופות קבועות לכל בני המשפחה" }
@@ -686,7 +1164,7 @@
             }
         };
 
-        // פונקציות עזר לניווט
+        // ===== NAVIGATION =====
         const tabs = document.querySelectorAll('.nav-tab');
         const panes = document.querySelectorAll('.tab-pane');
 
@@ -697,45 +1175,47 @@
                     p.classList.add('hidden');
                     p.classList.remove('pane-show', 'block');
                 });
-                
                 tab.classList.add('tab-active');
-                const targetId = tab.getAttribute('data-target');
-                const activePane = document.getElementById(targetId);
-                
+                const activePane = document.getElementById(tab.getAttribute('data-target'));
                 activePane.classList.remove('hidden');
                 activePane.classList.add('block');
-                
-                setTimeout(() => {
-                    activePane.classList.add('pane-show');
-                }, 20);
+                setTimeout(() => activePane.classList.add('pane-show'), 20);
+                // Trigger reveal animations
+                setTimeout(() => triggerReveal(), 50);
             });
         });
 
-        // ספירה לאחור לתאריך הטיסה המדויק
+        // ===== SCROLL REVEAL =====
+        function triggerReveal() {
+            document.querySelectorAll('.reveal').forEach(el => {
+                el.classList.add('visible');
+            });
+        }
+
+        // ===== COUNTDOWN =====
         const tripDate = new Date('September 27, 2026 09:00:00').getTime();
-        const countdownElement = document.getElementById('countdown');
 
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = tripDate - now;
-
             if (distance < 0) {
-                countdownElement.innerText = "החופשה התחילה! 🎉";
+                document.getElementById('cd-days').innerText = '🎉';
+                document.getElementById('cd-hours').innerText = '✈️';
+                document.getElementById('cd-mins').innerText = '🏖️';
                 return;
             }
-
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
             const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            
-            countdownElement.innerText = days + " ימים ו-" + hours + " שעות";
+            const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('cd-days').innerText = days;
+            document.getElementById('cd-hours').innerText = hours;
+            document.getElementById('cd-mins').innerText = mins;
         }
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // משחק זיכרון - לוגיקה פנימית במודול
-        function shuffle(array) {
-            return array.sort(() => Math.random() - 0.5);
-        }
+        // ===== MEMORY GAME =====
+        function shuffle(array) { return array.sort(() => Math.random() - 0.5); }
 
         function initMemoryGame() {
             const board = document.getElementById('memory-board');
@@ -745,280 +1225,244 @@
             matchedCount = 0;
             const statusEl = document.getElementById('game-status');
             if (statusEl) statusEl.innerText = '';
-            
-            const shuffled = shuffle(cards);
-            shuffled.forEach((emoji, index) => {
+            shuffle(cards).forEach((emoji, index) => {
                 const card = document.createElement('div');
                 card.classList.add('memory-card');
                 card.dataset.emoji = emoji;
                 card.dataset.index = index;
-                card.innerHTML = `
-                    <div class="card-inner">
-                        <div class="card-back">🌊</div>
-                        <div class="card-front">${emoji}</div>
-                    </div>
-                `;
+                card.innerHTML = `<div class="card-inner"><div class="card-back">🌊</div><div class="card-front">${emoji}</div></div>`;
                 card.addEventListener('click', () => flipCard(card));
                 board.appendChild(card);
             });
         }
 
         function flipCard(card) {
-            if (flippedCards.length === 2 || card.classList.contains('flipped') || card.classList.contains('matched')) {
-                return;
-            }
-
+            if (flippedCards.length === 2 || card.classList.contains('flipped') || card.classList.contains('matched')) return;
             card.classList.add('flipped');
             flippedCards.push(card);
-
-            if (flippedCards.length === 2) {
-                checkMatch();
-            }
+            if (flippedCards.length === 2) checkMatch();
         }
 
         function checkMatch() {
-            const [card1, card2] = flippedCards;
-            if (card1.dataset.emoji === card2.dataset.emoji) {
-                card1.classList.add('matched');
-                card2.classList.add('matched');
+            const [c1, c2] = flippedCards;
+            if (c1.dataset.emoji === c2.dataset.emoji) {
+                c1.classList.add('matched');
+                c2.classList.add('matched');
                 matchedCount += 2;
                 flippedCards = [];
-                
                 if (matchedCount === cards.length) {
-                    const statusEl = document.getElementById('game-status');
-                    if (statusEl) statusEl.innerText = "כל הכבוד! מצאתם את כל הזוגות! 🎉🏆";
+                    document.getElementById('game-status').innerText = "כל הכבוד! מצאתם את כל הזוגות! 🎉🏆";
                     triggerConfetti();
                 }
             } else {
-                setTimeout(() => {
-                    card1.classList.remove('flipped');
-                    card2.classList.remove('flipped');
-                    flippedCards = [];
-                }, 1000);
+                setTimeout(() => { c1.classList.remove('flipped'); c2.classList.remove('flipped'); flippedCards = []; }, 1000);
             }
         }
 
         function triggerConfetti() {
-            const colors = ['#f43f5e', '#0ea5e9', '#10b981', '#fbbf24', '#a855f7'];
-            for (let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.classList.add('confetti');
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.transform = `scale(${Math.random() * 0.8 + 0.5})`;
-                confetti.style.animationDelay = Math.random() * 0.5 + 's';
-                confetti.style.animationDuration = Math.random() * 1.5 + 2 + 's';
-                document.body.appendChild(confetti);
-
-                setTimeout(() => {
-                    confetti.remove();
-                }, 4000);
+            const colors = ['#f43f5e','#0ea5e9','#10b981','#fbbf24','#a855f7','#f97316'];
+            for (let i = 0; i < 60; i++) {
+                const c = document.createElement('div');
+                c.classList.add('confetti');
+                c.style.left = Math.random() * 100 + 'vw';
+                c.style.top = '-20px';
+                c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                c.style.width = (Math.random() * 8 + 6) + 'px';
+                c.style.height = (Math.random() * 8 + 6) + 'px';
+                c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                c.style.animationDelay = Math.random() * 0.8 + 's';
+                c.style.animationDuration = Math.random() * 2 + 2.5 + 's';
+                document.body.appendChild(c);
+                setTimeout(() => c.remove(), 5000);
             }
         }
 
-        // פונקציות עזר לשמירה ועדכון
+        // ===== CHECKLIST =====
+        function updateProgressBar() {
+            const container = document.getElementById('checklist-content');
+            if (!container) return;
+            const allCheckboxes = container.querySelectorAll('input[type="checkbox"]');
+            if (allCheckboxes.length === 0) return;
+            const checked = Array.from(allCheckboxes).filter(cb => cb.checked).length;
+            const pct = Math.round((checked / allCheckboxes.length) * 100);
+            const fill = document.getElementById('checklist-progress-fill');
+            const text = document.getElementById('checklist-progress-text');
+            if (fill) fill.style.width = pct + '%';
+            if (text) text.innerText = pct + '%';
+        }
+
         function saveChecklistLocal() {
             localStorage.setItem('ayia_napa_checklist_checked', JSON.stringify(checkedItemsState));
             localStorage.setItem('ayia_napa_checklist_custom', JSON.stringify(customItemsState));
             renderChecklist();
         }
 
+        function renderChecklist() {
+            const container = document.getElementById('checklist-content');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const familyNameText = currentFamily === 'nakache' ? 'משפחת נקש' : 'משפחת סויסה';
+
+            // Add custom item input
+            const inputDiv = document.createElement('div');
+            inputDiv.className = 'card p-5 border-rose-100';
+            inputDiv.innerHTML = `
+                <h4 class="font-bold text-stone-800 text-sm mb-3">➕ הוספת פריט לרשימת ${familyNameText}</h4>
+                <div class="flex gap-2">
+                    <input id="custom-item-input" type="text" placeholder="הקלד פריט..." class="flex-grow bg-stone-50 border border-stone-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-rose-400">
+                    <button onclick="addCustomChecklistItem()" class="bg-rose-500 hover:bg-rose-600 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-all shadow-sm shrink-0 hover:scale-105 active:scale-95">הוסף</button>
+                </div>
+            `;
+            container.appendChild(inputDiv);
+
+            // Render categories
+            const colorMap = {
+                sky: { bg: 'bg-sky-50', border: 'border-sky-100', title: 'text-sky-800', dot: 'bg-sky-400' },
+                rose: { bg: 'bg-rose-50', border: 'border-rose-100', title: 'text-rose-800', dot: 'bg-rose-400' },
+                amber: { bg: 'bg-amber-50', border: 'border-amber-100', title: 'text-amber-800', dot: 'bg-amber-400' },
+                teal: { bg: 'bg-teal-50', border: 'border-teal-100', title: 'text-teal-800', dot: 'bg-teal-400' },
+                red: { bg: 'bg-red-50', border: 'border-red-100', title: 'text-red-800', dot: 'bg-red-400' }
+            };
+
+            for (const [catKey, catData] of Object.entries(baseChecklistCategories)) {
+                const c = colorMap[catData.color] || colorMap.sky;
+                const card = document.createElement('div');
+                card.className = 'card overflow-hidden';
+
+                let itemsHtml = '';
+                catData.items.forEach(item => {
+                    const uid = `chk-${currentFamily}-${catKey}-${item.id}`;
+                    const isChecked = !!checkedItemsState[uid];
+                    const checkedClass = isChecked ? 'checked-item' : '';
+                    const checkedAttr = isChecked ? 'checked' : '';
+                    itemsHtml += `
+                        <div class="check-item border-b border-stone-50 last:border-0">
+                            <input type="checkbox" id="${uid}" onclick="toggleCheck(this)" ${checkedAttr} class="w-5 h-5 rounded cursor-pointer flex-shrink-0" style="accent-color:#f43f5e">
+                            <label for="${uid}" class="cursor-pointer select-none text-sm text-stone-700 flex-grow ${checkedClass}">${item.text}</label>
+                        </div>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="px-5 py-3 ${c.bg} ${c.border} border-b flex items-center gap-2">
+                        <div class="w-2.5 h-2.5 rounded-full ${c.dot} flex-shrink-0"></div>
+                        <h3 class="text-sm font-bold ${c.title}">${catData.title}</h3>
+                    </div>
+                    <div class="p-4 divide-y divide-stone-50">${itemsHtml}</div>
+                `;
+                container.appendChild(card);
+            }
+
+            // Custom items
+            const customList = customItemsState[currentFamily] || [];
+            const customCard = document.createElement('div');
+            customCard.className = 'card overflow-hidden';
+
+            let customHtml = '';
+            if (customList.length === 0) {
+                customHtml = `<p class="text-xs text-stone-400 italic p-4">אין עדיין פריטים מותאמים אישית.</p>`;
+            } else {
+                customList.forEach(item => {
+                    const uid = item.id;
+                    const isChecked = !!checkedItemsState[uid];
+                    const checkedClass = isChecked ? 'checked-item' : '';
+                    const checkedAttr = isChecked ? 'checked' : '';
+                    customHtml += `
+                        <div class="check-item border-b border-stone-50 last:border-0 justify-between">
+                            <div class="flex items-center gap-3 flex-grow">
+                                <input type="checkbox" id="${uid}" onclick="toggleCheck(this)" ${checkedAttr} class="w-5 h-5 rounded cursor-pointer flex-shrink-0" style="accent-color:#f43f5e">
+                                <label for="${uid}" class="cursor-pointer select-none text-sm text-stone-700 ${checkedClass}">${item.text}</label>
+                            </div>
+                            <button onclick="deleteCustomChecklistItem('${item.id}')" class="text-rose-400 hover:text-rose-600 text-xs px-2 transition-colors flex-shrink-0">❌</button>
+                        </div>
+                    `;
+                });
+            }
+
+            customCard.innerHTML = `
+                <div class="px-5 py-3 bg-purple-50 border-b border-purple-100 flex items-center gap-2">
+                    <div class="w-2.5 h-2.5 rounded-full bg-purple-400 flex-shrink-0"></div>
+                    <h3 class="text-sm font-bold text-purple-800">✨ פריטים מותאמים אישית</h3>
+                </div>
+                <div class="p-4 divide-y divide-stone-50">${customHtml}</div>
+            `;
+            container.appendChild(customCard);
+
+            setTimeout(updateProgressBar, 50);
+        }
+
+        // ===== EXPENSES =====
         function saveExpensesState(newList) {
             expenses = newList;
             localStorage.setItem('ayia_napa_expenses', JSON.stringify(expenses));
             renderExpenses();
         }
 
-        // טעינה מקומית גיבוי
-        function loadLocalData() {
-            const storedExpenses = localStorage.getItem('ayia_napa_expenses');
-            if (storedExpenses) {
-                expenses = JSON.parse(storedExpenses);
-            }
-            renderExpenses();
-
-            const storedChecked = localStorage.getItem('ayia_napa_checklist_checked');
-            if (storedChecked) {
-                checkedItemsState = JSON.parse(storedChecked);
-            }
-
-            const storedCustom = localStorage.getItem('ayia_napa_checklist_custom');
-            if (storedCustom) {
-                customItemsState = JSON.parse(storedCustom);
-            } else {
-                customItemsState = { nakache: [], swissa: [] };
-            }
-
-            renderChecklist();
-        }
-
-        function applyChecklistState() {
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            checkboxes.forEach(cb => {
-                const isChecked = !!checkedItemsState[cb.id];
-                cb.checked = isChecked;
-                if (cb.nextElementSibling) {
-                    if (isChecked) {
-                        cb.nextElementSibling.classList.add('checked-item');
-                    } else {
-                        cb.nextElementSibling.classList.remove('checked-item');
-                    }
-                }
-            });
-        }
-
-        // ================= רינדור רשימת הציוד דינמית מופרדת משפחות =================
-        function renderChecklist() {
-            const container = document.getElementById('checklist-content');
-            if (!container) return;
-            container.innerHTML = '';
-
-            // 1. הוספת תיבת קלט לפריטים אישיים בראש הרשימה
-            const inputContainer = document.createElement('div');
-            inputContainer.classList.add('bg-white', 'rounded-2xl', 'p-5', 'shadow-md', 'border', 'border-rose-100', 'mb-6');
-            
-            const familyNameText = currentFamily === 'nakache' ? 'משפחת נקש' : 'משפחת סויסה';
-            
-            inputContainer.innerHTML = `
-                <h4 class="font-bold text-stone-800 text-sm mb-3">➕ הוספת פריט חופשי לרשימת ${familyNameText} (מסונכרן לכולם!)</h4>
-                <div class="flex gap-2">
-                    <input id="custom-item-input" type="text" placeholder="הקלד פריט שברצונך להוסיף (למשל: תרופה מיוחדת, בובה)..." class="flex-grow bg-stone-50 border border-stone-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-rose-400">
-                    <button onclick="addCustomChecklistItem()" class="bg-rose-500 hover:bg-rose-600 text-white font-bold text-sm px-6 py-2.5 rounded-xl transition-all shadow-sm shrink-0">הוסף פריט</button>
-                </div>
-            `;
-            container.appendChild(inputContainer);
-
-            // 2. רינדור קטגוריות הבסיס
-            for (const [catKey, catData] of Object.entries(baseChecklistCategories)) {
-                const card = document.createElement('div');
-                card.classList.add('bg-white', 'rounded-2xl', 'p-6', 'shadow-md', 'border', 'border-stone-100', 'mb-6');
-                
-                let itemsHtml = '';
-                catData.items.forEach(item => {
-                    const uniqueId = `chk-${currentFamily}-${catKey}-${item.id}`;
-                    const isChecked = !!checkedItemsState[uniqueId];
-                    const checkedClass = isChecked ? 'checked-item' : '';
-                    const checkedAttr = isChecked ? 'checked' : '';
-
-                    itemsHtml += `
-                        <li class="flex items-center space-x-reverse space-x-3 py-1">
-                            <input type="checkbox" id="${uniqueId}" onclick="toggleCheck(this)" ${checkedAttr} class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400 cursor-pointer">
-                            <label for="${uniqueId}" class="cursor-pointer select-none text-sm text-stone-700 ${checkedClass}">${item.text}</label>
-                        </li>
-                    `;
-                });
-
-                card.innerHTML = `
-                    <h3 class="text-base font-bold text-stone-800 border-b border-stone-100 pb-2 mb-4">${catData.title}</h3>
-                    <ul class="space-y-3">
-                        ${itemsHtml}
-                    </ul>
-                `;
-                container.appendChild(card);
-            }
-
-            // 3. רינדור פריטים מותאמים אישית (אם קיימים) בכרטיס נפרד
-            const customList = customItemsState[currentFamily] || [];
-            const customCard = document.createElement('div');
-            customCard.classList.add('bg-white', 'rounded-2xl', 'p-6', 'shadow-md', 'border', 'border-stone-100');
-            
-            let customItemsHtml = '';
-            if (customList.length === 0) {
-                customItemsHtml = `<p class="text-xs text-stone-400 italic">אין עדיין פריטים מותאמים אישית. השתמשו בתיבת הקלט למעלה כדי להוסיף!</p>`;
-            } else {
-                customItemsHtml = `<ul class="space-y-3">`;
-                customList.forEach(item => {
-                    const uniqueId = item.id;
-                    const isChecked = !!checkedItemsState[uniqueId];
-                    const checkedClass = isChecked ? 'checked-item' : '';
-                    const checkedAttr = isChecked ? 'checked' : '';
-
-                    customItemsHtml += `
-                        <li class="flex items-center justify-between py-1.5 border-b border-stone-50 last:border-0">
-                            <div class="flex items-center space-x-reverse space-x-3">
-                                <input type="checkbox" id="${uniqueId}" onclick="toggleCheck(this)" ${checkedAttr} class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400 cursor-pointer">
-                                <label for="${uniqueId}" class="cursor-pointer select-none text-sm text-stone-700 ${checkedClass}">${item.text}</label>
-                            </div>
-                            <button onclick="deleteCustomChecklistItem('${item.id}')" class="text-rose-400 hover:text-rose-600 text-xs px-2 transform hover:scale-110 transition-transform">❌ מחיקה</button>
-                        </li>
-                    `;
-                });
-                customItemsHtml += `</ul>`;
-            }
-
-            customCard.innerHTML = `
-                <h3 class="text-base font-bold text-rose-700 border-b border-rose-100 pb-2 mb-4">✨ פריטים מותאמים אישית שלכם</h3>
-                ${customItemsHtml}
-            `;
-            container.appendChild(customCard);
-        }
-
         function renderExpenses() {
             const list = document.getElementById('expense-list');
             if (!list) return;
             list.innerHTML = '';
+            let totalNakache = 0, totalSwissa = 0;
 
-            let totalNakache = 0;
-            let totalSwissa = 0;
-
-            expenses.forEach((e, idx) => {
+            expenses.forEach(e => {
                 if (e.payer === 'נקש') totalNakache += e.amount;
                 if (e.payer === 'סויסה') totalSwissa += e.amount;
-
                 const row = document.createElement('tr');
-                row.classList.add('border-b', 'border-stone-100', 'h-10');
+                row.className = 'expense-row border-b border-stone-100 h-10';
                 row.innerHTML = `
-                    <td class="font-semibold text-stone-800">${e.desc}</td>
-                    <td class="text-left font-bold text-sky-700">${e.amount.toFixed(2)}€</td>
-                    <td>${e.payer}</td>
-                    <td class="text-center">
-                        <button onclick="deleteExpense(${e.id})" class="text-rose-500 hover:text-rose-700 font-bold px-2">❌</button>
-                    </td>
+                    <td class="font-semibold text-stone-800 py-2">${e.desc}</td>
+                    <td class="text-left font-bold text-sky-700 py-2">${e.amount.toFixed(2)}€</td>
+                    <td class="py-2">${e.payer}</td>
+                    <td class="text-center py-2"><button onclick="deleteExpense(${e.id})" class="text-rose-400 hover:text-rose-600 font-bold px-2 transition-colors">❌</button></td>
                 `;
                 list.appendChild(row);
             });
 
-            const totalNakacheEl = document.getElementById('total-nakache');
-            const totalSwissaEl = document.getElementById('total-swissa');
-            if (totalNakacheEl) totalNakacheEl.innerText = totalNakache.toFixed(2) + '€';
-            if (totalSwissaEl) totalSwissaEl.innerText = totalSwissa.toFixed(2) + '€';
+            const tnEl = document.getElementById('total-nakache');
+            const tsEl = document.getElementById('total-swissa');
+            if (tnEl) tnEl.innerText = totalNakache.toFixed(2) + '€';
+            if (tsEl) tsEl.innerText = totalSwissa.toFixed(2) + '€';
 
-            const balanceEl = document.getElementById('expense-balance');
-            if (balanceEl) {
-                const halfDiff = Math.abs(totalNakache - totalSwissa) / 2;
+            const balEl = document.getElementById('expense-balance');
+            if (balEl) {
+                const diff = Math.abs(totalNakache - totalSwissa) / 2;
                 if (totalNakache === totalSwissa) {
-                    balanceEl.innerText = "אין הפרשים - כולם שווים!";
-                    balanceEl.className = "text-emerald-600 font-bold text-sm";
+                    balEl.innerText = "שווים! אין הפרשים ✅";
+                    balEl.className = "text-emerald-600 font-bold text-sm";
                 } else if (totalNakache > totalSwissa) {
-                    balanceEl.innerText = `סויסה חייבים לנקש: ${halfDiff.toFixed(2)}€`;
-                    balanceEl.className = "text-amber-600 font-bold text-sm";
+                    balEl.innerText = `סויסה חייבים לנקש: ${diff.toFixed(2)}€`;
+                    balEl.className = "text-amber-600 font-bold text-sm";
                 } else {
-                    balanceEl.innerText = `נקש חייבים לסויה: ${halfDiff.toFixed(2)}€`;
-                    balanceEl.className = "text-amber-600 font-bold text-sm";
+                    balEl.innerText = `נקש חייבים לסויסה: ${diff.toFixed(2)}€`;
+                    balEl.className = "text-amber-600 font-bold text-sm";
                 }
             }
         }
 
-        // ================= GLOBAL EXPORTS =================
-        window.initMemoryGame = initMemoryGame;
-        
-        window.resetMemoryGame = function() {
-            initMemoryGame();
-        };
+        // ===== LOCAL DATA =====
+        function loadLocalData() {
+            const storedExpenses = localStorage.getItem('ayia_napa_expenses');
+            if (storedExpenses) expenses = JSON.parse(storedExpenses);
+            renderExpenses();
+
+            const storedChecked = localStorage.getItem('ayia_napa_checklist_checked');
+            if (storedChecked) checkedItemsState = JSON.parse(storedChecked);
+
+            const storedCustom = localStorage.getItem('ayia_napa_checklist_custom');
+            if (storedCustom) customItemsState = JSON.parse(storedCustom);
+            else customItemsState = { nakache: [], swissa: [] };
+
+            renderChecklist();
+        }
+
+        // ===== GLOBAL EXPORTS =====
+        window.resetMemoryGame = function() { initMemoryGame(); };
 
         window.switchFamilyChecklist = function(family) {
             currentFamily = family;
-            
-            const btnNakache = document.getElementById('btn-family-nakache');
-            const btnSwissa = document.getElementById('btn-family-swissa');
-            
-            if (family === 'nakache') {
-                btnNakache.classList.add('family-tab-active');
-                btnSwissa.classList.remove('family-tab-active');
-            } else {
-                btnSwissa.classList.add('family-tab-active');
-                btnNakache.classList.remove('family-tab-active');
-            }
+            document.getElementById('btn-family-nakache').classList.toggle('family-tab-active', family === 'nakache');
+            document.getElementById('btn-family-swissa').classList.toggle('family-tab-active', family === 'swissa');
             renderChecklist();
         };
 
@@ -1027,17 +1471,10 @@
             if (!input) return;
             const text = input.value.trim();
             if (!text) return;
-
-            const newItem = {
-                id: `custom-${currentFamily}-${Date.now()}`,
-                text: text
-            };
-
-            if (!customItemsState[currentFamily]) {
-                customItemsState[currentFamily] = [];
-            }
-            customItemsState[currentFamily].push(newItem);
+            if (!customItemsState[currentFamily]) customItemsState[currentFamily] = [];
+            customItemsState[currentFamily].push({ id: `custom-${currentFamily}-${Date.now()}`, text });
             saveChecklistLocal();
+            input.value = '';
         };
 
         window.deleteCustomChecklistItem = function(id) {
@@ -1050,97 +1487,92 @@
 
         window.toggleCheck = function(checkbox) {
             const label = checkbox.nextElementSibling;
-            const isChecked = checkbox.checked;
-            if (isChecked) {
-                if (label) label.classList.add('checked-item');
-            } else {
-                if (label) label.classList.remove('checked-item');
-            }
-            checkedItemsState[checkbox.id] = isChecked;
+            checkedItemsState[checkbox.id] = checkbox.checked;
+            if (label) label.classList.toggle('checked-item', checkbox.checked);
             saveChecklistLocal();
+            updateProgressBar();
         };
 
         window.addExpense = function() {
             const desc = document.getElementById('expense-desc').value.trim();
             const amount = parseFloat(document.getElementById('expense-amount').value);
             const payer = document.getElementById('expense-payer').value;
-
-            if (!desc || isNaN(amount) || amount <= 0) {
-                return;
-            }
-
-            const item = {
-                id: Date.now(),
-                desc,
-                amount,
-                payer
-            };
-
-            const newList = [...expenses, item];
-            saveExpensesState(newList);
-            
+            if (!desc || isNaN(amount) || amount <= 0) return;
+            saveExpensesState([...expenses, { id: Date.now(), desc, amount, payer }]);
             document.getElementById('expense-desc').value = '';
             document.getElementById('expense-amount').value = '';
         };
 
         window.deleteExpense = function(id) {
-            const newList = expenses.filter(e => e.id !== id);
-            saveExpensesState(newList);
+            saveExpensesState(expenses.filter(e => e.id !== id));
         };
 
-        // אתחול התחלתי של המשחק ורשימת הציוד
+        // ===== INIT =====
         window.onload = function() {
             loadLocalData();
             initMemoryGame();
+            triggerReveal();
         };
     </script>
 
-    <!-- גרף טמפרטורות בספטמבר -->
+    <!-- WEATHER CHART -->
     <script>
         window.addEventListener('load', () => {
             const ctx = document.getElementById('weatherChart').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['טמפ\' מקסימום יום', 'טמפ\' מינימום לילה', 'טמפרטורת המים'],
+                    labels: ['מקסימום יום', 'מינימום לילה', 'טמפ\' מים'],
                     datasets: [{
-                        label: 'ממוצע מעלות צלזיוס בספטמבר',
+                        label: 'מעלות צלזיוס',
                         data: [29, 19, 27],
                         backgroundColor: [
-                            'rgba(244, 63, 94, 0.75)',
-                            'rgba(56, 189, 248, 0.65)',
-                            'rgba(13, 148, 136, 0.75)'
+                            'rgba(244, 63, 94, 0.8)',
+                            'rgba(56, 189, 248, 0.8)',
+                            'rgba(20, 184, 166, 0.8)'
                         ],
                         borderColor: [
                             'rgba(244, 63, 94, 1)',
                             'rgba(56, 189, 248, 1)',
-                            'rgba(13, 148, 136, 1)'
+                            'rgba(20, 184, 166, 1)'
                         ],
-                        borderWidth: 1.5,
-                        borderRadius: 6
+                        borderWidth: 0,
+                        borderRadius: 10,
+                        borderSkipped: false
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: {
-                            display: false
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: ctx => ` ${ctx.raw}°C`
+                            },
+                            backgroundColor: 'rgba(15,23,42,0.85)',
+                            padding: 10,
+                            cornerRadius: 10
                         }
                     },
                     scales: {
                         y: {
                             beginAtZero: true,
                             max: 35,
-                            grid: {
-                                color: '#f5f5f4'
+                            grid: { color: 'rgba(0,0,0,0.04)' },
+                            ticks: {
+                                callback: v => v + '°',
+                                font: { size: 11 }
                             }
                         },
                         x: {
-                            grid: {
-                                display: false
-                            }
+                            grid: { display: false },
+                            ticks: { font: { size: 11 } }
                         }
+                    },
+                    animation: {
+                        duration: 1200,
+                        easing: 'easeOutQuart'
                     }
                 }
             });
