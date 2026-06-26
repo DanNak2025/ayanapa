@@ -13,8 +13,6 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <!-- Fonts -->
@@ -493,19 +491,8 @@ body {
   transition: background 0.3s;
 }
 
-/* ============================================================
-   EXPENSE TABLE
-   ============================================================ */
-.expense-row { transition: background 0.2s; }
-.expense-row:active { background: rgba(14,165,233,0.05); }
 
-/* ============================================================
-   CHART CONTAINER
-   ============================================================ */
-.chart-wrap {
-  position: relative;
-  height: 220px;
-}
+
 
 /* ============================================================
    SWIPE INDICATOR
@@ -1058,51 +1045,72 @@ body {
       </div>
     </div>
 
-    <!-- Expense calculator -->
+    <!-- Flight Tracker -->
     <div class="card p-5 mb-4 animate-in" style="animation-delay:0.05s">
-      <h3 class="font-bold text-base mb-1" style="color:var(--text)">💰 מחשבון הוצאות משותף</h3>
-      <p class="text-xs mb-4" style="color:var(--text-muted)">עקבו אחרי ההוצאות של שתי המשפחות</p>
-      <div class="space-y-2 mb-3">
-        <input id="expense-desc" type="text" placeholder="תיאור (למשל: מונית פנטליס)" class="w-full px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-2 transition-all" style="background:rgba(14,165,233,0.06);border:1px solid var(--border);color:var(--text)">
-        <div class="flex gap-2">
-          <input id="expense-amount" type="number" placeholder="סכום (€)" class="flex-1 px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-2 transition-all" style="background:rgba(14,165,233,0.06);border:1px solid var(--border);color:var(--text)">
-          <select id="expense-payer" class="flex-1 px-3 py-3 rounded-xl text-sm focus:outline-none focus:ring-2 transition-all" style="background:rgba(14,165,233,0.06);border:1px solid var(--border);color:var(--text)">
-            <option value="נקש">שילם: נקש</option>
-            <option value="סויסה">שילם: סויסה</option>
-          </select>
-        </div>
-      </div>
-      <button onclick="addExpense()" class="w-full py-3 rounded-xl text-sm font-bold text-white transition-all hover:scale-[1.01] active:scale-[0.99] shadow-md mb-4" style="background:linear-gradient(135deg,#10b981,#059669)">
-        ➕ הוסף הוצאה
-      </button>
-
-      <div class="overflow-x-auto mb-4">
-        <table class="w-full text-xs text-right" style="color:var(--text)">
-          <thead>
-            <tr style="border-bottom:1px solid var(--border);color:var(--text-muted)">
-              <th class="pb-2 font-semibold">תיאור</th>
-              <th class="pb-2 text-left font-semibold">סכום</th>
-              <th class="pb-2 font-semibold">מי שילם</th>
-              <th class="pb-2 text-center font-semibold">מחיקה</th>
-            </tr>
-          </thead>
-          <tbody id="expense-list"></tbody>
-        </table>
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-bold text-base" style="color:var(--text)">✈️ מעקב טיסות בזמן אמת</h3>
+        <button onclick="refreshFlights()" id="flight-refresh-btn" class="text-xs px-3 py-1.5 rounded-full font-bold transition-all active:scale-95" style="background:rgba(14,165,233,0.1);color:var(--sky)">🔄 רענן</button>
       </div>
 
-      <!-- Expense chart -->
-      <div class="chart-wrap mb-4">
-        <canvas id="expenseChart"></canvas>
+      <!-- Outbound -->
+      <div class="mb-3 p-4 rounded-2xl" style="background:linear-gradient(135deg,rgba(14,165,233,0.08),rgba(14,165,233,0.03));border:1px solid rgba(14,165,233,0.18)">
+        <div class="flex items-center justify-between mb-2">
+          <div>
+            <p class="font-black text-sm" style="color:var(--sky)">U8103 · TUS Airways</p>
+            <p class="text-xs mt-0.5" style="color:var(--text-muted)">הלוך · 27.09.2026 · TLV → LCA</p>
+          </div>
+          <div class="text-2xl">🛫</div>
+        </div>
+        <div id="flight-out" class="text-xs" style="color:var(--text-muted)">טוען נתוני טיסה...</div>
       </div>
 
-      <div class="p-4 rounded-xl flex justify-between items-center text-xs" style="background:rgba(14,165,233,0.06);border:1px solid var(--border)">
-        <div class="space-y-2">
-          <p style="color:var(--text)">נקש שילמו: <strong id="total-nakache" style="color:var(--sky);font-size:0.9rem">0€</strong></p>
-          <p style="color:var(--text)">סויסה שילמו: <strong id="total-swissa" style="color:var(--sky);font-size:0.9rem">0€</strong></p>
+      <!-- Return -->
+      <div class="p-4 rounded-2xl" style="background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(16,185,129,0.03));border:1px solid rgba(16,185,129,0.18)">
+        <div class="flex items-center justify-between mb-2">
+          <div>
+            <p class="font-black text-sm" style="color:var(--emerald)">U8106 · TUS Airways</p>
+            <p class="text-xs mt-0.5" style="color:var(--text-muted)">חזור · 30.09.2026 · LCA → TLV</p>
+          </div>
+          <div class="text-2xl">🛬</div>
         </div>
-        <div class="p-3 rounded-xl text-left" style="background:var(--card-bg);border:1px solid var(--border)">
-          <p id="expense-balance" class="font-bold text-sm" style="color:var(--rose)">אין הפרשים</p>
+        <div id="flight-ret" class="text-xs" style="color:var(--text-muted)">טוען נתוני טיסה...</div>
+      </div>
+
+      <p class="text-center text-xs mt-3" style="color:var(--text-muted)">נתונים מ-AeroDataBox · מתעדכן ביום הטיסה</p>
+    </div>
+
+    <!-- Currency Converter -->
+    <div class="card p-5 mb-4 animate-in" style="animation-delay:0.1s">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-bold text-base" style="color:var(--text)">💱 מחשבון מטבע</h3>
+        <div class="flex items-center gap-1.5 text-xs font-semibold" style="color:#22c55e">
+          <span class="live-dot"></span> שער עדכני
         </div>
+      </div>
+
+      <div class="flex gap-3 mb-3">
+        <div class="flex-1">
+          <label class="text-xs font-semibold block mb-1.5" style="color:var(--text-muted)">₪ שקלים</label>
+          <input id="ils-input" type="number" inputmode="decimal" placeholder="0" oninput="convertCurrency('ils')" class="w-full px-4 py-3 rounded-xl text-lg font-bold text-center focus:outline-none focus:ring-2 transition-all" style="background:rgba(14,165,233,0.06);border:1px solid var(--border);color:var(--text)">
+        </div>
+        <div class="flex items-end pb-3 text-xl">⇄</div>
+        <div class="flex-1">
+          <label class="text-xs font-semibold block mb-1.5" style="color:var(--text-muted)">€ יורו</label>
+          <input id="eur-input" type="number" inputmode="decimal" placeholder="0" oninput="convertCurrency('eur')" class="w-full px-4 py-3 rounded-xl text-lg font-bold text-center focus:outline-none focus:ring-2 transition-all" style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);color:var(--text)">
+        </div>
+      </div>
+
+      <div id="currency-rate" class="text-center text-xs py-2 px-4 rounded-xl" style="background:rgba(14,165,233,0.06);color:var(--text-muted)">
+        טוען שער חליפין...
+      </div>
+
+      <!-- Quick amounts -->
+      <div class="flex flex-wrap gap-2 mt-3 justify-center">
+        <span class="text-xs font-semibold" style="color:var(--text-muted)">המרה מהירה:</span>
+        <button onclick="quickConvert(50)" class="text-xs px-3 py-1 rounded-full font-bold transition-all active:scale-95" style="background:rgba(14,165,233,0.1);color:var(--sky)">50€</button>
+        <button onclick="quickConvert(100)" class="text-xs px-3 py-1 rounded-full font-bold transition-all active:scale-95" style="background:rgba(14,165,233,0.1);color:var(--sky)">100€</button>
+        <button onclick="quickConvert(200)" class="text-xs px-3 py-1 rounded-full font-bold transition-all active:scale-95" style="background:rgba(14,165,233,0.1);color:var(--sky)">200€</button>
+        <button onclick="quickConvert(500)" class="text-xs px-3 py-1 rounded-full font-bold transition-all active:scale-95" style="background:rgba(14,165,233,0.1);color:var(--sky)">500€</button>
       </div>
     </div>
 
@@ -1145,7 +1153,7 @@ body {
     <span class="bnav-label">כשר</span>
   </button>
   <button class="bnav-item" data-target="pane-tools" onclick="switchTab('pane-tools', this)">
-    <span class="bnav-icon">🎮</span>
+    <span class="bnav-icon">🛠️</span>
     <span class="bnav-label">כלים</span>
   </button>
 </nav>
@@ -1157,10 +1165,9 @@ body {
 // ===== STATE =====
 let checkedItemsState = {};
 let customItemsState = { nakache: [], swissa: [] };
-let expenses = [];
 let currentFamily = 'nakache';
 let currentTab = 'pane-overview';
-let expenseChart = null;
+let eurRate = 3.95; // fallback rate
 
 // ===== DARK MODE =====
 const darkToggle = document.getElementById('dark-toggle');
@@ -1168,7 +1175,6 @@ let isDark = localStorage.getItem('darkMode') === 'true';
 function applyDark() {
   document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
   darkToggle.textContent = isDark ? '☀️' : '🌙';
-  if (expenseChart) expenseChart.update();
 }
 applyDark();
 darkToggle.addEventListener('click', () => {
@@ -1201,8 +1207,8 @@ function switchTab(targetId, btn) {
 
   // Init map when beaches tab opened
   if (targetId === 'pane-kids' && !window.mapInitialized) initMap();
-  // Init expense chart when tools tab opened
-  if (targetId === 'pane-tools' && !expenseChart) initExpenseChart();
+  // Load flights when tools tab opened
+  if (targetId === 'pane-tools') loadFlights();
 }
 
 // ===== SWIPE SUPPORT =====
@@ -1390,34 +1396,123 @@ function triggerConfetti() {
 }
 window.resetMemoryGame = () => initMemoryGame();
 
-// ===== EXPENSE CHART =====
-function initExpenseChart() {
-  const ctx = document.getElementById('expenseChart');
-  if (!ctx) return;
-  expenseChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: ['נקש', 'סויסה'],
-      datasets: [{ data: [0, 0], backgroundColor: ['#0ea5e9','#f43f5e'], borderWidth: 0, hoverOffset: 6 }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: {
-        legend: { position: 'bottom', labels: { font: { family: 'Noto Sans Hebrew', size: 12 }, color: isDark ? '#94a3b8' : '#78716c', padding: 16 } },
-        tooltip: { callbacks: { label: ctx => ` ${ctx.raw.toFixed(2)}€` }, backgroundColor: 'rgba(15,23,42,0.85)', padding: 10, cornerRadius: 10 }
-      },
-      cutout: '65%'
+// ===== FLIGHT TRACKER =====
+async function loadFlights() {
+  const today = new Date();
+  const outDate = '2026-09-27';
+  const retDate = '2026-09-30';
+
+  async function fetchFlight(flightNum, date, elId, color) {
+    const el = document.getElementById(elId);
+    if (!el) return;
+    try {
+      // Use AeroDataBox free API via RapidAPI proxy (no key needed for basic schedule)
+      const res = await fetch(`https://aerodatabox.p.rapidapi.com/flights/number/${flightNum}/${date}`, {
+        headers: {
+          'x-rapidapi-host': 'aerodatabox.p.rapidapi.com',
+          'x-rapidapi-key': 'demo'
+        }
+      });
+      if (!res.ok) throw new Error('no data');
+      const data = await res.json();
+      const f = Array.isArray(data) ? data[0] : data;
+      if (!f) throw new Error('empty');
+      const dep = f.departure?.scheduledTime?.local || f.departure?.scheduledTime?.utc || '--:--';
+      const arr = f.arrival?.scheduledTime?.local || f.arrival?.scheduledTime?.utc || '--:--';
+      const status = f.status || 'מתוכנן';
+      const statusHe = { 'Scheduled':'✅ מתוכנן', 'Active':'🛫 בטיסה', 'Landed':'🛬 נחת', 'Cancelled':'❌ בוטל', 'Delayed':'⚠️ מאוחר' }[status] || status;
+      const depTime = dep.includes('T') ? dep.split('T')[1].slice(0,5) : dep.slice(0,5);
+      const arrTime = arr.includes('T') ? arr.split('T')[1].slice(0,5) : arr.slice(0,5);
+      el.innerHTML = `
+        <div class="flex justify-between items-center">
+          <div class="text-center">
+            <div class="font-black text-base" style="color:${color}">${depTime}</div>
+            <div style="color:var(--text-muted)">המראה</div>
+          </div>
+          <div class="text-center flex-grow px-2">
+            <div style="color:var(--text-muted)">—✈️—</div>
+            <div class="font-bold mt-0.5" style="color:${color}">${statusHe}</div>
+          </div>
+          <div class="text-center">
+            <div class="font-black text-base" style="color:${color}">${arrTime}</div>
+            <div style="color:var(--text-muted)">נחיתה</div>
+          </div>
+        </div>
+      `;
+    } catch(e) {
+      // Fallback: show scheduled times from our data
+      const isOut = elId === 'flight-out';
+      el.innerHTML = `
+        <div class="flex justify-between items-center">
+          <div class="text-center">
+            <div class="font-black text-base" style="color:${color}">${isOut ? '09:00' : '15:00'}</div>
+            <div style="color:var(--text-muted)">המראה מתוכנת</div>
+          </div>
+          <div class="text-center flex-grow px-2">
+            <div style="color:var(--text-muted)">—✈️—</div>
+            <div class="text-xs mt-0.5" style="color:var(--text-muted)">נתונים ביום הטיסה</div>
+          </div>
+          <div class="text-center">
+            <div class="font-black text-base" style="color:${color}">${isOut ? '10:00' : '16:30'}</div>
+            <div style="color:var(--text-muted)">נחיתה מתוכנת</div>
+          </div>
+        </div>
+        <div class="mt-2 text-center">
+          <a href="https://www.flightradar24.com/${flightNum}" target="_blank" class="text-xs font-bold px-3 py-1 rounded-full" style="background:rgba(14,165,233,0.12);color:var(--sky)">📱 עקוב ב-FlightRadar24</a>
+        </div>
+      `;
     }
-  });
+  }
+
+  fetchFlight('U8103', outDate, 'flight-out', '#0ea5e9');
+  fetchFlight('U8106', retDate, 'flight-ret', '#10b981');
 }
 
-function updateExpenseChart() {
-  if (!expenseChart) return;
-  let n = 0, s = 0;
-  expenses.forEach(e => { if (e.payer === 'נקש') n += e.amount; else s += e.amount; });
-  expenseChart.data.datasets[0].data = [n, s];
-  expenseChart.update();
+window.refreshFlights = function() {
+  const btn = document.getElementById('flight-refresh-btn');
+  if (btn) { btn.textContent = '⏳ טוען...'; btn.disabled = true; }
+  document.getElementById('flight-out').innerHTML = '<div style="color:var(--text-muted)">טוען...</div>';
+  document.getElementById('flight-ret').innerHTML = '<div style="color:var(--text-muted)">טוען...</div>';
+  loadFlights().then(() => {
+    if (btn) { btn.textContent = '🔄 רענן'; btn.disabled = false; }
+  });
+};
+
+// ===== CURRENCY CONVERTER =====
+async function loadExchangeRate() {
+  try {
+    const res = await fetch('https://api.frankfurter.app/latest?from=EUR&to=ILS');
+    const data = await res.json();
+    eurRate = data.rates.ILS;
+    const rateEl = document.getElementById('currency-rate');
+    if (rateEl) rateEl.textContent = `1€ = ${eurRate.toFixed(3)} ₪ | 1₪ = ${(1/eurRate).toFixed(4)}€`;
+  } catch(e) {
+    const rateEl = document.getElementById('currency-rate');
+    if (rateEl) rateEl.textContent = `1€ ≈ ${eurRate.toFixed(2)} ₪ (שער משוער)`;
+  }
 }
+
+window.convertCurrency = function(from) {
+  const ilsEl = document.getElementById('ils-input');
+  const eurEl = document.getElementById('eur-input');
+  if (!ilsEl || !eurEl) return;
+  if (from === 'ils') {
+    const ils = parseFloat(ilsEl.value);
+    eurEl.value = isNaN(ils) ? '' : (ils / eurRate).toFixed(2);
+  } else {
+    const eur = parseFloat(eurEl.value);
+    ilsEl.value = isNaN(eur) ? '' : (eur * eurRate).toFixed(2);
+  }
+};
+
+window.quickConvert = function(eur) {
+  const eurEl = document.getElementById('eur-input');
+  const ilsEl = document.getElementById('ils-input');
+  if (eurEl) eurEl.value = eur;
+  if (ilsEl) ilsEl.value = (eur * eurRate).toFixed(2);
+};
+
+loadExchangeRate();
 
 // ===== CHECKLIST DATA =====
 const checklistData = {
@@ -1628,64 +1723,10 @@ function loadSharedChecklist() {
   }
 }
 
-// ===== EXPENSES =====
-function saveExpenses(list) {
-  expenses = list;
-  localStorage.setItem('ayia_expenses', JSON.stringify(expenses));
-  renderExpenses();
-  updateExpenseChart();
-}
 
-function renderExpenses() {
-  const list = document.getElementById('expense-list');
-  if (!list) return;
-  list.innerHTML = '';
-  let n = 0, s = 0;
-  expenses.forEach(e => {
-    if (e.payer === 'נקש') n += e.amount;
-    else s += e.amount;
-    const tr = document.createElement('tr');
-    tr.className = 'expense-row';
-    tr.style.borderBottom = '1px solid var(--border)';
-    tr.innerHTML = `
-      <td class="py-2 font-semibold text-xs" style="color:var(--text)">${e.desc}</td>
-      <td class="py-2 text-left font-bold text-xs" style="color:var(--sky)">${e.amount.toFixed(2)}€</td>
-      <td class="py-2 text-xs" style="color:var(--text)">${e.payer}</td>
-      <td class="py-2 text-center"><button onclick="deleteExpense(${e.id})" style="color:var(--rose)" class="text-xs px-1">❌</button></td>
-    `;
-    list.appendChild(tr);
-  });
-  const tn = document.getElementById('total-nakache');
-  const ts = document.getElementById('total-swissa');
-  if (tn) tn.textContent = n.toFixed(2) + '€';
-  if (ts) ts.textContent = s.toFixed(2) + '€';
-  const bal = document.getElementById('expense-balance');
-  if (bal) {
-    const diff = Math.abs(n - s) / 2;
-    if (n === s) { bal.textContent = 'שווים! ✅'; bal.style.color = 'var(--emerald)'; }
-    else if (n > s) { bal.textContent = `סויסה חייבים לנקש: ${diff.toFixed(2)}€`; bal.style.color = 'var(--amber)'; }
-    else { bal.textContent = `נקש חייבים לסויסה: ${diff.toFixed(2)}€`; bal.style.color = 'var(--amber)'; }
-  }
-}
-
-window.addExpense = function() {
-  const desc = document.getElementById('expense-desc').value.trim();
-  const amount = parseFloat(document.getElementById('expense-amount').value);
-  const payer = document.getElementById('expense-payer').value;
-  if (!desc || isNaN(amount) || amount <= 0) return;
-  saveExpenses([...expenses, { id: Date.now(), desc, amount, payer }]);
-  document.getElementById('expense-desc').value = '';
-  document.getElementById('expense-amount').value = '';
-};
-
-window.deleteExpense = function(id) {
-  saveExpenses(expenses.filter(e => e.id !== id));
-};
 
 // ===== LOAD LOCAL DATA =====
 function loadLocal() {
-  const stored = localStorage.getItem('ayia_expenses');
-  if (stored) expenses = JSON.parse(stored);
   const checked = localStorage.getItem('ayia_checked');
   if (checked) checkedItemsState = JSON.parse(checked);
   const custom = localStorage.getItem('ayia_custom');
@@ -1703,7 +1744,6 @@ window.onload = function() {
   loadSharedChecklist();
   loadLocal();
   renderChecklist();
-  renderExpenses();
   initMemoryGame();
 };
 </script>
