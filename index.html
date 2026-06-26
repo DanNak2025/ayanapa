@@ -60,7 +60,6 @@ body {
   color: var(--text);
   overflow-x: hidden;
   transition: background 0.3s, color 0.3s;
-  padding-bottom: env(safe-area-inset-bottom, 80px);
 }
 
 /* ============================================================
@@ -143,7 +142,8 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-top: 1px solid var(--border);
-  padding: 8px 4px calc(8px + env(safe-area-inset-bottom, 0px));
+  padding: 10px 4px 0;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
   display: flex;
   justify-content: space-around;
   box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
@@ -596,7 +596,7 @@ body {
 <!-- ============================================================
      MAIN CONTENT
      ============================================================ -->
-<main class="max-w-lg mx-auto px-4 pt-4 pb-28" id="panes-container">
+<main class="max-w-lg mx-auto px-4 pt-4" style="padding-bottom: calc(80px + max(16px, env(safe-area-inset-bottom)))" id="panes-container">
 
   <!-- =================== TAB 1: OVERVIEW =================== -->
   <section id="pane-overview" class="tab-pane active">
@@ -1076,7 +1076,17 @@ body {
         <div id="flight-ret" class="text-xs" style="color:var(--text-muted)">טוען נתוני טיסה...</div>
       </div>
 
-      <p class="text-center text-xs mt-3" style="color:var(--text-muted)">נתונים מ-AeroDataBox · מתעדכן ביום הטיסה</p>
+      <!-- Last checked + daily auto-check -->
+      <div class="mt-3 p-3 rounded-xl flex items-center justify-between" style="background:rgba(14,165,233,0.05);border:1px solid rgba(14,165,233,0.1)">
+        <div class="text-xs" style="color:var(--text-muted)">
+          <span>🕒 בדיקה אחרונה: </span>
+          <span id="flight-last-checked" class="font-semibold" style="color:var(--sky)">לא נבדק</span>
+        </div>
+        <div class="flex items-center gap-1.5 text-xs font-semibold" style="color:#22c55e">
+          <span class="live-dot"></span>
+          <span>בדיקה יומית אוטומטית</span>
+        </div>
+      </div>
     </div>
 
     <!-- Currency Converter -->
@@ -1397,8 +1407,22 @@ function triggerConfetti() {
 window.resetMemoryGame = () => initMemoryGame();
 
 // ===== FLIGHT TRACKER =====
+function updateLastCheckedUI() {
+  const el = document.getElementById('flight-last-checked');
+  if (!el) return;
+  const ts = localStorage.getItem('flight_last_checked');
+  if (!ts) { el.textContent = 'לא נבדק'; return; }
+  const d = new Date(parseInt(ts));
+  const now = new Date();
+  const diffMin = Math.round((now - d) / 60000);
+  const timeStr = d.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' });
+  const dateStr = d.toLocaleDateString('he-IL', { day: '2-digit', month: '2-digit' });
+  if (diffMin < 1) el.textContent = 'זה עתה';
+  else if (diffMin < 60) el.textContent = `לפני ${diffMin} דקות`;
+  else el.textContent = `${dateStr} בשעה ${timeStr}`;
+}
+
 async function loadFlights() {
-  const today = new Date();
   const outDate = '2026-09-27';
   const retDate = '2026-09-30';
 
@@ -1464,8 +1488,13 @@ async function loadFlights() {
     }
   }
 
-  fetchFlight('U8103', outDate, 'flight-out', '#0ea5e9');
-  fetchFlight('U8106', retDate, 'flight-ret', '#10b981');
+  await Promise.allSettled([
+    fetchFlight('U8103', outDate, 'flight-out', '#0ea5e9'),
+    fetchFlight('U8106', retDate, 'flight-ret', '#10b981')
+  ]);
+  // Save last checked timestamp
+  localStorage.setItem('flight_last_checked', Date.now().toString());
+  updateLastCheckedUI();
 }
 
 window.refreshFlights = function() {
@@ -1477,6 +1506,23 @@ window.refreshFlights = function() {
     if (btn) { btn.textContent = '🔄 רענן'; btn.disabled = false; }
   });
 };
+
+// Daily auto-check: re-check once per day if last check was >23h ago
+(function scheduleDailyFlightCheck() {
+  const ts = localStorage.getItem('flight_last_checked');
+  const now = Date.now();
+  const msIn23h = 23 * 60 * 60 * 1000;
+  if (!ts || (now - parseInt(ts)) > msIn23h) {
+    // Auto-check silently in background
+    loadFlights();
+  } else {
+    // Just update the UI with stored timestamp
+    updateLastCheckedUI();
+    // Schedule next check
+    const nextCheck = msIn23h - (now - parseInt(ts));
+    setTimeout(() => loadFlights(), nextCheck);
+  }
+})();
 
 // ===== CURRENCY CONVERTER =====
 async function loadExchangeRate() {
