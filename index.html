@@ -1725,56 +1725,73 @@ window.startCompass = function() {
 
 function startOrientationListener(lat, lng) {
   const status = document.getElementById('compass-status');
-  if (status) status.textContent = 'מצפן פעיל — סובב את הטלפון לקבל קריאה מדויקת';
+  if (status) status.textContent = 'מצפן פעיל — החץ הזהב תמיד מצביע לירושלים';
+
+  // Ensure jer-arrow exists before events start firing
+  ensureJerArrow();
+
   deviceOrientationHandler = (e) => {
-    const heading = e.webkitCompassHeading || (e.alpha != null ? (360 - e.alpha) : null);
+    // webkitCompassHeading: degrees clockwise from true north (iOS)
+    // alpha: degrees counter-clockwise from north (Android)
+    const heading = (e.webkitCompassHeading != null)
+      ? e.webkitCompassHeading
+      : (e.alpha != null ? (360 - e.alpha) % 360 : null);
     if (heading == null) return;
     updateCompassDisplay(lat, lng, heading);
   };
   window.addEventListener('deviceorientation', deviceOrientationHandler, true);
 }
 
+function ensureJerArrow() {
+  const svg = document.getElementById('compass-svg');
+  if (!svg || document.getElementById('jer-arrow')) return;
+  const jerArrow = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+  jerArrow.id = 'jer-arrow';
+  jerArrow.innerHTML = `
+    <line x1="90" y1="90" x2="90" y2="28" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
+    <polygon points="90,16 83,32 97,32" fill="#f59e0b"/>
+    <circle cx="90" cy="90" r="5" fill="#f59e0b"/>
+    <text x="90" y="10" text-anchor="middle" font-size="9" font-weight="800" fill="#f59e0b" font-family="Noto Sans Hebrew">ירושלים</text>
+  `;
+  jerArrow.style.transformOrigin = '90px 90px';
+  jerArrow.style.transition = 'transform 0.25s cubic-bezier(0.23,1,0.32,1)';
+  svg.appendChild(jerArrow);
+}
+
 function updateCompassDisplay(lat, lng, deviceHeading) {
-  const bearing = calcBearingToJerusalem(lat, lng);
-  const needle = document.getElementById('compass-needle');
+  const bearing = calcBearingToJerusalem(lat, lng); // true bearing to Jerusalem from user
   const degreesEl = document.getElementById('compass-degrees');
   const status = document.getElementById('compass-status');
+  const compassRose = document.getElementById('compass-needle'); // the N/S needle
 
-  // Needle rotation: if we have device heading, rotate needle so Jerusalem direction is correct
-  // Without device heading: just show the static bearing from Ayia Napa
-  let needleRotation;
+  ensureJerArrow();
+  const jerArrow = document.getElementById('jer-arrow');
+
   if (deviceHeading != null) {
-    needleRotation = bearing - deviceHeading;
-  } else {
-    needleRotation = bearing; // static: north = up, Jerusalem is at `bearing` degrees
-  }
+    // ── DYNAMIC MODE ──────────────────────────────────────────────────────────
+    // The compass rose rotates opposite to the phone heading so N always faces up
+    // relative to the phone. The Jerusalem arrow is fixed in absolute space:
+    // it must point at (bearing) degrees from north, so relative to the
+    // rotated rose it sits at (bearing - deviceHeading).
+    //
+    // Rose: rotate -deviceHeading  (counter-rotate so N stays "up" on screen)
+    // Jerusalem arrow: rotate (bearing - deviceHeading)
+    if (compassRose) compassRose.style.transform = `rotate(${-deviceHeading}deg)`;
+    if (jerArrow)    jerArrow.style.transform    = `rotate(${bearing - deviceHeading}deg)`;
 
-  if (needle) needle.style.transform = `rotate(${needleRotation}deg)`;
-  if (degreesEl) degreesEl.textContent = bearing + '°';
-
-  // Add a golden Jerusalem arrow overlay
-  const svg = document.getElementById('compass-svg');
-  let jerArrow = document.getElementById('jer-arrow');
-  if (!jerArrow && svg) {
-    jerArrow = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    jerArrow.id = 'jer-arrow';
-    jerArrow.innerHTML = `
-      <line x1="90" y1="90" x2="90" y2="32" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
-      <polygon points="90,22 85,36 95,36" fill="#f59e0b"/>
-      <text x="90" y="12" text-anchor="middle" font-size="9" font-weight="700" fill="#f59e0b" font-family="Noto Sans Hebrew">ירושלים</text>
-    `;
-    jerArrow.style.transformOrigin = '90px 90px';
-    jerArrow.style.transition = 'transform 0.6s cubic-bezier(0.23,1,0.32,1)';
-    svg.appendChild(jerArrow);
-  }
-  if (jerArrow) jerArrow.style.transform = `rotate(${needleRotation}deg)`;
-
-  if (status && deviceHeading == null) {
     const dir = bearing < 45 ? 'צפון' : bearing < 135 ? 'מזרח' : bearing < 225 ? 'דרום' : 'מערב';
-    status.textContent = `ירושלים נמצאת בכיוון ${bearing}° (לכיוון ${dir})`;
-  } else if (status) {
-    status.textContent = `ירושלים: ${bearing}° — החץ הזהב מצביע את הכיוון`;
+    if (status) status.textContent = `ירושלים: ${bearing}° (${dir}) — החץ הזהב מצביע את הכיוון`;
+  } else {
+    // ── STATIC MODE (no device orientation) ──────────────────────────────────
+    // Rose stays upright (N = up). Jerusalem arrow points at `bearing` from north.
+    if (compassRose) compassRose.style.transform = `rotate(0deg)`;
+    if (jerArrow)    jerArrow.style.transform    = `rotate(${bearing}deg)`;
+
+    const dir = bearing < 45 ? 'צפון' : bearing < 135 ? 'מזרח' : bearing < 225 ? 'דרום' : 'מערב';
+    if (status) status.textContent = `ירושלים בכיוון ${bearing}° (${dir}) — סובב את הטלפון לקבל כיוון דינמי`;
   }
+
+  if (degreesEl) degreesEl.textContent = bearing + '°';
 }
 
 window.stopCompass = function() {
