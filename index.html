@@ -205,26 +205,21 @@ body {
    TABS / PANES
    ============================================================ */
 .tab-pane {
-  opacity: 0;
-  transform: translateX(20px);
-  transition: opacity 0.35s ease, transform 0.35s ease;
-  pointer-events: none;
-  position: absolute;
-  width: 100%;
+  display: none;
 }
 .tab-pane.active {
-  opacity: 1;
-  transform: translateX(0);
-  pointer-events: all;
-  position: relative;
+  display: block;
+  animation: pane-in 0.3s cubic-bezier(0.23,1,0.32,1) both;
 }
 .tab-pane.exit-left {
-  opacity: 0;
-  transform: translateX(-20px);
+  display: none;
+}
+@keyframes pane-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 #panes-container {
   position: relative;
-  min-height: 200px;
 }
 
 /* ============================================================
@@ -1285,15 +1280,18 @@ window.addEventListener('load', () => {
 
 // ===== TAB NAVIGATION =====
 function switchTab(targetId, btn) {
-  const prev = document.getElementById(currentTab);
-  const next = document.getElementById(targetId);
   if (currentTab === targetId) return;
 
-  prev.classList.remove('active');
-  prev.classList.add('exit-left');
-  setTimeout(() => prev.classList.remove('exit-left'), 400);
+  const prev = document.getElementById(currentTab);
+  const next = document.getElementById(targetId);
 
-  next.classList.add('active');
+  // Hide previous, show next — no leftover height from hidden panes
+  if (prev) prev.classList.remove('active');
+  if (next) next.classList.add('active');
+
+  // Scroll to top of content on tab change
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
   currentTab = targetId;
 
   document.querySelectorAll('.bnav-item').forEach(b => b.classList.remove('active'));
