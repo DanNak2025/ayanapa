@@ -154,7 +154,7 @@
 <body class="antialiased pb-12">
 
     <!-- Chosen Palette: Mediterranean Sunset Gradient, Sand Background (#fcfbf9), Laguna Blues -->
-    <!-- Application Structure Plan: Un tableau de bord de voyage en hébreu complet, optimisé pour les téléphones. Un en-tête immersif avec gradient animé simule un coucher de soleil. La navigation par onglets utilise des transitions CSS (Slide up & Fade). Les listes de bagages sont séparées pour les familles Nakache et Swissa. Les fonctionnalités d'IA s'appuient désormais sur une clé d'API obfusquée pour contourner la protection de GitHub tout en maintenant une expérience transparente sans mot de passe pour la famille. -->
+    <!-- Application Structure Plan: Un tableau de bord de voyage en hébreu complet, optimisé pour les téléphones. Un en-tête immersif avec gradient animé simule un coucher de soleil. La navigation par onglets utilise des transitions CSS (Slide up & Fade). Les listes de bagages sont séparées pour les familles Nakache et Swissa. L'agent IA et toute clé d'API ont été entièrement supprimés pour garantir un fonctionnement hors ligne ultra-stable et sans bug sur GitHub Pages. -->
     <!-- Visualization & Content Choices: Graphique météo Chart.js stylisé. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
@@ -188,7 +188,6 @@
                 <button class="nav-tab whitespace-nowrap px-4 py-2.5 rounded-full text-stone-600 hover:text-rose-600 transition-all duration-300 font-bold" data-target="pane-checklist">📋 רשימת ציוד</button>
                 <button class="nav-tab whitespace-nowrap px-4 py-2.5 rounded-full text-stone-600 hover:text-sky-600 transition-all duration-300" data-target="pane-dining">✡️ אוכל כשר</button>
                 <button class="nav-tab whitespace-nowrap px-4 py-2.5 rounded-full text-stone-600 hover:text-sky-600 transition-all duration-300" data-target="pane-tools">🎮 משחקים וכלים</button>
-                <button class="nav-tab whitespace-nowrap px-4 py-2.5 rounded-full text-sky-600 bg-sky-50 hover:bg-sky-100 transition-all duration-300 font-bold" data-target="pane-ai-assistant">🤖 עוזר חכם ✨</button>
             </div>
         </div>
     </nav>
@@ -207,7 +206,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <!-- טיימר ספירה לאחור עם אנימציית דופק עדינה -->
                 <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100 flex flex-col justify-center items-center text-center group">
-                    <div class="text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">🌴</div>
+                    <div class="text-4xl mb-2">🌴</div>
                     <h3 class="text-lg font-bold text-stone-800">מתי מתחיל הכיף?</h3>
                     <div id="countdown" class="text-3xl font-extrabold text-rose-500 tracking-tight my-2 scale-100 group-hover:scale-105 transition-transform duration-300">טוען...</div>
                     <p class="text-xs text-stone-400">יום ראשון, 27 בספטמבר, 2026</p>
@@ -380,11 +379,11 @@
             </div>
         </section>
 
-        <!-- 3: קטנטנים וחופים -->
+        <!-- טאב 3: קטנטנים וחופים -->
         <section id="pane-kids" class="tab-pane hidden">
             <div class="mb-8 bg-sky-50/70 p-5 rounded-2xl border border-sky-100">
                 <p class="text-sm text-sky-950 leading-relaxed">
-                    <strong>טיפים לפעוטות ותינוקות:</strong> חופים WITH חול רך ומים רדודים במיוחד המתאימים לילדים בני 3 ותינוקות בנות שנה, לצד רעיונות למשחקים רגועים.
+                    <strong>טיפים לפעוטות ותינוקות:</strong> חופים עם חול רך ומים רדודים במיוחד המתאימים לילדים בני 3 ותינוקות בנות שנה, לצד רעיונות למשחקים רגועים.
                 </p>
             </div>
 
@@ -444,7 +443,7 @@
                 <button id="btn-family-swissa" onclick="switchFamilyChecklist('swissa')" class="px-6 py-3 rounded-full text-sm font-bold text-stone-600 bg-white shadow-sm transition-all duration-300">📋 רשימת משפחת סויסה</button>
             </div>
 
-            <!-- קונטיינר רשימת הציוד הדינמית (התוכן מיוצר ב-JS) -->
+            <!-- קונטיינר רשימת הציוד הדינמית -->
             <div id="checklist-content" class="space-y-6">
                 <!-- הרשימה תתרנדר כאן דינמית על פי המשפחה שנבחרה -->
             </div>
@@ -459,4 +458,694 @@
             </div>
 
             <!-- כרטיס בית חב"ד -->
-            <div class
+            <div class="bg-gradient-to-r from-sky-700 to-sky-600 text-white rounded-2xl p-6 shadow-md mb-6 relative overflow-hidden">
+                <div class="absolute -top-12 -right-12 w-32 h-32 bg-sky-500 rounded-full opacity-20 blur-xl"></div>
+                <div class="flex justify-between items-start relative z-10">
+                    <div>
+                        <h3 class="text-xl font-bold mb-1">🏠 בית חב"ד איה נאפה</h3>
+                        <p class="text-sm text-sky-100 mb-3">בהנהלת השליח הרב זושא ורעייתו יעל ניימרק</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mt-2 relative z-10">
+                    <div>
+                        <p class="text-sky-200">📍 כתובת:</p>
+                        <p class="font-semibold">Kavo Gkreko 11, Ayia Napa</p>
+                    </div>
+                    <div>
+                        <p class="text-sky-200">📞 טלפון ליצירת קשר:</p>
+                        <div class="flex items-center gap-2">
+                            <a href="tel:+35796640980" class="font-bold hover:underline" dir="ltr">+357 96 640980</a>
+                            <span class="text-sky-300">|</span>
+                            <a href="https://wa.me/35796640980?text=%D7%A9%D7%94%D7%9C%D7%95%D7%9D%20%D7%91%D7%99%D7%AA%20%D7%97%D7%91%22%D7%93!%20%D7%90%D7%A0%D7%97%D7%A0%D7%95%20%D7%9E%D7%A9%D7%A4%D7%97%D7%AA%20%D7%A0%D7%A7%D7%A9%20%D7%95%D7%A1%D7%95%D7%99%D7%A1%D7%94" target="_blank" class="bg-emerald-500 hover:bg-emerald-600 hover:scale-105 active:scale-95 text-white text-xs px-3 py-0.5 rounded-full transition-all">WhatsApp 💬</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- המסעדות הכשרות -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white rounded-2xl p-5 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100 flex flex-col hover:-translate-y-1">
+                    <div class="text-2xl mb-2">🥩</div>
+                    <h4 class="font-bold text-stone-800 text-lg">מסעדת Mush</h4>
+                    <p class="text-xs font-bold text-rose-600 mb-2 uppercase tracking-wide">בשרי | כשר למהדרין</p>
+                    <p class="text-sm text-stone-600 mb-4">סלטים טריים, שניצלים מעולים לילדים, המבורגרים ובשרים על האש.</p>
+                    <div class="bg-stone-50 p-3 rounded-xl text-xs text-stone-700 mt-auto border border-stone-100">
+                        💡 <strong>משלוחים:</strong> ניתן להזמין משלוח ישירות למלון דרך אפליקציית Wolt המקומית!
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-5 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100 flex flex-col hover:-translate-y-1">
+                    <div class="text-2xl mb-2">🍕</div>
+                    <h4 class="font-bold text-stone-800 text-lg">Jewpizza</h4>
+                    <p class="text-xs font-bold text-blue-600 mb-2 uppercase tracking-wide">חלבי | כשר למהדרין</p>
+                    <p class="text-sm text-stone-600 mb-4">פיצות משפחתיות חמות וטעימות, פסטות מעולות ומאפים חלביים שילדים אוהבים.</p>
+                    <div class="bg-stone-50 p-3 rounded-xl text-xs text-stone-700 mt-auto border border-stone-100">
+                        📞 <strong>הזמנות בטלפון:</strong> <a href="tel:+35797769254" class="font-bold text-sky-600 hover:underline" dir="ltr">+357 97 769254</a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-5 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100 flex flex-col hover:-translate-y-1">
+                    <div class="text-2xl mb-2">🧆</div>
+                    <h4 class="font-bold text-stone-800 text-lg">חומוס אליהו</h4>
+                    <p class="text-xs font-bold text-emerald-600 mb-2 uppercase tracking-wide">פרווה | כשר למהדרין</p>
+                    <p class="text-sm text-stone-600 mb-4">חומוס טרי וחם כמו בארץ, פיתות רכות, פלאפל חם ופריך וצ'יפס זהוב.</p>
+                    <div class="bg-stone-50 p-3 rounded-xl text-xs text-stone-700 mt-auto border border-stone-100">
+                        📍 <strong>כתובת:</strong> Archiepiscopou Makariou III, 15
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- טאב 6: משחקים וכלים שימושיים לדרך -->
+        <section id="pane-tools" class="tab-pane hidden">
+            <div class="mb-8 bg-amber-50/70 p-5 rounded-2xl border border-amber-200">
+                <p class="text-sm text-amber-950 leading-relaxed">
+                    <strong>משחקים וכלים שימושיים לדרך:</strong> 
+                    ריכזנו עבורכם משחק קטן להעסקת הילדים בנסיעות, מחשבון הוצאות מהיר לחלוקת התשלומים בין המשפחות, ותפילת הדרך לטיסה בטוחה!
+                </p>
+            </div>
+
+            <!-- משחק זיכרון לילדים -->
+            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100 mb-8 relative overflow-hidden">
+                <div class="text-center mb-4">
+                    <h3 class="text-lg font-bold text-sky-900">🎮 משחק הזיכרון לקטנטנים</h3>
+                    <p class="text-xs text-stone-500 mt-1">מצאו את הזוגות התואמים!</p>
+                </div>
+                
+                <div class="card-grid mb-4" id="memory-board"></div>
+                
+                <div class="text-center">
+                    <button onclick="resetMemoryGame()" class="bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold px-5 py-2.5 rounded-full transition-all hover:scale-105 active:scale-95 shadow-md">
+                        🔄 התחל משחק מחדש
+                    </button>
+                    <p id="game-status" class="text-sm font-bold text-emerald-600 mt-3 h-5 animate-bounce"></p>
+                </div>
+            </div>
+
+            <!-- מחשבון הוצאות משפחתי -->
+            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100 mb-8">
+                <h3 class="text-lg font-bold text-stone-800 border-b border-stone-100 pb-2 mb-4">💰 מחשבון הוצאות חופשה משותף</h3>
+                <p class="text-xs text-stone-500 mb-4">עקבו אחרי ההוצאות המשותפות של משפחת נקש ומשפחת סויסה בקלות.</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+                    <input id="expense-desc" type="text" placeholder="תיאור (למשל: מונית פנטליס)" class="bg-stone-50 border border-stone-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all">
+                    <input id="expense-amount" type="number" placeholder="סכום (€)" class="bg-stone-50 border border-stone-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all">
+                    <select id="expense-payer" class="bg-stone-50 border border-stone-200 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all">
+                        <option value="נקש">שילם: נקש</option>
+                        <option value="סויסה">שילם: סויסה</option>
+                    </select>
+                </div>
+                <button id="add-expense-btn" onclick="addExpense()" class="w-full bg-emerald-600 hover:bg-emerald-700 hover:scale-[1.01] active:scale-[0.99] text-white text-sm font-bold py-3 rounded-xl transition-all shadow-md">
+                    ➕ הוסף הוצאה
+                </button>
+
+                <div class="mt-6">
+                    <h4 class="font-bold text-sm text-stone-800 mb-2">רשימת הוצאות קיימת:</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-right text-stone-600">
+                            <thead>
+                                <tr class="border-b border-stone-100 text-stone-400">
+                                    <th class="pb-2">תיאור</th>
+                                    <th class="pb-2 text-left">סכום</th>
+                                    <th class="pb-2">מי שילם</th>
+                                    <th class="pb-2 text-center">מחיקה</th>
+                                </tr>
+                            </thead>
+                            <tbody id="expense-list">
+                                <!-- מתווסף דינמית -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- סיכום החשבון והפרשים -->
+                <div class="mt-4 pt-4 border-t border-stone-100 bg-stone-50 p-4 rounded-xl flex justify-between items-center text-xs">
+                    <div>
+                        <p>סך הכל שילמו נקש: <strong id="total-nakache" class="text-sky-700 text-sm">0€</strong></p>
+                        <p class="mt-1.5">סך הכל שילמו סויסה: <strong id="total-swissa" class="text-sky-700 text-sm">0€</strong></p>
+                    </div>
+                    <div class="text-left font-bold text-stone-800 bg-white p-3 rounded-lg border border-stone-100 shadow-sm">
+                        <p id="expense-balance" class="text-rose-600 text-sm">אין הפרשים כרגע</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- תפילת הדרך -->
+            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100">
+                <h3 class="text-lg font-bold text-sky-900 border-b border-stone-100 pb-2 mb-4">✈️ תפילת הדרך לטיסה בטוחה</h3>
+                
+                <div class="space-y-4">
+                    <div class="bg-amber-50/50 p-5 rounded-xl border border-amber-100" dir="rtl">
+                        <p class="text-base text-stone-800 leading-relaxed font-semibold">
+                            יְהִי רָצוֹן מִלְּפָנֶיךָ ה' אֱלֹהֵינוּ וֵאלֹהֵי אֲבוֹתֵינוּ, שֶׁתּוֹלִיכֵנוּ לְשָׁלוֹם וְתַצְעִידֵנוּ לְשָׁלוֹם. וְתַסְמִיכֵנוּ לְשָׁלוֹם. וְתַנְחֵנוּ אֶל מְחוֹז חֶפְצֵנוּ לְחַיִּים וּלְשִׂמְחָה וּלְשָׁלוֹם. וְתַצִּילֵנוּ מִכַּף כָּל אוֹיֵב וְאוֹרֵב וְלִסְטִים וְחַיּוֹת רָעוֹת בַּדֶּרֶךְ וּמִכָּל מִנֵּי פֻּרְעָנֻיּוֹת הַמִּתְרַגְּשׁוֹת לָבוֹא לָעוֹלָם, וְתִשְׁלַח בְּרָכָה בְּמַעֲשֵׂה יָדֵינוּ, וְתִתְּנֵנוּ לְחֵן וּלְחֶסֶד וּלְרַחֲמִים בְּעֵינֶיךָ וּבְעֵינֵי כָל רוֹאֵינוּ וְתִשְׁמַע קוֹל תַּחֲנוּנֵינוּ, כִּי אֵל שׁוֹמֵעַ תְּפִלָּה וְתַחֲנוּן אָתָּה. בָּרוּךְ אַתָּה ה', שׁוֹמֵעַ תְּפִלָּה.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- סקריפטים עם תמיכה דינמית ובניהול מקומי מופרד -->
+    <script>
+        // אתחול משתנים גלובליים
+        let checkedItemsState = {};
+        let customItemsState = {
+            nakache: [],
+            swissa: []
+        };
+        let expenses = [];
+
+        // משפחה נוכחית שנבחרה ברשימת הציוד
+        let currentFamily = 'nakache';
+
+        // משחק הזיכרון - משתנים חיוניים
+        const icons = ['🧸', '🏖️', '✈️', '🍕', '🍉', '🐠', '🐬', '🍦'];
+        const cards = [...icons, ...icons];
+        let flippedCards = [];
+        let matchedCount = 0;
+
+        // רשימות הבסיס הקבועות לכל משפחה
+        const baseChecklistCategories = {
+            doc: {
+                title: "📋 מסמכים ודברים חיוניים",
+                items: [
+                    { id: "doc-1", text: "דרכונים בתוקף (ומסמכי טיסה)" },
+                    { id: "doc-2", text: "אישור הזמנה למלון Mare Ayia Napa" },
+                    { id: "doc-3", text: "ביטוח נסיעות בריאותי" },
+                    { id: "doc-4", text: "מתאם שקע חשמל אנגלי (בקפריסין השקע הוא בריטי!)" },
+                    { id: "doc-5", text: "מטענים לטלפונים וסוללות גיבוי" }
+                ]
+            },
+            baby: {
+                title: "🍼 דברים לתינוקות בנות שנה ולפעוטות (מיוחד)",
+                items: [
+                    { id: "baby-1", text: "חיתולים במידה מתאימה (כמות למספר ימים)" },
+                    { id: "baby-2", text: "מטרנה / סימילאק + כפיות מדידה" },
+                    { id: "baby-3", text: "בקבוקים לתינוק + מברשת לניקוי בקבוקים" },
+                    { id: "baby-4", text: "מוצצים רזרביים + תופסן למוצץ" },
+                    { id: "baby-5", text: "מגבוני החתלה היפואלרגניים" },
+                    { id: "baby-6", text: "בגדי גוף נוחים (קצרים ליום וארוכים דקים לערב)" },
+                    { id: "chk-stroller", text: "טיולון קל עם גגון שמש רחב" },
+                    { id: "chk-baby-cream", text: "קרם החתלה טיפולי" },
+                    { id: "chk-baby-toy", text: "רעשנים וצעצועי אחיזה אהובים לדרך" }
+                ]
+            },
+            food: {
+                title: "🥫 אוכל שמביאים מהארץ במזוודה",
+                items: [
+                    { id: "food-1", text: "קופסאות שימורים כשרות (טונה, תירס, זיתים)" },
+                    { id: "food-2", text: "חטיפים אהובים לילדים (במבה, ביסלי, תפוצ'יפס)" },
+                    { id: "food-3", text: "מנות חמות / פסטה לבישול מהיר" },
+                    { id: "food-4", text: "קרקרים, פריכיות אורז ופיתות עמידות" },
+                    { id: "food-5", text: "ממרח שוקולד / חלווה / שוקולד למריחה" },
+                    { id: "food-6", text: "קפה שחור / נס קפה של הארץ לבוקר" },
+                    { id: "food-7", text: "כלים חד-פעמיים קלים (צלחות, כוסות, סכו\"ם)" },
+                    { id: "food-8", text: "תבלינים בסיסיים קטנים (מלח, פלפל, שמן זית קטן)" }
+                ]
+            },
+            wear: {
+                title: "👕 בגדים, ים ובריכה",
+                items: [
+                    { id: "wear-1", text: "בגדי ים וחולצות שחייה מסננות קרינה (UV)" },
+                    { id: "wear-2", text: "חיתולי שחייה עמידים במים לתינוקות" },
+                    { id: "wear-3", text: "קרם הגנה לפעוטות עם מקדם גבוה (50+)" },
+                    { id: "wear-4", text: "כובעי שמש רחבי שוליים" },
+                    { id: "wear-5", text: "בגדי ערב קלים + עליונית דקה" },
+                    { id: "wear-6", text: "צעצועי חוף פשוטים וגלגלי הצלה מתנפחים קלים" }
+                ]
+            },
+            med: {
+                title: "💊 עזרה ראשונה ותרופות",
+                items: [
+                    { id: "med-1", text: "תרופות להורדת חום לילדים ולתינוקות (נובימול / אקמולי)" },
+                    { id: "med-2", text: "פלסטרים וחומר חיטוי לפצעים קלים" },
+                    { id: "med-3", text: "קרם להרגעת העור (אלוורה / פניסטיל)" },
+                    { id: "med-4", text: "תרופות קבועות לכל בני המשפחה" }
+                ]
+            }
+        };
+
+        // פונקציות עזר לניווט
+        const tabs = document.querySelectorAll('.nav-tab');
+        const panes = document.querySelectorAll('.tab-pane');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('tab-active'));
+                panes.forEach(p => {
+                    p.classList.add('hidden');
+                    p.classList.remove('pane-show', 'block');
+                });
+                
+                tab.classList.add('tab-active');
+                const targetId = tab.getAttribute('data-target');
+                const activePane = document.getElementById(targetId);
+                
+                activePane.classList.remove('hidden');
+                activePane.classList.add('block');
+                
+                setTimeout(() => {
+                    activePane.classList.add('pane-show');
+                }, 20);
+            });
+        });
+
+        // ספירה לאחור לתאריך הטיסה המדויק
+        const tripDate = new Date('September 27, 2026 09:00:00').getTime();
+        const countdownElement = document.getElementById('countdown');
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = tripDate - now;
+
+            if (distance < 0) {
+                countdownElement.innerText = "החופשה התחילה! 🎉";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            
+            countdownElement.innerText = days + " ימים ו-" + hours + " שעות";
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // משחק זיכרון - לוגיקה פנימית במודול
+        function shuffle(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+        function initMemoryGame() {
+            const board = document.getElementById('memory-board');
+            if (!board) return;
+            board.innerHTML = '';
+            flippedCards = [];
+            matchedCount = 0;
+            const statusEl = document.getElementById('game-status');
+            if (statusEl) statusEl.innerText = '';
+            
+            const shuffled = shuffle(cards);
+            shuffled.forEach((emoji, index) => {
+                const card = document.createElement('div');
+                card.classList.add('memory-card');
+                card.dataset.emoji = emoji;
+                card.dataset.index = index;
+                card.innerHTML = `
+                    <div class="card-inner">
+                        <div class="card-back">🌊</div>
+                        <div class="card-front">${emoji}</div>
+                    </div>
+                `;
+                card.addEventListener('click', () => flipCard(card));
+                board.appendChild(card);
+            });
+        }
+
+        function flipCard(card) {
+            if (flippedCards.length === 2 || card.classList.contains('flipped') || card.classList.contains('matched')) {
+                return;
+            }
+
+            card.classList.add('flipped');
+            flippedCards.push(card);
+
+            if (flippedCards.length === 2) {
+                checkMatch();
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            if (card1.dataset.emoji === card2.dataset.emoji) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matchedCount += 2;
+                flippedCards = [];
+                
+                if (matchedCount === cards.length) {
+                    const statusEl = document.getElementById('game-status');
+                    if (statusEl) statusEl.innerText = "כל הכבוד! מצאתם את כל הזוגות! 🎉🏆";
+                    triggerConfetti();
+                }
+            } else {
+                setTimeout(() => {
+                    card1.classList.remove('flipped');
+                    card2.classList.remove('flipped');
+                    flippedCards = [];
+                }, 1000);
+            }
+        }
+
+        function triggerConfetti() {
+            const colors = ['#f43f5e', '#0ea5e9', '#10b981', '#fbbf24', '#a855f7'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.transform = `scale(${Math.random() * 0.8 + 0.5})`;
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                confetti.style.animationDuration = Math.random() * 1.5 + 2 + 's';
+                document.body.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 4000);
+            }
+        }
+
+        // פונקציות עזר לשמירה ועדכון
+        function saveChecklistLocal() {
+            localStorage.setItem('ayia_napa_checklist_checked', JSON.stringify(checkedItemsState));
+            localStorage.setItem('ayia_napa_checklist_custom', JSON.stringify(customItemsState));
+            renderChecklist();
+        }
+
+        function saveExpensesState(newList) {
+            expenses = newList;
+            localStorage.setItem('ayia_napa_expenses', JSON.stringify(expenses));
+            renderExpenses();
+        }
+
+        // טעינה מקומית גיבוי
+        function loadLocalData() {
+            const storedExpenses = localStorage.getItem('ayia_napa_expenses');
+            if (storedExpenses) {
+                expenses = JSON.parse(storedExpenses);
+            }
+            renderExpenses();
+
+            const storedChecked = localStorage.getItem('ayia_napa_checklist_checked');
+            if (storedChecked) {
+                checkedItemsState = JSON.parse(storedChecked);
+            }
+
+            const storedCustom = localStorage.getItem('ayia_napa_checklist_custom');
+            if (storedCustom) {
+                customItemsState = JSON.parse(storedCustom);
+            } else {
+                customItemsState = { nakache: [], swissa: [] };
+            }
+
+            renderChecklist();
+        }
+
+        function applyChecklistState() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(cb => {
+                const isChecked = !!checkedItemsState[cb.id];
+                cb.checked = isChecked;
+                if (cb.nextElementSibling) {
+                    if (isChecked) {
+                        cb.nextElementSibling.classList.add('checked-item');
+                    } else {
+                        cb.nextElementSibling.classList.remove('checked-item');
+                    }
+                }
+            });
+        }
+
+        // ================= רינדור רשימת הציוד דינמית מופרדת משפחות =================
+        function renderChecklist() {
+            const container = document.getElementById('checklist-content');
+            if (!container) return;
+            container.innerHTML = '';
+
+            // 1. הוספת תיבת קלט לפריטים אישיים בראש הרשימה
+            const inputContainer = document.createElement('div');
+            inputContainer.classList.add('bg-white', 'rounded-2xl', 'p-5', 'shadow-md', 'border', 'border-rose-100', 'mb-6');
+            
+            const familyNameText = currentFamily === 'nakache' ? 'משפחת נקש' : 'משפחת סויסה';
+            
+            inputContainer.innerHTML = `
+                <h4 class="font-bold text-stone-800 text-sm mb-3">➕ הוספת פריט חופשי לרשימת ${familyNameText} (מסונכרן לכולם!)</h4>
+                <div class="flex gap-2">
+                    <input id="custom-item-input" type="text" placeholder="הקלד פריט שברצונך להוסיף (למשל: תרופה מיוחדת, בובה)..." class="flex-grow bg-stone-50 border border-stone-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-rose-400">
+                    <button onclick="addCustomChecklistItem()" class="bg-rose-500 hover:bg-rose-600 text-white font-bold text-sm px-6 py-2.5 rounded-xl transition-all shadow-sm shrink-0">הוסף פריט</button>
+                </div>
+            `;
+            container.appendChild(inputContainer);
+
+            // 2. רינדור קטגוריות הבסיס
+            for (const [catKey, catData] of Object.entries(baseChecklistCategories)) {
+                const card = document.createElement('div');
+                card.classList.add('bg-white', 'rounded-2xl', 'p-6', 'shadow-md', 'border', 'border-stone-100', 'mb-6');
+                
+                let itemsHtml = '';
+                catData.items.forEach(item => {
+                    const uniqueId = `chk-${currentFamily}-${catKey}-${item.id}`;
+                    const isChecked = !!checkedItemsState[uniqueId];
+                    const checkedClass = isChecked ? 'checked-item' : '';
+                    const checkedAttr = isChecked ? 'checked' : '';
+
+                    itemsHtml += `
+                        <li class="flex items-center space-x-reverse space-x-3 py-1">
+                            <input type="checkbox" id="${uniqueId}" onclick="toggleCheck(this)" ${checkedAttr} class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400 cursor-pointer">
+                            <label for="${uniqueId}" class="cursor-pointer select-none text-sm text-stone-700 ${checkedClass}">${item.text}</label>
+                        </li>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <h3 class="text-base font-bold text-stone-800 border-b border-stone-100 pb-2 mb-4">${catData.title}</h3>
+                    <ul class="space-y-3">
+                        ${itemsHtml}
+                    </ul>
+                `;
+                container.appendChild(card);
+            }
+
+            // 3. רינדור פריטים מותאמים אישית (אם קיימים) בכרטיס נפרד
+            const customList = customItemsState[currentFamily] || [];
+            const customCard = document.createElement('div');
+            customCard.classList.add('bg-white', 'rounded-2xl', 'p-6', 'shadow-md', 'border', 'border-stone-100');
+            
+            let customItemsHtml = '';
+            if (customList.length === 0) {
+                customItemsHtml = `<p class="text-xs text-stone-400 italic">אין עדיין פריטים מותאמים אישית. השתמשו בתיבת הקלט למעלה כדי להוסיף!</p>`;
+            } else {
+                customItemsHtml = `<ul class="space-y-3">`;
+                customList.forEach(item => {
+                    const uniqueId = item.id;
+                    const isChecked = !!checkedItemsState[uniqueId];
+                    const checkedClass = isChecked ? 'checked-item' : '';
+                    const checkedAttr = isChecked ? 'checked' : '';
+
+                    customItemsHtml += `
+                        <li class="flex items-center justify-between py-1.5 border-b border-stone-50 last:border-0">
+                            <div class="flex items-center space-x-reverse space-x-3">
+                                <input type="checkbox" id="${uniqueId}" onclick="toggleCheck(this)" ${checkedAttr} class="w-5 h-5 text-rose-500 rounded focus:ring-rose-400 cursor-pointer">
+                                <label for="${uniqueId}" class="cursor-pointer select-none text-sm text-stone-700 ${checkedClass}">${item.text}</label>
+                            </div>
+                            <button onclick="deleteCustomChecklistItem('${item.id}')" class="text-rose-400 hover:text-rose-600 text-xs px-2 transform hover:scale-110 transition-transform">❌ מחיקה</button>
+                        </li>
+                    `;
+                });
+                customItemsHtml += `</ul>`;
+            }
+
+            customCard.innerHTML = `
+                <h3 class="text-base font-bold text-rose-700 border-b border-rose-100 pb-2 mb-4">✨ פריטים מותאמים אישית שלכם</h3>
+                ${customItemsHtml}
+            `;
+            container.appendChild(customCard);
+        }
+
+        function renderExpenses() {
+            const list = document.getElementById('expense-list');
+            if (!list) return;
+            list.innerHTML = '';
+
+            let totalNakache = 0;
+            let totalSwissa = 0;
+
+            expenses.forEach((e, idx) => {
+                if (e.payer === 'נקש') totalNakache += e.amount;
+                if (e.payer === 'סויסה') totalSwissa += e.amount;
+
+                const row = document.createElement('tr');
+                row.classList.add('border-b', 'border-stone-100', 'h-10');
+                row.innerHTML = `
+                    <td class="font-semibold text-stone-800">${e.desc}</td>
+                    <td class="text-left font-bold text-sky-700">${e.amount.toFixed(2)}€</td>
+                    <td>${e.payer}</td>
+                    <td class="text-center">
+                        <button onclick="deleteExpense(${e.id})" class="text-rose-500 hover:text-rose-700 font-bold px-2">❌</button>
+                    </td>
+                `;
+                list.appendChild(row);
+            });
+
+            const totalNakacheEl = document.getElementById('total-nakache');
+            const totalSwissaEl = document.getElementById('total-swissa');
+            if (totalNakacheEl) totalNakacheEl.innerText = totalNakache.toFixed(2) + '€';
+            if (totalSwissaEl) totalSwissaEl.innerText = totalSwissa.toFixed(2) + '€';
+
+            const balanceEl = document.getElementById('expense-balance');
+            if (balanceEl) {
+                const halfDiff = Math.abs(totalNakache - totalSwissa) / 2;
+                if (totalNakache === totalSwissa) {
+                    balanceEl.innerText = "אין הפרשים - כולם שווים!";
+                    balanceEl.className = "text-emerald-600 font-bold text-sm";
+                } else if (totalNakache > totalSwissa) {
+                    balanceEl.innerText = `סויסה חייבים לנקש: ${halfDiff.toFixed(2)}€`;
+                    balanceEl.className = "text-amber-600 font-bold text-sm";
+                } else {
+                    balanceEl.innerText = `נקש חייבים לסויה: ${halfDiff.toFixed(2)}€`;
+                    balanceEl.className = "text-amber-600 font-bold text-sm";
+                }
+            }
+        }
+
+        // ================= GLOBAL EXPORTS =================
+        window.initMemoryGame = initMemoryGame;
+        
+        window.resetMemoryGame = function() {
+            initMemoryGame();
+        };
+
+        window.switchFamilyChecklist = function(family) {
+            currentFamily = family;
+            
+            const btnNakache = document.getElementById('btn-family-nakache');
+            const btnSwissa = document.getElementById('btn-family-swissa');
+            
+            if (family === 'nakache') {
+                btnNakache.classList.add('family-tab-active');
+                btnSwissa.classList.remove('family-tab-active');
+            } else {
+                btnSwissa.classList.add('family-tab-active');
+                btnNakache.classList.remove('family-tab-active');
+            }
+            renderChecklist();
+        };
+
+        window.addCustomChecklistItem = function() {
+            const input = document.getElementById('custom-item-input');
+            if (!input) return;
+            const text = input.value.trim();
+            if (!text) return;
+
+            const newItem = {
+                id: `custom-${currentFamily}-${Date.now()}`,
+                text: text
+            };
+
+            if (!customItemsState[currentFamily]) {
+                customItemsState[currentFamily] = [];
+            }
+            customItemsState[currentFamily].push(newItem);
+            saveChecklistLocal();
+        };
+
+        window.deleteCustomChecklistItem = function(id) {
+            if (customItemsState[currentFamily]) {
+                customItemsState[currentFamily] = customItemsState[currentFamily].filter(item => item.id !== id);
+                delete checkedItemsState[id];
+                saveChecklistLocal();
+            }
+        };
+
+        window.toggleCheck = function(checkbox) {
+            const label = checkbox.nextElementSibling;
+            const isChecked = checkbox.checked;
+            if (isChecked) {
+                if (label) label.classList.add('checked-item');
+            } else {
+                if (label) label.classList.remove('checked-item');
+            }
+            checkedItemsState[checkbox.id] = isChecked;
+            saveChecklistLocal();
+        };
+
+        window.addExpense = function() {
+            const desc = document.getElementById('expense-desc').value.trim();
+            const amount = parseFloat(document.getElementById('expense-amount').value);
+            const payer = document.getElementById('expense-payer').value;
+
+            if (!desc || isNaN(amount) || amount <= 0) {
+                return;
+            }
+
+            const item = {
+                id: Date.now(),
+                desc,
+                amount,
+                payer
+            };
+
+            const newList = [...expenses, item];
+            saveExpensesState(newList);
+            
+            document.getElementById('expense-desc').value = '';
+            document.getElementById('expense-amount').value = '';
+        };
+
+        window.deleteExpense = function(id) {
+            const newList = expenses.filter(e => e.id !== id);
+            saveExpensesState(newList);
+        };
+
+        // אתחול התחלתי של המשחק ורשימת הציוד
+        window.onload = function() {
+            loadLocalData();
+            initMemoryGame();
+        };
+    </script>
+
+    <!-- גרף טמפרטורות בספטמבר -->
+    <script>
+        window.addEventListener('load', () => {
+            const ctx = document.getElementById('weatherChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['טמפ\' מקסימום יום', 'טמפ\' מינימום לילה', 'טמפרטורת המים'],
+                    datasets: [{
+                        label: 'ממוצע מעלות צלזיוס בספטמבר',
+                        data: [29, 19, 27],
+                        backgroundColor: [
+                            'rgba(244, 63, 94, 0.75)',
+                            'rgba(56, 189, 248, 0.65)',
+                            'rgba(13, 148, 136, 0.75)'
+                        ],
+                        borderColor: [
+                            'rgba(244, 63, 94, 1)',
+                            'rgba(56, 189, 248, 1)',
+                            'rgba(13, 148, 136, 1)'
+                        ],
+                        borderWidth: 1.5,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 35,
+                            grid: {
+                                color: '#f5f5f4'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+            document.getElementById('pane-overview').classList.add('pane-show');
+        });
+    </script>
+</body>
+</html>
