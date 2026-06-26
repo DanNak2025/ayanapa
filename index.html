@@ -15,7 +15,7 @@
             overflow-x: hidden;
         }
         
-        /* Animation de fond fluide pour l'en-tête */
+        /* אנימציית רקע זורמת לכותרת הראשית */
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -26,7 +26,7 @@
             animation: gradientBG 10s ease infinite;
         }
 
-        /* Conteneur de graphique réactif */
+        /* מכולת הגרף */
         .chart-container {
             position: relative;
             width: 100%;
@@ -42,7 +42,7 @@
             }
         }
 
-        /* Style pour les onglets actifs */
+        /* מעברים חלקים לטאב פעיל */
         .tab-active {
             background-color: #0284c7;
             color: #ffffff !important;
@@ -64,7 +64,7 @@
             scrollbar-width: none;
         }
 
-        /* Animation douce de retrait de la check-list */
+        /* אנימציית מחיקה לרשימת הציוד */
         .checked-item {
             text-decoration: line-through;
             color: #a8a29e;
@@ -73,7 +73,7 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Transition d'affichage des volets d'onglets (Slide up & Fade) */
+        /* אנימציית כניסה רכה לתוכן הטאבים (Slide up + Fade in) */
         .tab-pane {
             opacity: 0;
             transform: translateY(12px);
@@ -84,7 +84,7 @@
             transform: translateY(0);
         }
 
-        /* Jeu de mémoire pour enfants */
+        /* עיצוב משחק הזיכרון */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -136,7 +136,7 @@
             transform: rotateY(180deg);
         }
 
-        /* Confettis de victoire */
+        /* אנימציית קונפטי דינמית לחגיגת ניצחון */
         @keyframes confettiFall {
             0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
             100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
@@ -154,7 +154,7 @@
 <body class="antialiased pb-12">
 
     <!-- Chosen Palette: Mediterranean Sunset Gradient, Sand Background (#fcfbf9), Laguna Blues -->
-    <!-- Application Structure Plan: Un tableau de bord de voyage en hébreu complet, optimisé pour les téléphones. Un en-tête immersif avec gradient animé simule un coucher de soleil. La navigation par onglets utilise des transitions CSS (Slide up & Fade). Les fonctionnalités interactives comme la check-list, le jeu de mémoire (avec confetti) et le budget ont été corrigées pour éliminer les erreurs de syntaxe JavaScript et l'absence de variable globale. -->
+    <!-- Application Structure Plan: Un tableau de bord de voyage en hébreu complet, optimisé pour les téléphones. Un en-tête immersif avec gradient animé simule un coucher de soleil. La navigation par onglets utilise des transitions CSS (Slide up & Fade). Les listes de bagages sont séparées pour les familles Nakache et Swissa. Les fonctionnalités d'IA s'appuient désormais sur un système de clés enregistrées localement dans le stockage sécurisé du navigateur pour contourner la protection anti-fuite de GitHub. -->
     <!-- Visualization & Content Choices: Graphique météo Chart.js stylisé. -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
@@ -207,7 +207,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <!-- טיימר ספירה לאחור עם אנימציית דופק עדינה -->
                 <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100 flex flex-col justify-center items-center text-center group">
-                    <div class="text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">🌴</div>
+                    <div class="text-4xl mb-2">🌴</div>
                     <h3 class="text-lg font-bold text-stone-800">מתי מתחיל הכיף?</h3>
                     <div id="countdown" class="text-3xl font-extrabold text-rose-500 tracking-tight my-2 scale-100 group-hover:scale-105 transition-transform duration-300">טוען...</div>
                     <p class="text-xs text-stone-400">יום ראשון, 27 בספטמבר, 2026</p>
@@ -339,7 +339,7 @@
                     </div>
                     <div class="space-y-3">
                         <div class="bg-stone-50/50 p-3 rounded-xl border border-stone-100">
-                            <p class="text-sm text-stone-700"><strong>בוקר:</strong> בילוי משפחתי בחוף מקרוניסוס (Makronissos Beach) השקט עם גישה נוחה מאוד לעגלות.</p>
+                            <p class="text-sm text-stone-700"><strong>בוקר:</strong> בילוי משפחתי בחוף מקרוניסוס (Makronissos Beach) השקט WITH גישה נוחה מאוד לעגלות.</p>
                         </div>
                         <div class="bg-stone-50/50 p-3 rounded-xl">
                             <p class="text-sm text-stone-700"><strong>צהריים/אחר הצהריים:</strong> מנוחת שנ"צ במלון, ולאחריה טיול רגוע בנמל איה נאפה לצפייה בסירות הצבעוניות.</p>
@@ -609,8 +609,32 @@
         <section id="pane-ai-assistant" class="tab-pane hidden">
             <div class="mb-8 bg-sky-50/70 p-5 rounded-2xl border border-sky-100">
                 <p class="text-sm text-sky-950 leading-relaxed">
-                    <strong>עוזר הנסיעות האישי שלכם ✨:</strong> מדור חדש זה פועל באמצעות בינה מלאכותית של Google (מודל Gemini). הוא מיועד לספק לכם פתרונות מהירים בהתאמה אישית מלאה לטיול שלכם.
+                    <strong>עוזר הנסיעות האישי שלכם ✨:</strong> מדור זה פועל באמצעות בינה מלאכותית של Google (מודל Gemini). הוא מיועד לספק לכם פתרונות מהירים בהתאמה אישית מלאה לטיול שלכם.
                 </p>
+            </div>
+
+            <!-- הגדרת מפתח API מאובטחת בדפדפן (פותר את חסימת ה-GCP של GitHub) -->
+            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100 mb-6">
+                <div class="flex items-center space-x-reverse space-x-3 mb-4">
+                    <span class="text-3xl">🔑</span>
+                    <div>
+                        <h3 class="text-lg font-bold text-stone-800">הגדרת מפתח API של Gemini</h3>
+                        <p class="text-xs text-stone-400">הזינו את מפתח ה-API שלכם פעם אחת כדי להפעיל את העוזר החכם ב-GitHub Pages (נשמר מקומית אצלכם בדפדפן באופן מאובטח)</p>
+                    </div>
+                </div>
+                <div id="api-key-setup-zone" class="space-y-3">
+                    <div id="api-key-input-area" class="flex flex-col sm:flex-row gap-2">
+                        <input id="api-key-input" type="password" placeholder="הזינו את מפתח ה-API שלכם כאן (השמירה מאובטחת ולא נחשפת לציבור ב-GitHub)" class="flex-grow bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                        <button onclick="saveApiKey()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold text-sm px-6 py-3 rounded-xl transition-all shadow-md shrink-0">שמור מפתח</button>
+                    </div>
+                    <div id="api-key-status-area" class="hidden flex items-center justify-between bg-emerald-50 border border-emerald-100 p-4 rounded-xl">
+                        <div class="flex items-center space-x-reverse space-x-2">
+                            <span class="text-emerald-600 text-xl">✔️</span>
+                            <p class="text-sm font-bold text-emerald-800">מפתח ה-API שלכם שמור ומאובטח בדפדפן!</p>
+                        </div>
+                        <button onclick="deleteApiKey()" class="text-rose-600 hover:text-rose-800 text-xs font-bold underline">מחק מפתח</button>
+                    </div>
+                </div>
             </div>
 
             <!-- מחולל משחקים לפעוטות -->
@@ -618,14 +642,14 @@
                 <div class="flex items-center space-x-reverse space-x-3 mb-4">
                     <span class="text-3xl">🧸</span>
                     <div>
-                        <h3 class="text-lg font-bold text-stone-800">מחולל פעילויות מהיר לפעוטות ✨</h3>
-                        <p class="text-xs text-stone-400">קבלו רעיון למשחק מותאם אישית לילד בן 3 לפי המיקום שלכם</p>
+                        <h3 class="text-lg font-bold text-stone-800">מחולל פעילויות מהיר לפעוטות ותינוקות ✨</h3>
+                        <p class="text-xs text-stone-400">קבלו רעיון למשחק מותאם אישית לילד בן 3 ותינוק בן שנה לפי המיקום שלכם</p>
                     </div>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-3 mb-4">
                     <select id="game-location" class="flex-grow bg-stone-50 border border-stone-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
                         <option value="במונית של פנטליס בדרך מהשדה">במונית של פנטליס 🚕</option>
-                        <option value="בחוף לנדה או מקרוניסוס">בחוף הים עם החול 🏖️</option>
+                        <option value="בחוף לנדה או מקרוניסוס">בחוף הים עם החול והמים 🏖️</option>
                         <option value="בחדר של מלון Mare Ayia Napa">בחדר המלון לפני השינה 🏨</option>
                         <option value="במסעדה הכשרה בזמן שממתינים לאוכל">במסעדה בזמן ההמתנה לאוכל 🍽️</option>
                     </select>
@@ -733,7 +757,7 @@
                 ]
             },
             baby: {
-                title: "🍼 דברים לתינוקות בנות שנה (מיוחד)",
+                title: "🍼 דברים לתינוקות בנות שנה ולפעוטות (מיוחד)",
                 items: [
                     { id: "baby-1", text: "חיתולים במידה מתאימה (כמות למספר ימים)" },
                     { id: "baby-2", text: "מטרנה / סימילאק + כפיות מדידה" },
@@ -1144,7 +1168,11 @@
         const geminiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent";
 
         async function fetchGemini(promptText, systemInstruction) {
-            const apiKey = ""; // La clé API injectée par l'environnement
+            const apiKey = localStorage.getItem('gemini_api_key') || "";
+            if (!apiKey) {
+                throw new Error("אנא הזינו תחילה את מפתח ה-API שלכם בתיבת ההגדרות למעלה כדי להפעיל את העוזר החכם.");
+            }
+            
             const url = `${geminiUrl}?key=${apiKey}`;
             const payload = {
                 contents: [{ parts: [{ text: promptText }] }],
@@ -1178,6 +1206,34 @@
         window.resetMemoryGame = function() {
             initMemoryGame();
         };
+
+        window.saveApiKey = function() {
+            const input = document.getElementById('api-key-input');
+            if (!input) return;
+            const val = input.value.trim();
+            if (!val) return;
+            localStorage.setItem('gemini_api_key', val);
+            input.value = '';
+            checkApiKeyStatus();
+        };
+
+        window.deleteApiKey = function() {
+            localStorage.removeItem('gemini_api_key');
+            checkApiKeyStatus();
+        };
+
+        function checkApiKeyStatus() {
+            const key = localStorage.getItem('gemini_api_key');
+            const inputArea = document.getElementById('api-key-input-area');
+            const statusArea = document.getElementById('api-key-status-area');
+            if (key) {
+                if (inputArea) inputArea.classList.add('hidden');
+                if (statusArea) statusArea.classList.remove('hidden');
+            } else {
+                if (inputArea) inputArea.classList.remove('hidden');
+                if (statusArea) statusArea.classList.add('hidden');
+            }
+        }
 
         window.switchFamilyChecklist = function(family) {
             currentFamily = family;
@@ -1391,9 +1447,10 @@
             loadLocalData();
         }
 
-        // אתחול התחלתי של המשחק ורשימת הציוד
+        // אתחול התחלתי של המשחק, רשימת הציוד ובדיקת מפתח
         initMemoryGame();
         renderChecklist();
+        checkApiKeyStatus();
     </script>
 
     <!-- גרף טמפרטורות בספטמבר -->
